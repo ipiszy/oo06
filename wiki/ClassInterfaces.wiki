@@ -7,7 +7,7 @@ Class interfaces
 
 = Details =
 
-*1. Controller:*
+*1. Controller*
 
 getDyingItems()截止日期
 
@@ -52,7 +52,7 @@ void startUp()
 void deadlineTrigger()
  
 
-*3. ItemManager:*
+*3. ItemManager*
 
 //createItem()
 
@@ -83,12 +83,12 @@ double Money transferPrice(userName, double offerMoney)
 List<user, money> queryReturnMoney(itemId)
 
 
-*4. CatagoryManager:*
+*4. CatagoryManager*
 
 List<String> queryCatagories()
 
 
-*5. UserManager:*
+*5. UserManager*
 
 isValid(string user, string pass)
 
@@ -99,16 +99,16 @@ charge(string userName, double money)
 transfer(double money(+,-))
 
 
-*6. Item:*
+*6. Item*
 
 info()
 
 
-*7. ItemDigest:*
+*7. ItemDigest*
 
  
 
-*8. UserInfo:*
+*8. UserInfo*
 
 setName()
 
