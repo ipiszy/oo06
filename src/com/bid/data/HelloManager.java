@@ -29,4 +29,8 @@ public class HelloManager {
 		}
 	}
 
+	public static void main(String [] arg){
+		System.out.println("testing hibernate");
+		System.out.println();
+	}
 }
