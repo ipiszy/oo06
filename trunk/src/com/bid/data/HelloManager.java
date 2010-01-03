@@ -7,16 +7,17 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class testHibernate {
-	public static void main(String[] argv) {
+public class HelloManager {
+	public String list() {
 		Session session = HibernateUtility.currentSession();
 		Transaction transaction = null;
+		StringBuffer result = new StringBuffer("");
 		try {
 			transaction = session.beginTransaction();
 			List hellos = session.createQuery("from Hello").list();
 			for (Iterator iterator = hellos.iterator(); iterator.hasNext();) {
 				Hello hello = (Hello) iterator.next();
-				System.out.println(hello.getName());
+				result.append(hello.getName());
 			}
 			transaction.commit();
 		} catch (HibernateException e) {
@@ -24,7 +25,7 @@ public class testHibernate {
 			e.printStackTrace();
 		} finally {
 			session.close();
-
+			return result.toString();
 		}
 	}
 
