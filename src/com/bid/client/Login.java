@@ -33,6 +33,7 @@ public class Login implements EntryPoint {
 		final Label stayLabel = new Label("Stay Sign In");
 		final Button logInButton = new Button("Sign In");
 		final Label error = new Label();
+		error.setStyleName("error");
 
 		final HTML signupHTML = new HTML(
 				"<div class=\"hand\" " +
@@ -89,7 +90,7 @@ public class Login implements EntryPoint {
 							}
 
 							public void onSuccess(Boolean result) {
-								if (result.TRUE) {
+								if (result.equals(result.TRUE)) {
 
 								} else {
 									error.setText("id or password false");

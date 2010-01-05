@@ -87,7 +87,7 @@ font-size:137.5%;
 padding:5px;
 }
 #error {
-display:none;
+color:#FF0000;
 }
 #logo {
 left:-1px;
