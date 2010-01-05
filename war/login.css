@@ -1,0 +1,172 @@
+* {
+margin:0;
+padding:0;
+}
+body {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+background:#FFFFFF none repeat scroll 0 0;
+color:#000000;
+font-family:Arial,sans-serif;
+font-size:62.5%;
+padding:10px 15px;
+}
+#container {
+width:95%;
+}
+#header {
+height:37px;
+margin:0 auto -3.5em;
+position:relative;
+}
+#main {
+line-height:1.2;
+margin-right:280px;
+padding-bottom:1em;
+padding-left:2em;
+}
+#right {
+float:left;
+font-size:1.2em;
+margin-top:100px;
+padding-bottom:1em;
+text-align:center;
+width:280px;
+}
+#content {
+float:left;
+margin-right:-280px;
+margin-top:100px;
+width:100%;
+}
+#footer {
+clear:both;
+color:#666666;
+font-size:1.2em;
+margin:0 auto;
+padding:1em 0 0;
+text-align:center;
+width:100%;
+}
+.loginbox {
+border:1px solid #E5ECF9;
+margin:0 0 0;
+padding:2px;
+}
+.loginbox input.le {
+margin:2px 0.5em;
+}
+.gaia.le.rem {
+float:left;
+}
+#errormsg_0_Passwd {
+font-size:73%;
+}
+#errormsg_0_Email {
+font-size:73%;
+}
+.gaia.le.val {
+float:left;
+}
+.gaia.le.button {
+text-align:center;
+}
+.loginbox input {
+margin-right:0.5em;
+}
+.loginbox img {
+padding-top:2px;
+}
+.loginbox button {
+padding-top:2px;
+}
+#login {
+background-color:#E8EEFA;
+font-size:137.5%;
+padding:5px;
+}
+#error {
+display:none;
+}
+#logo {
+left:-1px;
+position:absolute;
+}
+h2 {
+color:#2464F0;
+font-size:1.8em;
+font-weight:normal;
+margin-bottom:0.8em;
+}
+#main p {
+font-size:1.2em;
+margin-bottom:2em;
+}
+h3 {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+background:transparent no-repeat scroll left top;
+font-size:1.3em;
+padding-left:30px;
+}
+h4 {
+font-size:1em;
+}
+.ds {
+padding-left:30px;
+}
+.promo img {
+float:left;
+padding-left:15px;
+padding-right:10px;
+}
+.promo p {
+padding-top:18px;
+}
+.small {
+font-size:0.9em;
+}
+.signuptext {
+color:#FFFFFF;
+font-size:120%;
+text-decoration:none;
+}
+.hand {
+background-image:url(https://checkout.google.com/img/button_md.gif);
+background-position:center center;
+background-repeat:no-repeat;
+cursor:pointer;
+height:33px;
+width:274px;
+}
+.signup {
+color:#FFFFFF;
+font-size:135%;
+font-weight:bold;
+line-height:31px;
+}
+.blue-border {
+background-color:#FFFFFF;
+border:1px solid #E5ECF9;
+margin:0.5em 0;
+padding:2px;
+width:274px;
+}
+.blue-background {
+background-color:#E5ECF9;
+padding:8px 0;
+text-align:center;
+width:274px;
+}
+.lang-select option {
+padding:1px 10px;
+}
+#gaia_loginbox span {
+font-size:73%;
+text-align:left;
+}
+#gaia_loginbox input {
+font-size:73%;
+}
