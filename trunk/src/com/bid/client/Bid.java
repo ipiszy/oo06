@@ -49,6 +49,7 @@ public class Bid implements EntryPoint {
 		// Use RootPanel.get() to get the entire body element
 		RootPanel.get("nameFieldContainer").add(nameField);
 		RootPanel.get("sendButtonContainer").add(sendButton);
+		
 
 		// Focus the cursor on the name field when the app loads
 		nameField.setFocus(true);
