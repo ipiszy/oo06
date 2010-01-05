@@ -23,7 +23,7 @@
   
   <servlet-mapping>
     <servlet-name>loginServlet</servlet-name>
-    <url-pattern>/bid/login</url-pattern>
+    <url-pattern>/login_module/login</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->
