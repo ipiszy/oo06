@@ -3,8 +3,8 @@ package com.bid.dataMgr;
 import java.util.List;
 import java.util.Map;
 
-import com.bid.data.Item;
 import com.bid.data.ItemDigest;
+import com.bid.data.Items;
 
 public class ItemMgr {
 	//createItem()
@@ -66,7 +66,7 @@ public class ItemMgr {
 	 * @param thisItem
 	 * @return
 	 */
-	public boolean addItem(Item thisItem){
+	public boolean addItem(Items thisItem){
 		return false;
 	}
 
@@ -94,7 +94,7 @@ public class ItemMgr {
 	 * @param itemId
 	 * @return
 	 */
-	public Item queryItem(long itemId){
+	public Items queryItem(long itemId){
 		return null;
 	}
 
