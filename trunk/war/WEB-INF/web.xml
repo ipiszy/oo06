@@ -21,6 +21,11 @@
     <servlet-class>com.bid.server.GetCategoriesService</servlet-class>
   </servlet>
   
+  <servlet>
+    <servlet-name>getDyingItemsServlet</servlet-name>
+    <servlet-class>com.bid.server.GetDyingItemsService</servlet-class>
+  </servlet>
+  
   <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
     <url-pattern>/bid/greet</url-pattern>
@@ -36,6 +41,10 @@
     <url-pattern>/browse_module/getCategories</url-pattern>
   </servlet-mapping>
   
+  <servlet-mapping>
+    <servlet-name>getDyingItemsServlet</servlet-name>
+    <url-pattern>/browse_module/getDyingItems</url-pattern>
+  </servlet-mapping>
   
   <!-- Default page to serve -->
   <welcome-file-list>
