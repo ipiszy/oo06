@@ -1,4 +1,4 @@
-package com.bid.data;
+package com.bid.dataMgr;
 
 import java.util.Iterator;
 import java.util.List;
@@ -6,6 +6,8 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
+import com.bid.data.Hello;
 
 public class HelloManager {
 	public String list() {

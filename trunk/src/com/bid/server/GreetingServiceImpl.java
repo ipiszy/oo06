@@ -1,7 +1,7 @@
 package com.bid.server;
 
 import com.bid.client.GreetingService;
-import com.bid.data.HelloManager;
+import com.bid.dataMgr.HelloManager;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 /**
