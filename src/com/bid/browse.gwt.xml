@@ -3,5 +3,6 @@
 <module rename-to='browse_module'>
 	<inherits name="com.google.gwt.user.User" />
 	<source path="client" />
+	<source path="data"/>
 	<entry-point class="com.bid.client.Browse" />
 </module>

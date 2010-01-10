@@ -1,6 +1,8 @@
 package com.bid.data;
 
-public class Category {
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+public class Category implements IsSerializable{
 	long id;
 	String name;
 	
@@ -17,4 +19,11 @@ public class Category {
 		this.name = name;
 	}
 	
+	public Category(){
+	}
+	
+	public Category(long id, String name){
+		this.id = id;
+		this.name = name;
+	}
 }

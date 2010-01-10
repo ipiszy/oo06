@@ -1,4 +1,4 @@
-package com.bid.data;
+package com.bid.dataMgr;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;

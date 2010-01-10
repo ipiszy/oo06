@@ -1,4 +1,4 @@
-package com.bid.data;
+package com.bid.dataMgr;
 
 // default package
 // Generated 2010-1-3 10:10:25 by Hibernate Tools 3.2.4.GA
@@ -9,6 +9,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
+
+import com.bid.data.Hello;
+
 import static org.hibernate.criterion.Example.create;
 
 /**
