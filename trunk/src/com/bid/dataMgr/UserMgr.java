@@ -25,10 +25,6 @@ public class UserMgr {
 				returnValue = false;
 			else
 				returnValue = true;
-			// else if (user.isDisabled() == true)
-			// returnString = "disabled";
-			// else
-			// returnString = user.getType();
 
 		} catch (HibernateException e) {
 			HibernateUtility.commitTransaction();
@@ -39,25 +35,24 @@ public class UserMgr {
 		return returnValue;
 	}
 
-	@SuppressWarnings("null")
 	public boolean addUser(UserInfo userInfo) {
 		boolean flag = true;
 		Session s = HibernateUtility.currentSession();
 		try {
 			
 			HibernateUtility.beginTransaction();
-			Users user = (Users) s.get(Users.class, userInfo.userName);
+			Users user = (Users) s.get(Users.class, userInfo.getUserName());
 			HibernateUtility.commitTransaction();
 			if(user!=null){
 				flag = false;
 			}else
 			{
 				user = new Users();
-				user.setUserName(userInfo.userName);
-				user.setUserPass(userInfo.userPass);
-				user.setUserBalance(userInfo.userBalance);
-				user.setUserBankAccount(userInfo.userBankAccount);
-				user.setUserMailBox(userInfo.userMailBox);
+				user.setUserName(userInfo.getUserName());
+				user.setUserPass(userInfo.getUserPass());
+				user.setUserBalance(userInfo.getUserBalance());
+				user.setUserBankAccount(userInfo.getUserBankAccount());
+				user.setUserMailBox(userInfo.getUserMailBox());
 	
 				HibernateUtility.beginTransaction();
 				s.saveOrUpdate(user);
@@ -84,13 +79,6 @@ public class UserMgr {
 		// TODO
 		return false;
 	}
-
-//	// is this necessary?
-//	// Wu Fenggang
-//	public void login(String userName) {
-//		// TODO Auto-generated method stub
-//
-//	}
 
 	public boolean hasUser(String userName) {
 		Session s = HibernateUtility.currentSession();

@@ -49,7 +49,7 @@ public class DataBoundary {
 	 *	作用：服务器端增加一个用户
 	 */
 	public boolean register(UserInfo userInfo){
-		if(!userMgr.hasUser(userInfo.userName)){
+		if(!userMgr.hasUser(userInfo.getUserName())){
 			userMgr.addUser(userInfo);
 		}
 		
@@ -132,7 +132,7 @@ public class DataBoundary {
 		return iList;
 	}
 	
-	public List<ItemDigest> getDryingItems ( long from, long to, long categoryId ) {
+	public List<ItemDigest> getDyingItems ( long from, long to, long categoryId ) {
 		List<ItemDigest> iList = null;//null表示出错
 		iList = itemMgr.queryDyingItems(from, to, categoryId);
 		return iList;
