@@ -13,6 +13,7 @@ public class DataBoundary {
 		itemMgr = new ItemMgr();
 		userMgr = new UserMgr();
 		timerMgr = new TimerMgr();
+		categoryMgr = new CategoryMgr();
 	}
 
 	/**
@@ -106,33 +107,39 @@ public class DataBoundary {
 	 */	
 	public boolean  offerPrice(double money, long itemId, String userName){
 		//1把出价的用户与其货品之间的关系绑定
-		//2从用户的账面上扣去某个金额
+		//2从用户的账面上扣去某个(差额)金额
 		boolean offered = userMgr.charge(userName, money);
 		return offered;
 	} 
-
-	public boolean charge(double name, String userName) {
-		return false;
-	}
 	
-	public List<Category> getCatagories(){
-		return null;
+	public List<Category> getCategories(){
+		List<Category> cList = null;//null表示出错
+		cList = categoryMgr.getAllCategories();
+		return cList;
 	}
 	
 	public List<ItemDigest> getDyingItems(long from, long to){
-		return null;
+		List<ItemDigest> iList = null;//null表示出错
+		iList = itemMgr.queryDyingItems(from, to);
+		return iList;
 	}
 	
 	public List<ItemDigest> getDryingItems ( long from, long to, long categoryId ) {
-		return null;
+		List<ItemDigest> iList = null;//null表示出错
+		iList = itemMgr.queryDyingItems(from, to, categoryId);
+		return iList;
 	}
 	
 	public List<ItemDigest> getLatestItems(long from, long to){
-		return null;
+		List<ItemDigest> iList = null;//null表示出错
+		iList = itemMgr.queryLatestItems(from, to);
+		return iList;
 	}
 	
 	public List<ItemDigest> getLatestItems ( long from, long to, long categoryId ) {
-		return null;
+		List<ItemDigest> iList = null;//null表示出错
+		iList = itemMgr.queryLatestItems(from, to, categoryId);
+		return iList;
 	}
 
 	private boolean isUserValid(String userName, String psw){
@@ -143,4 +150,5 @@ public class DataBoundary {
 	private ItemMgr itemMgr;
 	private UserMgr userMgr;
 	private TimerMgr timerMgr;
+	private CategoryMgr categoryMgr;
 }
