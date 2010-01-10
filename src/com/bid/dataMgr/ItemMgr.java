@@ -3,8 +3,8 @@ package com.bid.dataMgr;
 import java.util.List;
 import java.util.Map;
 
-import com.bid.data.ItemDigest;
 import com.bid.data.Items;
+import com.bid.exchange.ItemDigest;
 
 public class ItemMgr {
 	//createItem()

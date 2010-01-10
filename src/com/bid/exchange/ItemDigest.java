@@ -1,4 +1,4 @@
-package com.bid.data;
+package com.bid.exchange;
 
 import java.util.Date;
 import com.google.gwt.user.client.rpc.IsSerializable;

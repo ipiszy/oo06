@@ -3,9 +3,9 @@ package com.bid.dataMgr;
 import java.util.List;
 
 import com.bid.data.Category;
-import com.bid.data.ItemDigest;
 import com.bid.data.Items;
-import com.bid.data.UserInfo;
+import com.bid.exchange.UserInfo;
+import com.bid.exchange.ItemDigest;
 
 public class DataBoundary {
 	
