@@ -1,10 +1,9 @@
 package com.bid.dataMgr;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 
 import com.bid.data.UserInfo;
 import com.bid.data.Users;
@@ -40,20 +39,30 @@ public class UserMgr {
 		return returnValue;
 	}
 
+	@SuppressWarnings("null")
 	public boolean addUser(UserInfo userInfo) {
 		boolean flag = true;
 		Session s = HibernateUtility.currentSession();
 		try {
-			Users user = new Users();
-			user.setUserName(userInfo.userName);
-			user.setUserPass(userInfo.userPass);
-			user.setUserBalance(userInfo.userBalance);
-			user.setUserBankAccount(userInfo.userBankAccount);
-			user.setUserMailBox(userInfo.userMailBox);
-
+			
 			HibernateUtility.beginTransaction();
-			s.saveOrUpdate(user);
+			Users user = (Users) s.get(Users.class, userInfo.userName);
 			HibernateUtility.commitTransaction();
+			if(user!=null){
+				flag = false;
+			}else
+			{
+				user = new Users();
+				user.setUserName(userInfo.userName);
+				user.setUserPass(userInfo.userPass);
+				user.setUserBalance(userInfo.userBalance);
+				user.setUserBankAccount(userInfo.userBankAccount);
+				user.setUserMailBox(userInfo.userMailBox);
+	
+				HibernateUtility.beginTransaction();
+				s.saveOrUpdate(user);
+				HibernateUtility.commitTransaction();
+			}
 		} catch (HibernateException e) {
 			HibernateUtility.commitTransaction();
 			e.printStackTrace();
@@ -76,12 +85,12 @@ public class UserMgr {
 		return false;
 	}
 
-	// is this necessary?
-	// Wu Fenggang
-	public void login(String userName) {
-		// TODO Auto-generated method stub
-
-	}
+//	// is this necessary?
+//	// Wu Fenggang
+//	public void login(String userName) {
+//		// TODO Auto-generated method stub
+//
+//	}
 
 	public boolean hasUser(String userName) {
 		Session s = HibernateUtility.currentSession();
@@ -102,6 +111,25 @@ public class UserMgr {
 		}
 		HibernateUtility.closeSession();
 		return returnValue;
+	}
+	
+	
+	public static void main(String[] args){
+		
+//          System.out.println(new UserMgr().selectAll());
+//          System.out.println(new UserMgr().queryAccount("ipiszy"));
+//          System.out.println(new UserMgr().delAccount("ipiszy"));
+         
+
+		System.out.println(new UserMgr().addUser(new UserInfo("ipiszy", 0,
+				"Applicant", "ipiszy", "ipiszy")));
+		System.out.println(new UserMgr().addUser(new UserInfo(   "ipiszy", 0, "Applicant", "ipiszy", "ipiszy")));
+        
+        System.out.println(new UserMgr().isValid("ipiszy", "Applicant"));
+        System.out.println(new UserMgr().isValid("aay", "a"));
+        System.out.println(new UserMgr().addUser(new UserInfo(
+                "aay", 0, "123", "ipiszy", "ipiszy")));
+        System.out.println(new UserMgr().isValid("aay", "123"));
 	}
 
 }
