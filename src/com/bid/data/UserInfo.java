@@ -1,5 +1,11 @@
 package com.bid.data;
 
+/**
+ * Add getter and Setter to this simple struct-like class?
+ * all public fields would be enough
+ * @author Sepsky
+ *
+ */
 public class UserInfo {
 
 	public String userName;
@@ -16,6 +22,7 @@ public class UserInfo {
 		this.userBankAccount = bankAccount;
 		this.userMailBox = mailBox;
 	}
+
 
 //	boolean setuserBalance(String userName,int charge);
 //

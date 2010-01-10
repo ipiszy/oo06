@@ -48,7 +48,7 @@ public class DataBoundary {
 	 *	作用：服务器端增加一个用户
 	 */
 	public boolean register(UserInfo userInfo){
-		if(!userMgr.hasUser(userInfo.getName())){
+		if(!userMgr.hasUser(userInfo.userName)){
 			userMgr.addUser(userInfo);
 		}
 		
