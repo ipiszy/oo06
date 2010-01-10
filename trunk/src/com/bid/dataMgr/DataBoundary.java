@@ -66,7 +66,10 @@ public class DataBoundary {
 	 *	输出：货品是否提交成功
 	 */
 	public boolean submitItem(Item thisItem){
-		boolean isSubmmitted = itemMgr.addItem(thisItem);
+		boolean isSubmmitted = false;
+		if(itemMgr.addItem(thisItem))
+			isSubmmitted = timerMgr.registerDeadline(thisItem.getItemId(), thisItem.getTime());
+		
 		return isSubmmitted;
 	}
 
