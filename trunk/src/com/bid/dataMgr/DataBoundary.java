@@ -14,6 +14,7 @@ public class DataBoundary {
 		userMgr = new UserMgr();
 		timerMgr = new TimerMgr();
 		categoryMgr = new CategoryMgr();
+		serverLoginMgr = new ServerLoginMgr();
 	}
 
 	public void startUp(){
@@ -37,7 +38,7 @@ public class DataBoundary {
 	 */
 	public boolean login(String userName, String psw){
 		if(this.isUserValid(userName, psw))
-			userMgr.login(userName);
+			serverLoginMgr.login(userName);
 		
 		return false;
 	}
@@ -158,4 +159,6 @@ public class DataBoundary {
 	private UserMgr userMgr;
 	private TimerMgr timerMgr;
 	private CategoryMgr categoryMgr;
+	private ServerLoginMgr serverLoginMgr;
+
 }
