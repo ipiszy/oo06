@@ -7,20 +7,31 @@ package com.bid.data;
  */
 public class Items implements java.io.Serializable {
 
+	// constant values for the bidding status
+	public final static int ONBID = 0;
+	public final static int OBSOLETE = 1;
+	
+	// static information which must be provide when posting obsolete
+
 	private int itemId;
 	private String itemName;
 	private String itemDes;
 	private String itemBidRule;
 	private Double itemFlourPrice;
-	private Double itemHighestBidprice;
-	private String itemHighestBidUserName;
-	private Integer itmeStatus;
 	private Integer itemAvailableSeconds;
-	private String itemCargoName;
-	private Integer itmeCargoId;
 	private int sortId;
 	private String postUser;
 	private String imageUrl;
+
+	
+	
+	// dynamic information which would change during the bidding process
+
+	private Double itemHighestBidprice = 0.0;
+	private String itemHighestBidUserName = null;
+	private Integer itmeStatus = ONBID;
+	private String itemCargoName = null;
+	private Integer itmeCargoId = -1 ;// not available
 
 	public Items() {
 	}
