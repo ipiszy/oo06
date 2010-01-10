@@ -25,38 +25,91 @@ public class DataBoundary {
 		return thisItem;
 	}
 
+	/**
+	 *	输入：用户的唯一标示，用户的密码
+	 *	输出：用户是否登录成功
+	 *	作用：浏览器端和服务器端都知道用户进入登录状态
+	 */
 	public boolean login(String userName, String psw){
+		if(this.isUserValid(userName, psw))
+			userMgr.login(userName);
+		
 		return false;
 	}
 
-	public void register(UserInfo userInfo){
+	/**
+	 *	输入：用户的信息
+	 *	输出：用户是否注册成功 
+	 *	作用：服务器端增加一个用户
+	 */
+	public boolean register(UserInfo userInfo){
+		if(!userMgr.hasUser(userInfo.getName())){
+			userMgr.addUser(userInfo);
+		}
+		
+		return false;
 	}
 
-	public void requestPostItem(){
+	/**
+	 *	输入： 
+	 */
+	public void requestPostItem(){/**--------------------我是华丽丽的警示线----------------------------------------*/
 	}
 
-	public void submitItem(){
+	/**
+	 *	输入：货品的详细资料
+	 *	输出：货品是否提交成功
+	 */
+	public boolean submitItem(Item thisItem){
+		boolean isSubmmitted = itemMgr.addItem(thisItem);
+		return isSubmmitted;
 	}
 
+	/**
+	 * 	输入：货品的唯一标示、货品的货单号
+	 * 	输出：无
+	 * 	作用：浏览器端和服务器端都知道货品已发出
+	 */
 	public void confirmDelivery(long itemId, long receiptId){
+		itemMgr.updateDelivery(itemId, receiptId);
 	}
-
+	
+	/**
+	 * 	输入：货品的唯一标示、货品的货单号
+	 * 	输出：无
+	 * 	作用：浏览器端和服务器端都知道货品已收到
+	 */
 	public void confirmReceipt(long itemId){
+		itemMgr.updateReceipt(itemId);
 	}
 
 	//???receipt password
 
 	//???suicide
 
+	/**
+	 *	作用：提供货品的目前价 
+	 */
 	public double /*curPrice*/ requestBid(long itemId){
-		return 0;
+		double curPrice = -1;//-1表示出错
+		//1检验货品是否存在(optional)
+		//2检查货品是否在拍卖时限内
+		//3获得当前价格
+		if(itemMgr.isAlive(itemId))
+			itemMgr.queryCurPrice(itemId);
+		
+		return curPrice;
 	}
 
-	public boolean  offerPrice(double money, long itemId){
-		return false;
-	}
-
-	 
+	/**
+	 *	作用：服务器和客户器端都知道某一位用户为某一个商品出了一个价格 
+	 */	
+	public boolean  offerPrice(double money, long itemId, String userName){
+		//1把出价的用户与其货品之间的关系绑定
+		//2从用户的账面上扣去某个金额
+		boolean offered = userMgr.charge(userName, money);
+		return offered;
+	} 
 
 	public boolean charge(double name, String userName) {
 		return false;
@@ -83,6 +136,7 @@ public class DataBoundary {
 	}
 
 	private boolean isUserValid(String userName, String psw){
+		userMgr.isValid(userName, psw);
 		return false;
 	}
 	
