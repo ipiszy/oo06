@@ -16,6 +16,10 @@ public class DataBoundary {
 		categoryMgr = new CategoryMgr();
 	}
 
+	public void startUp(){
+		
+	}
+	
 	/**
 	 *  输入：货品的唯一标示
 	 *  输出：货品的详细描述
