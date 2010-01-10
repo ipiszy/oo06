@@ -1,4 +1,4 @@
-package com.bid.data;
+package com.bid.dataMgr;
 
 // Generated 2010-1-10 18:44:41 by Hibernate Tools 3.2.4.GA
 
@@ -8,16 +8,19 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
+
+import com.bid.data.Users;
+
 import static org.hibernate.criterion.Example.create;
 
 /**
- * Home object for domain model class Deposits.
- * @see com.bid.data.Deposits
+ * Home object for domain model class Users.
+ * @see com.bid.data.Users
  * @author Hibernate Tools
  */
-public class DepositsHome {
+public class UsersHome {
 
-	private static final Log log = LogFactory.getLog(DepositsHome.class);
+	private static final Log log = LogFactory.getLog(UsersHome.class);
 
 	private final SessionFactory sessionFactory = getSessionFactory();
 
@@ -32,8 +35,8 @@ public class DepositsHome {
 		}
 	}
 
-	public void persist(Deposits transientInstance) {
-		log.debug("persisting Deposits instance");
+	public void persist(Users transientInstance) {
+		log.debug("persisting Users instance");
 		try {
 			sessionFactory.getCurrentSession().persist(transientInstance);
 			log.debug("persist successful");
@@ -43,8 +46,8 @@ public class DepositsHome {
 		}
 	}
 
-	public void attachDirty(Deposits instance) {
-		log.debug("attaching dirty Deposits instance");
+	public void attachDirty(Users instance) {
+		log.debug("attaching dirty Users instance");
 		try {
 			sessionFactory.getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -54,8 +57,8 @@ public class DepositsHome {
 		}
 	}
 
-	public void attachClean(Deposits instance) {
-		log.debug("attaching clean Deposits instance");
+	public void attachClean(Users instance) {
+		log.debug("attaching clean Users instance");
 		try {
 			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
@@ -65,8 +68,8 @@ public class DepositsHome {
 		}
 	}
 
-	public void delete(Deposits persistentInstance) {
-		log.debug("deleting Deposits instance");
+	public void delete(Users persistentInstance) {
+		log.debug("deleting Users instance");
 		try {
 			sessionFactory.getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -76,11 +79,11 @@ public class DepositsHome {
 		}
 	}
 
-	public Deposits merge(Deposits detachedInstance) {
-		log.debug("merging Deposits instance");
+	public Users merge(Users detachedInstance) {
+		log.debug("merging Users instance");
 		try {
-			Deposits result = (Deposits) sessionFactory.getCurrentSession()
-					.merge(detachedInstance);
+			Users result = (Users) sessionFactory.getCurrentSession().merge(
+					detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -89,11 +92,11 @@ public class DepositsHome {
 		}
 	}
 
-	public Deposits findById(com.bid.data.DepositsId id) {
-		log.debug("getting Deposits instance with id: " + id);
+	public Users findById(java.lang.String id) {
+		log.debug("getting Users instance with id: " + id);
 		try {
-			Deposits instance = (Deposits) sessionFactory.getCurrentSession()
-					.get("com.bid.data.Deposits", id);
+			Users instance = (Users) sessionFactory.getCurrentSession().get(
+					"com.bid.data.Users", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -106,13 +109,12 @@ public class DepositsHome {
 		}
 	}
 
-	public List<Deposits> findByExample(Deposits instance) {
-		log.debug("finding Deposits instance by example");
+	public List<Users> findByExample(Users instance) {
+		log.debug("finding Users instance by example");
 		try {
-			List<Deposits> results = (List<Deposits>) sessionFactory
-					.getCurrentSession()
-					.createCriteria("com.bid.data.Deposits").add(
-							create(instance)).list();
+			List<Users> results = (List<Users>) sessionFactory
+					.getCurrentSession().createCriteria("com.bid.data.Users")
+					.add(create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
 			return results;

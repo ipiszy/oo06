@@ -1,4 +1,4 @@
-package com.bid.data;
+package com.bid.dataMgr;
 
 // Generated 2010-1-10 18:44:41 by Hibernate Tools 3.2.4.GA
 
@@ -8,16 +8,19 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
+
+import com.bid.data.Sorts;
+
 import static org.hibernate.criterion.Example.create;
 
 /**
- * Home object for domain model class Items.
- * @see com.bid.data.Items
+ * Home object for domain model class Sorts.
+ * @see com.bid.data.Sorts
  * @author Hibernate Tools
  */
-public class ItemsHome {
+public class SortsHome {
 
-	private static final Log log = LogFactory.getLog(ItemsHome.class);
+	private static final Log log = LogFactory.getLog(SortsHome.class);
 
 	private final SessionFactory sessionFactory = getSessionFactory();
 
@@ -32,8 +35,8 @@ public class ItemsHome {
 		}
 	}
 
-	public void persist(Items transientInstance) {
-		log.debug("persisting Items instance");
+	public void persist(Sorts transientInstance) {
+		log.debug("persisting Sorts instance");
 		try {
 			sessionFactory.getCurrentSession().persist(transientInstance);
 			log.debug("persist successful");
@@ -43,8 +46,8 @@ public class ItemsHome {
 		}
 	}
 
-	public void attachDirty(Items instance) {
-		log.debug("attaching dirty Items instance");
+	public void attachDirty(Sorts instance) {
+		log.debug("attaching dirty Sorts instance");
 		try {
 			sessionFactory.getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -54,8 +57,8 @@ public class ItemsHome {
 		}
 	}
 
-	public void attachClean(Items instance) {
-		log.debug("attaching clean Items instance");
+	public void attachClean(Sorts instance) {
+		log.debug("attaching clean Sorts instance");
 		try {
 			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
@@ -65,8 +68,8 @@ public class ItemsHome {
 		}
 	}
 
-	public void delete(Items persistentInstance) {
-		log.debug("deleting Items instance");
+	public void delete(Sorts persistentInstance) {
+		log.debug("deleting Sorts instance");
 		try {
 			sessionFactory.getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -76,10 +79,10 @@ public class ItemsHome {
 		}
 	}
 
-	public Items merge(Items detachedInstance) {
-		log.debug("merging Items instance");
+	public Sorts merge(Sorts detachedInstance) {
+		log.debug("merging Sorts instance");
 		try {
-			Items result = (Items) sessionFactory.getCurrentSession().merge(
+			Sorts result = (Sorts) sessionFactory.getCurrentSession().merge(
 					detachedInstance);
 			log.debug("merge successful");
 			return result;
@@ -89,11 +92,11 @@ public class ItemsHome {
 		}
 	}
 
-	public Items findById(int id) {
-		log.debug("getting Items instance with id: " + id);
+	public Sorts findById(int id) {
+		log.debug("getting Sorts instance with id: " + id);
 		try {
-			Items instance = (Items) sessionFactory.getCurrentSession().get(
-					"com.bid.data.Items", id);
+			Sorts instance = (Sorts) sessionFactory.getCurrentSession().get(
+					"com.bid.data.Sorts", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -106,11 +109,11 @@ public class ItemsHome {
 		}
 	}
 
-	public List<Items> findByExample(Items instance) {
-		log.debug("finding Items instance by example");
+	public List<Sorts> findByExample(Sorts instance) {
+		log.debug("finding Sorts instance by example");
 		try {
-			List<Items> results = (List<Items>) sessionFactory
-					.getCurrentSession().createCriteria("com.bid.data.Items")
+			List<Sorts> results = (List<Sorts>) sessionFactory
+					.getCurrentSession().createCriteria("com.bid.data.Sorts")
 					.add(create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
