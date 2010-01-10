@@ -13,21 +13,16 @@
 			length="45" not-null="false">
 		</sql-type>
 	</type-mapping>
-	<table-filter match-catalog="ooad" match-name="deposits" />
-	<table-filter match-name=".*" />
-	<table-filter match-catalog="ooad" match-name="items" />
-	<table-filter match-name=".*" />
-	<table-filter match-catalog="ooad" match-name="sorts" />
-	<table-filter match-name=".*" />
-	<table-filter match-catalog="ooad" match-name="users" />
-	<table-filter match-name=".*" />
-	<table catalog="ooad" name="deposits"  class="com.bid.data.Deposits">
+	<table-filter match-name="items" match-catalog="ooad"></table-filter>
+	<table-filter></table-filter>
+	<table catalog="ooad" name="deposits"
+		class="com.bid.data.Deposits">
 		<column name="moneyFrozen" jdbc-type=''></column>
 	</table>
 	<table catalog="ooad" name="sorts" class="com.bid.data.Sorts">
 		<column name="sortName" jdbc-type=''></column>
 	</table>
-	<table catalog="ooad" name="items"  class="com.bid.data.Items">
+	<table catalog="ooad" name="items" class="com.bid.data.Items">
 		<column name="itemName" jdbc-type=''></column>
 		<column name="itemDes" jdbc-type=''></column>
 		<column name="itemBidRule" jdbc-type=''></column>
