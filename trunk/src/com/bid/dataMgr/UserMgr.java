@@ -5,8 +5,8 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
-import com.bid.data.UserInfo;
 import com.bid.data.Users;
+import com.bid.exchange.UserInfo;
 
 public class UserMgr {
 	private static Log log = LogFactory.getLog(UserMgr.class);
