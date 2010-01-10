@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2010-1-10 18:44:40 by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.bid.data.Items" table="items" catalog="ooad">
+        <id name="itemId" type="int">
+            <column name="itemID" />
+            <generator class="assigned" />
+        </id>
+        <property name="itemName" type="string">
+            <column name="itemName" length="40" />
+        </property>
+        <property name="itemDes" type="string">
+            <column name="itemDes" length="150" />
+        </property>
+        <property name="itemBidRule" type="string">
+            <column name="itemBidRule" length="150" />
+        </property>
+        <property name="itemFlourPrice" type="java.lang.Double">
+            <column name="itemFlourPrice" precision="22" scale="0" />
+        </property>
+        <property name="itemHighestBidprice" type="java.lang.Double">
+            <column name="ItemHighestBidprice" precision="22" scale="0" />
+        </property>
+        <property name="itemHighestBidUserName" type="string">
+            <column name="itemHighestBidUserName" length="20" />
+        </property>
+        <property name="itmeStatus" type="java.lang.Integer">
+            <column name="itmeStatus" />
+        </property>
+        <property name="itemAvailableSeconds" type="java.lang.Integer">
+            <column name="itemAvailableSeconds" />
+        </property>
+        <property name="itemCargoName" type="string">
+            <column name="itemCargoName" length="20" />
+        </property>
+        <property name="itmeCargoId" type="java.lang.Integer">
+            <column name="itmeCargoID" />
+        </property>
+        <property name="sortId" type="int">
+            <column name="sortID" not-null="true" />
+        </property>
+        <property name="postUser" type="string">
+            <column name="postUser" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>
