@@ -15,9 +15,15 @@ public class DataBoundary {
 		timerMgr = new TimerMgr();
 		categoryMgr = new CategoryMgr();
 	}
+	
+	public Items getItem(long itemId){
+		Items thisItem = itemMgr.queryItem(itemId);
+		return thisItem;
+		
+	}
 
 	public void startUp(){
-		
+		timerMgr.startUp();
 	}
 	
 	/**
