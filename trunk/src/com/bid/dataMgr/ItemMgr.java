@@ -52,4 +52,9 @@ public class ItemMgr {
 	public Map<String /*user*/, Double/*money*/> queryReturnMoney(long itemId) {
 		return null;
 	}
+
+	public boolean isAlive(long itemId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
