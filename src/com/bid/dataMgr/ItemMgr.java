@@ -13,11 +13,19 @@ public class ItemMgr {
 		return null;
 	}
 
-	public List<ItemDigest> queryLatestItems(){
+	public List<ItemDigest> queryLatestItems(long from, long to){
 		return null;
 	}
 
-	public List<ItemDigest> queryDyingItems(){
+	public List<ItemDigest> queryLatestItems( long from, long to, long categoryId ){
+		return null;
+	}
+
+	public List<ItemDigest> queryDyingItems(long from, long to){
+		return null;
+	}
+	
+	public List<ItemDigest> queryDyingItems( long from, long to, long categoryId ){
 		return null;
 	}
 
