@@ -111,13 +111,19 @@ public class UserMgr {
 
 		System.out.println(new UserMgr().addUser(new UserInfo("ipiszy", 0,
 				"Applicant", "ipiszy", "ipiszy")));
-		System.out.println(new UserMgr().addUser(new UserInfo(   "ipiszy", 0, "Applicant", "ipiszy", "ipiszy")));
+		System.out.println(new UserMgr().addUser(new UserInfo(   "ipiszy", 0,
+				"Applicant", "ipiszy", "ipiszy")));
         
         System.out.println(new UserMgr().isValid("ipiszy", "Applicant"));
         System.out.println(new UserMgr().isValid("aay", "a"));
         System.out.println(new UserMgr().addUser(new UserInfo(
                 "aay", 0, "123", "ipiszy", "ipiszy")));
         System.out.println(new UserMgr().isValid("aay", "123"));
+	}
+
+	public void login(String userName) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

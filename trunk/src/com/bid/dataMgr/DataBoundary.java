@@ -14,7 +14,6 @@ public class DataBoundary {
 		userMgr = new UserMgr();
 		timerMgr = new TimerMgr();
 		categoryMgr = new CategoryMgr();
-		serverLoginMgr = new ServerLoginMgr();
 	}
 
 	public void startUp(){
@@ -37,10 +36,9 @@ public class DataBoundary {
 	 *	作用：浏览器端和服务器端都知道用户进入登录状态
 	 */
 	public boolean login(String userName, String psw){
-		if(this.isUserValid(userName, psw))
-			serverLoginMgr.login(userName);
+		boolean logined = this.isUserValid(userName, psw);
 		
-		return false;
+		return logined;
 	}
 
 	/**
@@ -159,6 +157,5 @@ public class DataBoundary {
 	private UserMgr userMgr;
 	private TimerMgr timerMgr;
 	private CategoryMgr categoryMgr;
-	private ServerLoginMgr serverLoginMgr;
 
 }
