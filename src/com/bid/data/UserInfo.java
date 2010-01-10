@@ -6,7 +6,7 @@ package com.bid.data;
  * @author Sepsky
  *
  */
-public class UserInfo {
+public class UserInfo implements java.io.Serializable{
 
 	private String userName;
 	private double userBalance = 0;
