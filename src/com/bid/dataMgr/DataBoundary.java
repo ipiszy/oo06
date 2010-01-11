@@ -116,6 +116,7 @@ public class DataBoundary {
 	public boolean  offerPrice(double money, long itemId, String userName){
 		//1把出价的用户与其货品之间的关系绑定
 		//2从用户的账面上扣去某个(差额)金额
+		//0计算差额
 		boolean offered = userMgr.transfer(userName, money);
 		if(offered)
 			itemMgr.biddedBy(itemId, userName, money);
