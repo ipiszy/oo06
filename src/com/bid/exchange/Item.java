@@ -7,9 +7,9 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 public class Item implements IsSerializable {
 	// constant values for the bidding status
 	public final static int ONBID = 0;
-	public final static int BIDDED = 2;
-	public final static int ONDELIVER = 3;
-	public final static int OBSOLETE = 1;
+	public final static int BIDDED = 1;
+	public final static int ONDELIVER = 2;
+	public final static int DELIVERED = 3;
 
 	// static information which must be provide when posting obsolete
 	private long itemID;
