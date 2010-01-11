@@ -158,13 +158,15 @@ public class ItemMgr {
 		Session s = HibernateUtility.currentSession();
 		try {
 			HibernateUtility.beginTransaction();
-			/*Items saveItem = new Items(itemId, itemName, itemDes,
+			//itemId由后台统一发放
+			long itemId = ;
+			Items = new Items(itemId, itemName, itemDes,
 					 itemBidRule, itemFlourPrice, itemHighestBidprice,
 					 itemHighestBidUserName, itmeStatus,
 					 itemCargoName, itmeCargoId, sortId, 
 					 postUser, imageUrl, itemBidDeadline, 
 					 itemPostTimestamp);
-			s.saveOrUpdate(saveItem);*/
+			s.saveOrUpdate(saveItem);
 			HibernateUtility.commitTransaction();
 			}
 		catch (HibernateException e) {
@@ -184,7 +186,19 @@ public class ItemMgr {
 	 * @return
 	 */
 	public boolean updateDelivery(long itemId, long receiptId){
-		return false;
+		Session s = HibernateUtility.currentSession();
+		try {
+			HibernateUtility.beginTransaction();
+			Items item = (Items) s.get(Items.class, itemId);
+			HibernateUtility.commitTransaction();
+			item.setItmeStatus(Item.ONDELIVER);
+			} catch (HibernateException e) {
+				HibernateUtility.commitTransaction();
+				log.fatal(e);
+				return false;
+		}
+		HibernateUtility.closeSession();
+		return true;
 	}
 
 	/**
@@ -194,7 +208,6 @@ public class ItemMgr {
 	 */
 	public boolean updateReceipt(long itemId){
 		Session s = HibernateUtility.currentSession();
-		Item thisItem = null;
 		try {
 			HibernateUtility.beginTransaction();
 			Items item = (Items) s.get(Items.class, itemId);
