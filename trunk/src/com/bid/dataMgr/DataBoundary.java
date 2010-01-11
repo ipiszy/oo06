@@ -16,6 +16,10 @@ public class DataBoundary {
 		categoryMgr = new CategoryMgr();
 	}
 	
+	public List<ItemDigest> queryBiddedItems(String userName){
+		return (itemMgr.queryBiddedItems(userName));
+	}
+	
 	public Items getItem(long itemId){
 		Items thisItem = itemMgr.queryItem(itemId);
 		return thisItem;
