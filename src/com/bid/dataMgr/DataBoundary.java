@@ -24,19 +24,9 @@ public class DataBoundary {
 		return thisItem;
 		
 	}
-
-	public void startUp(){
-		timerMgr.startUp();
-	}
 	
-	/**
-	 *  输入：货品的唯一标示
-	 *  输出：货品的详细描述
-	 */
-	public Item getItemInfo(long itemId){
-		Item thisItem = null;
-		thisItem = itemMgr.queryItem(itemId);
-		return thisItem;
+	public UserInfo getUser(String userName){
+		return (userMgr.getUser(userName));
 	}
 
 	/**

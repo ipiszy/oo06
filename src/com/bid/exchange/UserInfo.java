@@ -19,7 +19,7 @@ public class UserInfo implements IsSerializable{
 	public UserInfo(){
 		
 	}
-	public UserInfo(String name, int balance, String pswd, String bankAccount, String mailBox)
+	public UserInfo(String name, double balance, String pswd, String bankAccount, String mailBox)
 	{
 		this.setUserName(name);
 		this.setUserBalance(balance);
