@@ -1,6 +1,6 @@
 package com.bid.data;
 
-// Generated 2010-1-11 20:15:23 by Hibernate Tools 3.2.4.GA
+// Generated 2010-1-11 20:31:31 by Hibernate Tools 3.2.4.GA
 
 import java.util.Date;
 
@@ -23,21 +23,25 @@ public class Items implements java.io.Serializable {
 	private String postUser;
 	private String imageUrl;
 	private Date itemBidDeadline;
+	private Date itemPostTimestamp;
 
 	public Items() {
 	}
 
-	public Items(int itemId, int sortId, Date itemBidDeadline) {
+	public Items(int itemId, int sortId, Date itemBidDeadline,
+			Date itemPostTimestamp) {
 		this.itemId = itemId;
 		this.sortId = sortId;
 		this.itemBidDeadline = itemBidDeadline;
+		this.itemPostTimestamp = itemPostTimestamp;
 	}
 
 	public Items(int itemId, String itemName, String itemDes,
 			String itemBidRule, Double itemFlourPrice,
 			Double itemHighestBidprice, String itemHighestBidUserName,
 			Integer itmeStatus, String itemCargoName, Integer itmeCargoId,
-			int sortId, String postUser, String imageUrl, Date itemBidDeadline) {
+			int sortId, String postUser, String imageUrl, Date itemBidDeadline,
+			Date itemPostTimestamp) {
 		this.itemId = itemId;
 		this.itemName = itemName;
 		this.itemDes = itemDes;
@@ -52,6 +56,7 @@ public class Items implements java.io.Serializable {
 		this.postUser = postUser;
 		this.imageUrl = imageUrl;
 		this.itemBidDeadline = itemBidDeadline;
+		this.itemPostTimestamp = itemPostTimestamp;
 	}
 
 	public int getItemId() {
@@ -164,6 +169,14 @@ public class Items implements java.io.Serializable {
 
 	public void setItemBidDeadline(Date itemBidDeadline) {
 		this.itemBidDeadline = itemBidDeadline;
+	}
+
+	public Date getItemPostTimestamp() {
+		return this.itemPostTimestamp;
+	}
+
+	public void setItemPostTimestamp(Date itemPostTimestamp) {
+		this.itemPostTimestamp = itemPostTimestamp;
 	}
 
 }
