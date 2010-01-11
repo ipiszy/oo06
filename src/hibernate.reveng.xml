@@ -12,9 +12,14 @@
 		<sql-type jdbc-type="VARCHAR" hibernate-type="string"
 			length="45" not-null="false">
 		</sql-type>
+		<sql-type jdbc-type="TIMESTAMP" hibernate-type="timestamp"
+			length="19" not-null="true">
+		</sql-type>
 	</type-mapping>
+	<table-filter match-name="deposits" match-catalog="ooad" exclude="true"></table-filter>
 	<table-filter match-name="items" match-catalog="ooad"></table-filter>
-	<table-filter></table-filter>
+	<table-filter match-name="sorts" match-catalog="ooad" exclude="true"></table-filter>
+	<table-filter match-name="users" match-catalog="ooad" exclude="true"></table-filter>
 	<table catalog="ooad" name="deposits"
 		class="com.bid.data.Deposits">
 		<column name="moneyFrozen" jdbc-type=''></column>
