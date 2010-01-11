@@ -12,7 +12,7 @@ public class Item implements IsSerializable {
 	private String itemName;
 	private String itemDes;
 	//Sting itemBidRule;
-	private int itemFloorPrice;
+	private double itemFloorPrice;
 	private int sortID;
 	private String postUserName;
 	private int itemAvailableSeconds ;
@@ -30,7 +30,7 @@ public class Item implements IsSerializable {
 		
 	}
 	public Item(int itemid, String itemname, String des, 
-			int floorprice, int sortid, String postUserName, int ttl){
+			double floorprice, int sortid, String postUserName, int ttl){
 		this.itemID = itemid;
 		this.itemName = itemname;
 		this.itemDes = des;
@@ -76,7 +76,7 @@ public class Item implements IsSerializable {
 		this.itemFloorPrice = itemFloorPrice;
 	}
 
-	public int getItemFloorPrice() {
+	public double getItemFloorPrice() {
 		return itemFloorPrice;
 	}
 
