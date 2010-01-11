@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2010-1-11 0:22:22 by Hibernate Tools 3.2.4.GA -->
+<!-- Generated 2010-1-11 22:43:11 by Hibernate Tools 3.2.4.GA -->
 <hibernate-mapping>
     <class name="com.bid.data.Deposits" table="deposits" catalog="ooad">
         <composite-id name="id" class="com.bid.data.DepositsId">
             <key-property name="userName" type="string">
                 <column name="userName" length="20" />
             </key-property>
-            <key-property name="itemId" type="int">
+            <key-property name="itemId" type="long">
                 <column name="itemID" />
             </key-property>
         </composite-id>

@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2010-1-11 20:31:31 by Hibernate Tools 3.2.4.GA -->
+<!-- Generated 2010-1-11 22:43:11 by Hibernate Tools 3.2.4.GA -->
 <hibernate-mapping>
     <class name="com.bid.data.Items" table="items" catalog="ooad">
-        <id name="itemId" type="int">
+        <id name="itemId" type="long">
             <column name="itemID" />
             <generator class="assigned" />
         </id>
@@ -26,8 +26,8 @@
         <property name="itemHighestBidUserName" type="string">
             <column name="itemHighestBidUserName" length="20" />
         </property>
-        <property name="itmeStatus" type="java.lang.Integer">
-            <column name="itmeStatus" />
+        <property name="itemStatus" type="java.lang.Integer">
+            <column name="itemStatus" />
         </property>
         <property name="itemCargoName" type="string">
             <column name="itemCargoName" length="20" />
@@ -35,7 +35,7 @@
         <property name="itmeCargoId" type="java.lang.Integer">
             <column name="itmeCargoID" />
         </property>
-        <property name="sortId" type="int">
+        <property name="sortId" type="long">
             <column name="sortID" not-null="true" />
         </property>
         <property name="postUser" type="string">
