@@ -69,9 +69,9 @@ public class ItemMgr {
 		String SQLQuery = "select * from items";
 		List<Items> detailList = this.execSQLQuery(SQLQuery);
 		for(Items item : detailList){
-			queryResult.add(new Item(item.getItemId(), item.getItemName(),
+			/*queryResult.add(new Item(item.getItemId(), item.getItemName(),
 					item.getItemDes(), item.getItemFlourPrice().doubleValue(),
-					item.getSortId(), item.getPostUser(), item.getItemAvailableSeconds().intValue()));
+					item.getSortId(), item.getPostUser(), item.getItemBidDeadline()));*/
 		}
 		return queryResult;
 	}
@@ -84,7 +84,19 @@ public class ItemMgr {
 	 * @return
 	 */
 	public List<ItemDigest> queryLatestItems(long from, long to){
-		return null;
+		List<ItemDigest> queryResult = new ArrayList<ItemDigest>();
+		String SQLQuery = "select * from items where";/**----------------我是华丽丽的警示线-----------------------------------*/
+		List<Items> detailList = this.execSQLQuery(SQLQuery);
+		for(Items item : detailList){
+			String imageURL = item.getImageUrl();
+			String name = item.getItemName();
+			double basePrice = item.getItemFlourPrice();
+			double latestPrice = item.getItemHighestBidprice();
+			Date d = null;// = item.getItemAvailableSeconds();
+			long itemId = item.getItemId();
+			queryResult.add(new ItemDigest(itemId, imageURL, name, basePrice, latestPrice, d));
+		}
+		return queryResult;
 	}
 
 	/**
@@ -107,7 +119,19 @@ public class ItemMgr {
 	 * @return
 	 */
 	public List<ItemDigest> queryDyingItems(long from, long to){
-		return null;
+		List<ItemDigest> queryResult = new ArrayList<ItemDigest>();
+		String SQLQuery = "select * from items";
+		List<Items> detailList = this.execSQLQuery(SQLQuery);/**----------------我是华丽丽的警示线2-----------------------------------*/
+		for(Items item : detailList){
+			String imageURL = item.getImageUrl();
+			String name = item.getItemName();
+			double basePrice = item.getItemFlourPrice();
+			double latestPrice = item.getItemHighestBidprice();
+			Date d = null;// = item.getItemAvailableSeconds();
+			long itemId = item.getItemId();
+			queryResult.add(new ItemDigest(itemId, imageURL, name, basePrice, latestPrice, d));
+		}
+		return queryResult;
 	}
 	
 	/**
@@ -119,7 +143,7 @@ public class ItemMgr {
 	 * @return
 	 */
 	public List<ItemDigest> queryDyingItems( long from, long to, long categoryId ){
-		return null;
+		return null;/**----------------我是华丽丽的警示线3-----------------------------------*/
 	}
 
 	/**
@@ -127,8 +151,28 @@ public class ItemMgr {
 	 * @param thisItem
 	 * @return
 	 */
-	public boolean addItem(Items thisItem){
-		return false;
+	public boolean addItem(Item thisItem){
+		boolean flag;
+		Session s = HibernateUtility.currentSession();
+		try {
+			HibernateUtility.beginTransaction();
+			/*Items saveItem = new Items(itemId, itemName, itemDes,
+					 itemBidRule, itemFlourPrice, itemHighestBidprice,
+					 itemHighestBidUserName, itmeStatus,
+					 itemCargoName, itmeCargoId, sortId, 
+					 postUser, imageUrl, itemBidDeadline, 
+					 itemPostTimestamp);
+			s.saveOrUpdate(saveItem);*/
+			HibernateUtility.commitTransaction();
+			}
+		catch (HibernateException e) {
+			HibernateUtility.commitTransaction();  
+			e.printStackTrace(); 
+			log.fatal(e);
+			flag = false;
+			}
+		HibernateUtility.closeSession();
+		return true;
 	}
 
 	/**
@@ -155,7 +199,7 @@ public class ItemMgr {
 	 * @param itemId
 	 * @return
 	 */
-	public Items queryItem(long itemId){
+	public Item queryItem(long itemId){
 		return null;
 	}
 
@@ -229,11 +273,14 @@ public class ItemMgr {
 				Integer itmeStatus = (Integer)(((Object[])obj)[11]);
 				String itemCargoName = (((Object[])obj)[12]).toString();
 				Integer itmeCargoId = (Integer)(((Object[])obj)[13]);
+				Date itemBidDeadline = (Date)(((Object[])obj)[14]);
+				Date itemPostTimestamp = (Date)(((Object[])obj)[15]);
 				queryResult.add(new Items(itemId, itemName, itemDes,
 						 itemBidRule, itemFlourPrice, itemHighestBidprice,
 						 itemHighestBidUserName, itmeStatus,
-						 itemAvailableSeconds, itemCargoName, itmeCargoId,
-						 sortId, postUser, imageUrl));
+						 itemCargoName, itmeCargoId, sortId, 
+						 postUser, imageUrl, itemBidDeadline, 
+						 itemPostTimestamp));
 				}
 			} catch (HibernateException e) { 
 				HibernateUtility.commitTransaction();

@@ -3,7 +3,7 @@ package com.bid.dataMgr;
 import java.util.List;
 
 import com.bid.data.Category;
-import com.bid.data.Items;
+import com.bid.exchange.Item;
 import com.bid.exchange.UserInfo;
 import com.bid.exchange.ItemDigest;
 
@@ -20,8 +20,8 @@ public class DataBoundary {
 		return (itemMgr.queryBiddedItems(userName));
 	}
 	
-	public Items getItem(long itemId){
-		Items thisItem = itemMgr.queryItem(itemId);
+	public Item getItem(long itemId){
+		Item thisItem = itemMgr.queryItem(itemId);
 		return thisItem;
 		
 	}
@@ -34,8 +34,8 @@ public class DataBoundary {
 	 *  输入：货品的唯一标示
 	 *  输出：货品的详细描述
 	 */
-	public Items getItemInfo(long itemId){
-		Items thisItem = null;
+	public Item getItemInfo(long itemId){
+		Item thisItem = null;
 		thisItem = itemMgr.queryItem(itemId);
 		return thisItem;
 	}
@@ -74,7 +74,7 @@ public class DataBoundary {
 	 *	输入：货品的详细资料
 	 *	输出：货品是否提交成功
 	 */
-	public boolean submitItem(Items thisItem){
+	public boolean submitItem(Item thisItem){
 		boolean isSubmmitted = false;
 		if(itemMgr.addItem(thisItem))
 			isSubmmitted = timerMgr.registerDeadline(thisItem.getItemId(), thisItem.getItemAvailableSeconds());
