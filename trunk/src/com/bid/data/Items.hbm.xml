@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2010-1-11 20:15:23 by Hibernate Tools 3.2.4.GA -->
+<!-- Generated 2010-1-11 20:31:31 by Hibernate Tools 3.2.4.GA -->
 <hibernate-mapping>
     <class name="com.bid.data.Items" table="items" catalog="ooad">
         <id name="itemId" type="int">
@@ -46,6 +46,9 @@
         </property>
         <property name="itemBidDeadline" type="timestamp">
             <column name="itemBidDeadline" length="19" not-null="true" />
+        </property>
+        <property name="itemPostTimestamp" type="timestamp">
+            <column name="itemPostTimestamp" length="19" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>
