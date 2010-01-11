@@ -11,6 +11,8 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
+import com.bid.data.Deposits;
+import com.bid.data.DepositsId;
 import com.bid.data.Items;
 import com.bid.data.Users;
 import com.bid.exchange.Item;
@@ -217,7 +219,7 @@ public class ItemMgr {
 	 * @return
 	 */
 	public boolean addItem(Item thisItem){
-		boolean flag;
+		boolean flag = false;
 		Session s = HibernateUtility.currentSession();
 		try {
 			HibernateUtility.beginTransaction();
@@ -239,6 +241,7 @@ public class ItemMgr {
 			s.saveOrUpdate(saveItem);
 			HibernateUtility.commitTransaction();
 			itemCnt++;
+			flag = true;
 			}
 		catch (HibernateException e) {
 			HibernateUtility.commitTransaction();  
@@ -247,7 +250,7 @@ public class ItemMgr {
 			flag = false;
 			}
 		HibernateUtility.closeSession();
-		return true;
+		return flag;
 	}
 
 	/**
@@ -460,6 +463,29 @@ public class ItemMgr {
 			HibernateUtility.closeSession(); 
 			return queryResult; 
 	}
+	
+
+	public boolean biddedBy(long itemId, String userName, double money) {
+
+		boolean flag = false;
+		Session s = HibernateUtility.currentSession();
+		try {
+			HibernateUtility.beginTransaction();
+			Deposits saveDep = new Deposits(new DepositsId(userName, itemId), money);
+			s.saveOrUpdate(saveDep);
+			HibernateUtility.commitTransaction();
+			flag = true;
+			}
+		catch (HibernateException e) {
+			HibernateUtility.commitTransaction();  
+			e.printStackTrace(); 
+			log.fatal(e);
+			flag = false;
+			}
+		HibernateUtility.closeSession();
+		return flag;
+	}
+	
 	private static Log log = LogFactory.getLog(UserMgr.class);
 	private long itemCnt = 0;
 }
