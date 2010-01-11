@@ -1,5 +1,7 @@
 package com.bid.exchange;
 
+import java.util.Date;
+
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class Item implements IsSerializable {
@@ -15,12 +17,14 @@ public class Item implements IsSerializable {
 	private double itemFloorPrice;
 	private int sortID;
 	private String postUserName;
-	private int itemAvailableSeconds ;
+	private Date date;
 
 	
 	
 	// dynamic information which would change during the bidding process
-	private int itemHighestBidPrice = 0;
+	private double itemHighestBidPrice = 0;
+	private String itemHighestBidUserName = null;
+	private int itemBidRule = 0;	//default
 	private int itemStatus = ONBID;
 	private String itemCargoName = null;
 	private int itemCargoID = -1; // not available
@@ -30,13 +34,17 @@ public class Item implements IsSerializable {
 		
 	}
 	public Item(int itemid, String itemname, String des, 
-			double floorprice, int sortid, String postUserName, int ttl){
+			double floorprice, int sortid, String postUserName, Date date,
+			double highestBidPrice, String highestBidUserName, int itemBidRule){
 		this.itemID = itemid;
 		this.itemName = itemname;
 		this.itemDes = des;
 		this.itemFloorPrice = floorprice;
 		this.sortID = sortid;
-		this.itemAvailableSeconds = ttl;
+		this.date = date;
+		this.itemHighestBidPrice = highestBidPrice;
+		this.itemHighestBidUserName = highestBidUserName;
+		this.itemBidRule = itemBidRule;
 	}
 
 
@@ -48,8 +56,8 @@ public class Item implements IsSerializable {
 	 * 
 	 * @return
 	 */
-	public long getTime() {
-		return this.itemAvailableSeconds;
+	public Date getTime() {
+		return this.date;
 	}
 
 	public void setItemID(long itemID) {
@@ -84,7 +92,7 @@ public class Item implements IsSerializable {
 		this.itemHighestBidPrice = itemHighestBidPrice;
 	}
 
-	public int getItemHighestBidPrice() {
+	public double getItemHighestBidPrice() {
 		return itemHighestBidPrice;
 	}
 
@@ -96,12 +104,22 @@ public class Item implements IsSerializable {
 		return itemStatus;
 	}
 
-	public void setItemAvailableSeconds(int itemAvailableSeconds) {
-		this.itemAvailableSeconds = itemAvailableSeconds;
+	public String getItemHighestBidUserName() {
+		return itemHighestBidUserName;
 	}
 
-	public int getItemAvailableSeconds() {
-		return itemAvailableSeconds;
+	public void setItemHighestBidUserName(String ItemHighestBidUserName) {
+		this.itemHighestBidUserName = ItemHighestBidUserName;
+	}
+	
+	
+
+	public void setItemAvailableSeconds(Date date) {
+		this.date = date;
+	}
+
+	public Date getItemAvailableSeconds() {
+		return date;
 	}
 
 	public void setItemCargoName(String itemCargoName) {
