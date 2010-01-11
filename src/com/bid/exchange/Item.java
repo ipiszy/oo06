@@ -7,6 +7,8 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 public class Item implements IsSerializable {
 	// constant values for the bidding status
 	public final static int ONBID = 0;
+	public final static int BIDDED = 2;
+	public final static int ONDELIVER = 3;
 	public final static int OBSOLETE = 1;
 
 	// static information which must be provide when posting obsolete
@@ -35,7 +37,7 @@ public class Item implements IsSerializable {
 	}
 	public Item(int itemid, String itemname, String des, 
 			double floorprice, int sortid, String postUserName, Date date,
-			double highestBidPrice, String highestBidUserName, int itemBidRule){
+			double highestBidPrice, String highestBidUserName, int itemBidRule, int itemStatus){
 		this.itemID = itemid;
 		this.itemName = itemname;
 		this.itemDes = des;
@@ -45,6 +47,7 @@ public class Item implements IsSerializable {
 		this.itemHighestBidPrice = highestBidPrice;
 		this.itemHighestBidUserName = highestBidUserName;
 		this.itemBidRule = itemBidRule;
+		this.itemStatus = itemStatus;
 	}
 
 
