@@ -11,6 +11,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 import com.bid.data.Items;
+import com.bid.data.Users;
 import com.bid.exchange.Item;
 import com.bid.exchange.ItemDigest;
 
@@ -247,9 +248,28 @@ public class ItemMgr {
 	 * @return
 	 */
 	public boolean isAlive(long itemId) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+		Session s = HibernateUtility.currentSession();
+		boolean returnValue = false;
+		try {
+			HibernateUtility.beginTransaction();
+			Items items = (Items) s.get(Items.class, itemId);
+			HibernateUtility.commitTransaction();
+
+			if (items == null)
+				returnValue = false;
+			else if (!(items.getItemBidDeadline().after(new Date())))
+				returnValue = false;
+			else
+				returnValue = true;
+
+		} catch (HibernateException e) {
+			HibernateUtility.commitTransaction();
+			log.fatal(e);
+			returnValue = false;
+		}
+		HibernateUtility.closeSession();
+		return returnValue;
+		}
 	
 	private List execSQLQuery(String SQLQuery){
 		Session s = HibernateUtility.currentSession();  
