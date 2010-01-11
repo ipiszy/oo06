@@ -1,6 +1,6 @@
 package com.bid.data;
 
-// Generated 2010-1-11 20:31:31 by Hibernate Tools 3.2.4.GA
+// Generated 2010-1-11 22:43:10 by Hibernate Tools 3.2.4.GA
 
 import java.util.Date;
 
@@ -9,17 +9,17 @@ import java.util.Date;
  */
 public class Items implements java.io.Serializable {
 
-	private int itemId;
+	private long itemId;
 	private String itemName;
 	private String itemDes;
 	private String itemBidRule;
 	private Double itemFlourPrice;
 	private Double itemHighestBidprice;
 	private String itemHighestBidUserName;
-	private Integer itmeStatus;
+	private Integer itemStatus;
 	private String itemCargoName;
 	private Integer itmeCargoId;
-	private int sortId;
+	private long sortId;
 	private String postUser;
 	private String imageUrl;
 	private Date itemBidDeadline;
@@ -28,7 +28,7 @@ public class Items implements java.io.Serializable {
 	public Items() {
 	}
 
-	public Items(int itemId, int sortId, Date itemBidDeadline,
+	public Items(long itemId, long sortId, Date itemBidDeadline,
 			Date itemPostTimestamp) {
 		this.itemId = itemId;
 		this.sortId = sortId;
@@ -36,12 +36,12 @@ public class Items implements java.io.Serializable {
 		this.itemPostTimestamp = itemPostTimestamp;
 	}
 
-	public Items(int itemId, String itemName, String itemDes,
+	public Items(long itemId, String itemName, String itemDes,
 			String itemBidRule, Double itemFlourPrice,
 			Double itemHighestBidprice, String itemHighestBidUserName,
-			Integer itmeStatus, String itemCargoName, Integer itmeCargoId,
-			int sortId, String postUser, String imageUrl, Date itemBidDeadline,
-			Date itemPostTimestamp) {
+			Integer itemStatus, String itemCargoName, Integer itmeCargoId,
+			long sortId, String postUser, String imageUrl,
+			Date itemBidDeadline, Date itemPostTimestamp) {
 		this.itemId = itemId;
 		this.itemName = itemName;
 		this.itemDes = itemDes;
@@ -49,7 +49,7 @@ public class Items implements java.io.Serializable {
 		this.itemFlourPrice = itemFlourPrice;
 		this.itemHighestBidprice = itemHighestBidprice;
 		this.itemHighestBidUserName = itemHighestBidUserName;
-		this.itmeStatus = itmeStatus;
+		this.itemStatus = itemStatus;
 		this.itemCargoName = itemCargoName;
 		this.itmeCargoId = itmeCargoId;
 		this.sortId = sortId;
@@ -59,11 +59,11 @@ public class Items implements java.io.Serializable {
 		this.itemPostTimestamp = itemPostTimestamp;
 	}
 
-	public int getItemId() {
+	public long getItemId() {
 		return this.itemId;
 	}
 
-	public void setItemId(int itemId) {
+	public void setItemId(long itemId) {
 		this.itemId = itemId;
 	}
 
@@ -115,12 +115,12 @@ public class Items implements java.io.Serializable {
 		this.itemHighestBidUserName = itemHighestBidUserName;
 	}
 
-	public Integer getItmeStatus() {
-		return this.itmeStatus;
+	public Integer getItemStatus() {
+		return this.itemStatus;
 	}
 
-	public void setItmeStatus(Integer itmeStatus) {
-		this.itmeStatus = itmeStatus;
+	public void setItemStatus(Integer itemStatus) {
+		this.itemStatus = itemStatus;
 	}
 
 	public String getItemCargoName() {
@@ -139,11 +139,11 @@ public class Items implements java.io.Serializable {
 		this.itmeCargoId = itmeCargoId;
 	}
 
-	public int getSortId() {
+	public long getSortId() {
 		return this.sortId;
 	}
 
-	public void setSortId(int sortId) {
+	public void setSortId(long sortId) {
 		this.sortId = sortId;
 	}
 

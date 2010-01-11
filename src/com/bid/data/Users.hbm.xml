@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2010-1-11 0:22:22 by Hibernate Tools 3.2.4.GA -->
+<!-- Generated 2010-1-11 22:43:11 by Hibernate Tools 3.2.4.GA -->
 <hibernate-mapping>
     <class name="com.bid.data.Users" table="users" catalog="ooad">
         <id name="userName" type="string">
