@@ -87,8 +87,8 @@ public class DataBoundary {
 	 * 	输出：无
 	 * 	作用：浏览器端和服务器端都知道货品已发出
 	 */
-	public void confirmDelivery(long itemId, long receiptId){
-		itemMgr.updateDelivery(itemId, receiptId);
+	public void confirmDelivery(long itemId, long receiptId, String cargoCmp){
+		itemMgr.updateDelivery(itemId, receiptId, cargoCmp);
 	}
 	
 	/**

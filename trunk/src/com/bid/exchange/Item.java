@@ -19,7 +19,9 @@ public class Item implements IsSerializable {
 	private double itemFloorPrice;
 	private int sortID;
 	private String postUserName;
-	private Date date;
+	private Date deadline;
+	private String imageURL;
+	private Date postTimestamp;
 
 	
 	
@@ -35,19 +37,24 @@ public class Item implements IsSerializable {
 	public Item(){
 		
 	}
-	public Item(int itemid, String itemname, String des, 
-			double floorprice, int sortid, String postUserName, Date date,
-			double highestBidPrice, String highestBidUserName, int itemBidRule, int itemStatus){
+	public Item(long itemid, String itemname, String des, 
+			double floorprice, int sortid, String postUserName, Date deadline,
+			double highestBidPrice, String highestBidUserName, 
+			int itemBidRule, int itemStatus, String imageURL,
+			Date postTimestamp
+			){
 		this.itemID = itemid;
 		this.itemName = itemname;
 		this.itemDes = des;
 		this.itemFloorPrice = floorprice;
 		this.sortID = sortid;
-		this.date = date;
+		this.deadline = deadline;
 		this.itemHighestBidPrice = highestBidPrice;
 		this.itemHighestBidUserName = highestBidUserName;
 		this.itemBidRule = itemBidRule;
 		this.itemStatus = itemStatus;
+		this.imageURL = imageURL;
+		this.postTimestamp = postTimestamp;
 	}
 
 
@@ -60,10 +67,10 @@ public class Item implements IsSerializable {
 	 * @return
 	 */
 	public Date getTime() {
-		return this.date;
+		return this.deadline;
 	}
 
-	public void setItemID(long itemID) {
+	private void setItemID(long itemID) {
 		this.itemID = itemID;
 	}
 
@@ -126,11 +133,11 @@ public class Item implements IsSerializable {
 	
 
 	public void setItemAvailableSeconds(Date date) {
-		this.date = date;
+		this.deadline = date;
 	}
 
 	public Date getItemAvailableSeconds() {
-		return date;
+		return deadline;
 	}
 
 	public void setItemCargoName(String itemCargoName) {
@@ -163,6 +170,15 @@ public class Item implements IsSerializable {
 
 	public String getPostUserName() {
 		return postUserName;
+	}
+	public String getImageURL() {
+		return imageURL;
+	}
+	public Date getItemBidDeadline() {
+		return deadline;
+	}
+	public Date getItemPostTimestamp() {
+		return this.postTimestamp;
 	}
 	
 }
