@@ -193,7 +193,20 @@ public class ItemMgr {
 	 * @return
 	 */
 	public boolean updateReceipt(long itemId){
-		return false;
+		Session s = HibernateUtility.currentSession();
+		Item thisItem = null;
+		try {
+			HibernateUtility.beginTransaction();
+			Items item = (Items) s.get(Items.class, itemId);
+			HibernateUtility.commitTransaction();
+			item.setItmeStatus(Item.DELIVERED);
+			} catch (HibernateException e) {
+				HibernateUtility.commitTransaction();
+				log.fatal(e);
+				return false;
+		}
+		HibernateUtility.closeSession();
+		return true;
 	}
 
 	/**
@@ -310,6 +323,8 @@ public class ItemMgr {
 				returnValue = false;
 			else
 				returnValue = true;
+			
+			returnValue = returnValue & (items.getItmeStatus() == Item.ONBID);
 
 		} catch (HibernateException e) {
 			HibernateUtility.commitTransaction();
