@@ -2,6 +2,7 @@ package com.bid.dataMgr;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -210,7 +211,19 @@ public class ItemMgr {
 	 * @return
 	 */
 	public double/*(curPrice)*/ queryCurPrice(long itemId){
-		return 0;
+		Session s = HibernateUtility.currentSession();
+		double curPrice = -1;
+		try {
+			HibernateUtility.beginTransaction();
+			Items items = (Items) s.get(Items.class, itemId);
+			HibernateUtility.commitTransaction();
+			curPrice = items.getItemHighestBidprice();
+		} catch (HibernateException e) {
+			HibernateUtility.commitTransaction();
+			log.fatal(e);
+		}
+		HibernateUtility.closeSession();
+		return curPrice;
 	}
 
 	/**
@@ -219,9 +232,9 @@ public class ItemMgr {
 	 * @param offerMoney
 	 * @return
 	 */
-	public double /*Money*/ queryTransferPrice(String userName, double offerMoney){
-		return 0;
-	}
+//	public double /*Money*/ queryTransferPrice(String userName, double offerMoney){
+//		return 0;
+//	}
 
 	/**
 	 * 
@@ -229,9 +242,9 @@ public class ItemMgr {
 	 * @param offerMoney
 	 * @return
 	 */
-	public double /*Money*/ transferPrice(String userName, double offerMoney){
-		return 0;
-	}
+//	public double /*Money*/ transferPrice(String userName, double offerMoney){
+//		return 0;
+//	}
 
 	/**
 	 * 
@@ -239,7 +252,25 @@ public class ItemMgr {
 	 * @return
 	 */
 	public Map<String /*user*/, Double/*money*/> queryReturnMoney(long itemId) {
-		return null;
+		Session s = HibernateUtility.currentSession();
+		Map<String, Double> queryResult = new HashMap<String, Double>();
+		try {
+			HibernateUtility.beginTransaction(); 
+			List depositsList = s.createSQLQuery("select userName, moneyFrozen from Deposits where itemId = " + itemId).list();
+			HibernateUtility.commitTransaction();
+			for(Object obj : depositsList){
+				String userName = (((Object[])obj)[0]).toString();
+				Double moneyFrozen = (Double)(((Object[])obj)[1]);
+				queryResult.put(userName, moneyFrozen);
+			}
+		}
+		catch (HibernateException e) { 
+			HibernateUtility.commitTransaction();
+			e.printStackTrace();
+			log.fatal(e);
+		}
+		HibernateUtility.closeSession();
+		return queryResult;
 	}
 
 	/**
@@ -269,11 +300,11 @@ public class ItemMgr {
 		}
 		HibernateUtility.closeSession();
 		return returnValue;
-		}
+	}
 	
 	private List execSQLQuery(String SQLQuery){
 		Session s = HibernateUtility.currentSession();  
-		ArrayList<Items> queryResult = new ArrayList<Items>();
+		List<Items> queryResult = new ArrayList<Items>();
 		try {
 			HibernateUtility.beginTransaction(); 
 			List itemsList = s.createSQLQuery(SQLQuery).list();
@@ -284,17 +315,16 @@ public class ItemMgr {
 				String itemDes = (((Object[])obj)[2]).toString();
 				String itemBidRule = (((Object[])obj)[3]).toString();
 				Double itemFlourPrice = (Double)(((Object[])obj)[4]);
-				Integer itemAvailableSeconds = (Integer)(((Object[])obj)[5]);
-				int sortId = (Integer)(((Object[])obj)[6]);
-				String postUser = (((Object[])obj)[7]).toString();
-				String imageUrl = (((Object[])obj)[8]).toString();
-				Double itemHighestBidprice = (Double)(((Object[])obj)[9]);
-				String itemHighestBidUserName = (((Object[])obj)[10]).toString();
-				Integer itmeStatus = (Integer)(((Object[])obj)[11]);
-				String itemCargoName = (((Object[])obj)[12]).toString();
-				Integer itmeCargoId = (Integer)(((Object[])obj)[13]);
-				Date itemBidDeadline = (Date)(((Object[])obj)[14]);
-				Date itemPostTimestamp = (Date)(((Object[])obj)[15]);
+				int sortId = (Integer)(((Object[])obj)[5]);
+				String postUser = (((Object[])obj)[6]).toString();
+				String imageUrl = (((Object[])obj)[7]).toString();
+				Double itemHighestBidprice = (Double)(((Object[])obj)[8]);
+				String itemHighestBidUserName = (((Object[])obj)[9]).toString();
+				Integer itmeStatus = (Integer)(((Object[])obj)[10]);
+				String itemCargoName = (((Object[])obj)[11]).toString();
+				Integer itmeCargoId = (Integer)(((Object[])obj)[12]);
+				Date itemBidDeadline = (Date)(((Object[])obj)[13]);
+				Date itemPostTimestamp = (Date)(((Object[])obj)[14]);
 				queryResult.add(new Items(itemId, itemName, itemDes,
 						 itemBidRule, itemFlourPrice, itemHighestBidprice,
 						 itemHighestBidUserName, itmeStatus,
