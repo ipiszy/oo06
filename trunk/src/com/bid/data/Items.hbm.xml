@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2010-1-11 0:22:22 by Hibernate Tools 3.2.4.GA -->
+<!-- Generated 2010-1-11 20:15:23 by Hibernate Tools 3.2.4.GA -->
 <hibernate-mapping>
     <class name="com.bid.data.Items" table="items" catalog="ooad">
         <id name="itemId" type="int">
@@ -29,9 +29,6 @@
         <property name="itmeStatus" type="java.lang.Integer">
             <column name="itmeStatus" />
         </property>
-        <property name="itemAvailableSeconds" type="java.lang.Integer">
-            <column name="itemAvailableSeconds" />
-        </property>
         <property name="itemCargoName" type="string">
             <column name="itemCargoName" length="20" />
         </property>
@@ -46,6 +43,9 @@
         </property>
         <property name="imageUrl" type="string">
             <column name="imageURL" length="100" />
+        </property>
+        <property name="itemBidDeadline" type="timestamp">
+            <column name="itemBidDeadline" length="19" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>

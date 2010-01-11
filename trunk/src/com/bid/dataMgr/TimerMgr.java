@@ -1,11 +1,13 @@
 package com.bid.dataMgr;
 
+import java.util.Date;
+
 public class TimerMgr {
 	
 	/**
 	 * 作用：挂了一个新的定时器
 	 */
-	public boolean registerDeadline(long itemId, long Time){
+	public boolean registerDeadline(long itemId, Date date){
 		return false;
 	}
 
