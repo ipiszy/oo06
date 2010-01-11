@@ -60,7 +60,7 @@ public class TestMain {
 		sampleItem.dump();
 		
 		System.out.println("testing getItem(long ):");
-		sampleItem  = b.getItemInfo(90001);
+		sampleItem  = b.getItem(90001);
 		sampleItem.dump();
 
 		
