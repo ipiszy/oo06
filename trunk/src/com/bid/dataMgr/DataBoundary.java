@@ -12,7 +12,6 @@ public class DataBoundary {
 	public DataBoundary(){
 		itemMgr = new ItemMgr();
 		userMgr = new UserMgr();
-		timerMgr = new TimerMgr();
 		categoryMgr = new CategoryMgr();
 	}
 	
@@ -24,10 +23,6 @@ public class DataBoundary {
 		Item thisItem = itemMgr.queryItem(itemId);
 		return thisItem;
 		
-	}
-
-	public void startUp(){
-		timerMgr.startUp();
 	}
 	
 	/**
@@ -75,11 +70,7 @@ public class DataBoundary {
 	 *	输出：货品是否提交成功
 	 */
 	public boolean submitItem(Item thisItem){
-		boolean isSubmmitted = false;
-		if(itemMgr.addItem(thisItem))
-			isSubmmitted = timerMgr.registerDeadline(thisItem.getItemId(), thisItem.getItemAvailableSeconds());
-		
-		return isSubmmitted;
+		return (itemMgr.addItem(thisItem));
 	}
 
 	/**
@@ -165,7 +156,6 @@ public class DataBoundary {
 	
 	private ItemMgr itemMgr;
 	private UserMgr userMgr;
-	private TimerMgr timerMgr;
 	private CategoryMgr categoryMgr;
 
 }
