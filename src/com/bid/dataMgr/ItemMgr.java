@@ -3,6 +3,10 @@ package com.bid.dataMgr;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
 import com.bid.data.Items;
 import com.bid.exchange.ItemDigest;
 
@@ -10,8 +14,23 @@ public class ItemMgr {
 	//createItem()
 
 
-	// what does this method do?
-	public List<ItemDigest> queryBiddedItems(){
+	/**
+	 * Query items that have been bidded by a certain person
+	 * @param userName
+	 * @return
+	 */
+	public List<ItemDigest> queryBiddedItems(String userName){
+		return null;
+	}
+	
+	/**
+	 * Query all items
+	 * @param from
+	 * @param to
+	 * @return
+	 */
+	public List<Items> queryItems(){
+
 		return null;
 	}
 
