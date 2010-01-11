@@ -88,6 +88,14 @@ public class Item implements IsSerializable {
 		return itemFloorPrice;
 	}
 
+	public void setItemBidRule(int itemBidRule) {
+		this.itemBidRule = itemBidRule;
+	}
+
+	public double getItemBidRule() {
+		return itemBidRule;
+	}
+
 	public void setItemHighestBidPrice(int itemHighestBidPrice) {
 		this.itemHighestBidPrice = itemHighestBidPrice;
 	}
