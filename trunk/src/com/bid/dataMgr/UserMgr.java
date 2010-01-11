@@ -39,21 +39,20 @@ public class UserMgr {
 		boolean flag = true;
 		Session s = HibernateUtility.currentSession();
 		try {
-			
+
 			HibernateUtility.beginTransaction();
 			Users user = (Users) s.get(Users.class, userInfo.getUserName());
 			HibernateUtility.commitTransaction();
-			if(user!=null){
+			if (user != null) {
 				flag = false;
-			}else
-			{
+			} else {
 				user = new Users();
 				user.setUserName(userInfo.getUserName());
 				user.setUserPass(userInfo.getUserPass());
 				user.setUserBalance(userInfo.getUserBalance());
 				user.setUserBankAccount(userInfo.getUserBankAccount());
 				user.setUserMailBox(userInfo.getUserMailBox());
-	
+
 				HibernateUtility.beginTransaction();
 				s.saveOrUpdate(user);
 				HibernateUtility.commitTransaction();
@@ -70,14 +69,73 @@ public class UserMgr {
 
 	}
 
+	/**
+	 * replenish the user's balance account
+	 * @param userName
+	 * @param money the amount of money added to the user's balance
+	 * @return
+	 */
 	public boolean charge(String userName, double money) {
-		// TODO
-		return false;
+		Session s = HibernateUtility.currentSession();
+		boolean returnValue = false;
+		try {
+			HibernateUtility.beginTransaction();
+			Users user = (Users) s.get(Users.class, userName);
+			HibernateUtility.commitTransaction();
+
+			if (user == null)
+				returnValue = false;
+			else {
+				double balance = user.getUserBalance();
+				user.setUserBalance(balance + money);
+
+				HibernateUtility.beginTransaction();
+				s.update(user);
+				HibernateUtility.commitTransaction();
+
+			}
+
+		} catch (HibernateException e) {
+			HibernateUtility.commitTransaction();
+			log.fatal(e);
+			returnValue = false;
+		}
+		HibernateUtility.closeSession();
+		return returnValue;
 	}
 
-	public boolean transfer(double money/* (+,-) */) {
-		// TODO
-		return false;
+	/**
+	 * Transfer money for this user.
+	 * @param money the money transfered. The balance increases if <b>money<b> is positive
+	 * @return
+	 */
+	public boolean transfer(String userName,double money/* (+,-) */) {
+		Session s = HibernateUtility.currentSession();
+		boolean returnValue = false;
+		try {
+			HibernateUtility.beginTransaction();
+			Users user = (Users) s.get(Users.class, userName);
+			HibernateUtility.commitTransaction();
+
+			if (user == null)
+				returnValue = false;
+			else {
+				double balance = user.getUserBalance();
+				user.setUserBalance(balance + money);
+
+				HibernateUtility.beginTransaction();
+				s.update(user);
+				HibernateUtility.commitTransaction();
+
+			}
+
+		} catch (HibernateException e) {
+			HibernateUtility.commitTransaction();
+			log.fatal(e);
+			returnValue = false;
+		}
+		HibernateUtility.closeSession();
+		return returnValue;
 	}
 
 	public boolean hasUser(String userName) {
@@ -100,30 +158,28 @@ public class UserMgr {
 		HibernateUtility.closeSession();
 		return returnValue;
 	}
-	
-	
-	public static void main(String[] args){
-		
-//          System.out.println(new UserMgr().selectAll());
-//          System.out.println(new UserMgr().queryAccount("ipiszy"));
-//          System.out.println(new UserMgr().delAccount("ipiszy"));
-         
+
+	public static void main(String[] args) {
+
+		// System.out.println(new UserMgr().selectAll());
+		// System.out.println(new UserMgr().queryAccount("ipiszy"));
+		// System.out.println(new UserMgr().delAccount("ipiszy"));
 
 		System.out.println(new UserMgr().addUser(new UserInfo("ipiszy", 0,
 				"Applicant", "ipiszy", "ipiszy")));
-		System.out.println(new UserMgr().addUser(new UserInfo(   "ipiszy", 0,
+		System.out.println(new UserMgr().addUser(new UserInfo("ipiszy", 0,
 				"Applicant", "ipiszy", "ipiszy")));
-        
-        System.out.println(new UserMgr().isValid("ipiszy", "Applicant"));
-        System.out.println(new UserMgr().isValid("aay", "a"));
-        System.out.println(new UserMgr().addUser(new UserInfo(
-                "aay", 0, "123", "ipiszy", "ipiszy")));
-        System.out.println(new UserMgr().isValid("aay", "123"));
+
+		System.out.println(new UserMgr().isValid("ipiszy", "Applicant"));
+		System.out.println(new UserMgr().isValid("aay", "a"));
+		System.out.println(new UserMgr().addUser(new UserInfo("aay", 0, "123",
+				"ipiszy", "ipiszy")));
+		System.out.println(new UserMgr().isValid("aay", "123"));
 	}
 
 	public void login(String userName) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
