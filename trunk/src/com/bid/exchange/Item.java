@@ -17,7 +17,7 @@ public class Item implements IsSerializable {
 	private String itemDes;
 	//Sting itemBidRule;
 	private double itemFloorPrice;
-	private int sortID;
+	private long sortID;
 	private String postUserName;
 	private Date deadline;
 	private String imageURL;
@@ -38,7 +38,7 @@ public class Item implements IsSerializable {
 		
 	}
 	public Item(long itemid, String itemname, String des, 
-			double floorprice, int sortid, String postUserName, Date deadline,
+			double floorprice, long sortId, String postUserName, Date deadline,
 			double highestBidPrice, String highestBidUserName, 
 			int itemBidRule, int itemStatus, String imageURL,
 			Date postTimestamp
@@ -47,7 +47,7 @@ public class Item implements IsSerializable {
 		this.itemName = itemname;
 		this.itemDes = des;
 		this.itemFloorPrice = floorprice;
-		this.sortID = sortid;
+		this.sortID = sortId;
 		this.deadline = deadline;
 		this.itemHighestBidPrice = highestBidPrice;
 		this.itemHighestBidUserName = highestBidUserName;
@@ -160,7 +160,7 @@ public class Item implements IsSerializable {
 		this.sortID = sortID;
 	}
 
-	public int getSortID() {
+	public long getSortID() {
 		return sortID;
 	}
 

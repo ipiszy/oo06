@@ -182,4 +182,21 @@ public class UserMgr {
 
 	}
 
+	public UserInfo getUser(String userName) {
+		UserInfo userinfo = null;
+		Session s = HibernateUtility.currentSession();
+		try {
+			HibernateUtility.beginTransaction();
+			Users user = (Users) s.get(Users.class, userName);
+			userinfo = new UserInfo(user.getUserName(),user.getUserBalance(),
+					user.getUserPass(), user.getUserBankAccount(), user.getUserMailBox());
+			HibernateUtility.commitTransaction();
+		} catch (HibernateException e) {
+			HibernateUtility.commitTransaction();
+			log.fatal(e);
+		}
+		HibernateUtility.closeSession();
+		return userinfo;
+	}
+
 }
