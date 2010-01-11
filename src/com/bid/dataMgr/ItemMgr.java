@@ -1,13 +1,17 @@
 package com.bid.dataMgr;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
 import com.bid.data.Items;
+import com.bid.exchange.Item;
 import com.bid.exchange.ItemDigest;
 
 public class ItemMgr {
@@ -20,18 +24,56 @@ public class ItemMgr {
 	 * @return
 	 */
 	public List<ItemDigest> queryBiddedItems(String userName){
-		return null;
+		List<ItemDigest> queryResult = new ArrayList<ItemDigest>();
+		String SQLQuery = "select * from items where itemHighestBidUserName = " + userName;
+		List<Items> detailList = this.execSQLQuery(SQLQuery);
+		for(Items item : detailList){
+			String imageURL = item.getImageUrl();
+			String name = item.getItemName();
+			double basePrice = item.getItemFlourPrice();
+			double latestPrice = item.getItemHighestBidprice();
+			Date d = null;// = item.getItemAvailableSeconds();
+			long itemId = item.getItemId();
+			queryResult.add(new ItemDigest(itemId, imageURL, name, basePrice, latestPrice, d));
+		}
+		return queryResult;
 	}
 	
 	/**
 	 * Query all items
-	 * @param from
-	 * @param to
 	 * @return
 	 */
-	public List<Items> queryItems(){
+	public List<ItemDigest> queryItemDigests(){
+		List<ItemDigest> queryResult = new ArrayList<ItemDigest>();
+		String SQLQuery = "select * from items";
+		List<Items> detailList = this.execSQLQuery(SQLQuery);
+		for(Items item : detailList){
+			String imageURL = item.getImageUrl();
+			String name = item.getItemName();
+			double basePrice = item.getItemFlourPrice();
+			double latestPrice = item.getItemHighestBidprice();
+			Date d = null;// = item.getItemAvailableSeconds();
+			long itemId = item.getItemId();
+			queryResult.add(new ItemDigest(itemId, imageURL, name, basePrice, latestPrice, d));
+		}
+		return queryResult;
+	}
 
-		return null;
+	
+	/**
+	 * Query all items
+	 * @return
+	 */
+	public List<Item> queryItems(){
+		List<Item> queryResult = new ArrayList<Item>();
+		String SQLQuery = "select * from items";
+		List<Items> detailList = this.execSQLQuery(SQLQuery);
+		for(Items item : detailList){
+			queryResult.add(new Item(item.getItemId(), item.getItemName(),
+					item.getItemDes(), item.getItemFlourPrice().doubleValue(),
+					item.getSortId(), item.getPostUser(), item.getItemAvailableSeconds().intValue()));
+		}
+		return queryResult;
 	}
 
 	/**
@@ -164,4 +206,42 @@ public class ItemMgr {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	private List execSQLQuery(String SQLQuery){
+		Session s = HibernateUtility.currentSession();  
+		ArrayList<Items> queryResult = new ArrayList<Items>();
+		try {
+			HibernateUtility.beginTransaction(); 
+			List itemsList = s.createSQLQuery(SQLQuery).list();
+			HibernateUtility.commitTransaction();
+			for(Object obj : itemsList){
+				int itemId = (Integer)(((Object[])obj)[0]);
+				String itemName = (((Object[])obj)[1]).toString();
+				String itemDes = (((Object[])obj)[2]).toString();
+				String itemBidRule = (((Object[])obj)[3]).toString();
+				Double itemFlourPrice = (Double)(((Object[])obj)[4]);
+				Integer itemAvailableSeconds = (Integer)(((Object[])obj)[5]);
+				int sortId = (Integer)(((Object[])obj)[6]);
+				String postUser = (((Object[])obj)[7]).toString();
+				String imageUrl = (((Object[])obj)[8]).toString();
+				Double itemHighestBidprice = (Double)(((Object[])obj)[9]);
+				String itemHighestBidUserName = (((Object[])obj)[10]).toString();
+				Integer itmeStatus = (Integer)(((Object[])obj)[11]);
+				String itemCargoName = (((Object[])obj)[12]).toString();
+				Integer itmeCargoId = (Integer)(((Object[])obj)[13]);
+				queryResult.add(new Items(itemId, itemName, itemDes,
+						 itemBidRule, itemFlourPrice, itemHighestBidprice,
+						 itemHighestBidUserName, itmeStatus,
+						 itemAvailableSeconds, itemCargoName, itmeCargoId,
+						 sortId, postUser, imageUrl));
+				}
+			} catch (HibernateException e) { 
+				HibernateUtility.commitTransaction();
+				e.printStackTrace();
+				log.fatal(e);
+			}
+			HibernateUtility.closeSession(); 
+			return queryResult; 
+	}
+	private static Log log = LogFactory.getLog(UserMgr.class);
 }
