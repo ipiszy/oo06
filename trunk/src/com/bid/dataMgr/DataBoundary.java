@@ -1,6 +1,7 @@
 package com.bid.dataMgr;
 
 import java.util.List;
+import java.util.Map;
 
 import com.bid.data.Category;
 import com.bid.exchange.Item;
@@ -117,7 +118,15 @@ public class DataBoundary {
 		//1把出价的用户与其货品之间的关系绑定
 		//2从用户的账面上扣去某个(差额)金额
 		//0计算差额
-		boolean offered = userMgr.transfer(userName, money);
+		double deltaMoney;
+		Map<String, Double> bidUsers = itemMgr.queryReturnMoney(itemId);
+		if(bidUsers.isEmpty())
+			return false;
+		if(!bidUsers.containsKey(userName))
+			deltaMoney = money - bidUsers.get(userName);
+		else
+			deltaMoney = money;
+		boolean offered = userMgr.transfer(userName, deltaMoney);
 		if(offered)
 			itemMgr.biddedBy(itemId, userName, money);
 		return offered;
