@@ -24,6 +24,10 @@ public class DataBoundary {
 		return thisItem;
 		
 	}
+
+	public void startUp(){
+		timerMgr.startUp();
+	}
 	
 	/**
 	 *  输入：货品的唯一标示
@@ -150,8 +154,7 @@ public class DataBoundary {
 	}
 
 	private boolean isUserValid(String userName, String psw){
-		userMgr.isValid(userName, psw);
-		return false;
+		return userMgr.isValid(userName, psw);
 	}
 	
 	private ItemMgr itemMgr;
