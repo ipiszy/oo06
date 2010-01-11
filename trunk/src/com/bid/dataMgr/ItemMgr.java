@@ -202,8 +202,26 @@ public class ItemMgr {
 	 * @return
 	 */
 	public Item queryItem(long itemId){
-		return null;
-	}
+		Session s = HibernateUtility.currentSession();
+		Item thisItem = null;
+		try {
+			HibernateUtility.beginTransaction();
+			Items item = (Items) s.get(Items.class, itemId);
+			HibernateUtility.commitTransaction();
+			thisItem = new Item(item.getItemId(), item.getItemName(),
+					item.getItemDes(), item.getItemFlourPrice(),
+					item.getSortId(), item.getPostUser(),
+					item.getItemBidDeadline(),
+					item.getItemHighestBidprice(),
+					item.getItemHighestBidUserName(),
+					0, Item.ONBID);
+			} catch (HibernateException e) {
+				HibernateUtility.commitTransaction();
+				log.fatal(e);
+				}
+			HibernateUtility.closeSession();
+			return thisItem;
+		}
 
 	/**
 	 * Query the current price (i.e. the highest bid price) of item <b>itemId<b>
