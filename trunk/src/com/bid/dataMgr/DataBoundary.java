@@ -102,6 +102,13 @@ public class DataBoundary {
 		
 		return curPrice;
 	}
+	
+	/**
+	 * 作用：给某个用户的账号上充值
+	 */
+	public boolean charge(double money, String userName){
+		return (userMgr.charge(userName, money));
+	}
 
 	/**
 	 *	作用：服务器和客户器端都知道某一位用户为某一个商品出了一个价格 
@@ -109,7 +116,9 @@ public class DataBoundary {
 	public boolean  offerPrice(double money, long itemId, String userName){
 		//1把出价的用户与其货品之间的关系绑定
 		//2从用户的账面上扣去某个(差额)金额
-		boolean offered = userMgr.charge(userName, money);
+		boolean offered = userMgr.transfer(userName, money);
+		if(offered)
+			itemMgr.biddedBy(itemId, userName, money);
 		return offered;
 	} 
 	
