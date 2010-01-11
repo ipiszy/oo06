@@ -171,6 +171,10 @@ public class Item implements IsSerializable {
 	public String getPostUserName() {
 		return postUserName;
 	}
+	public void dump() {
+		System.out.println("dumping the content of a Item object");
+		System.out.println(this.toString());
+	}
 	public String getImageURL() {
 		return imageURL;
 	}
@@ -179,6 +183,20 @@ public class Item implements IsSerializable {
 	}
 	public Date getItemPostTimestamp() {
 		return this.postTimestamp;
+	}
+	
+	public String  toString(){
+		String tmp = "";
+		tmp.concat("itemName: "+this.itemName+" ");
+		tmp.concat("itemID: "+ this.itemID+" ");
+		tmp.concat("\n");
+		tmp.concat("basePrice: "+this.itemFloorPrice+" ");
+		tmp.concat("latestPrice: "+ this.itemHighestBidPrice+" ");
+//		tmp.concat("\n");
+//		tmp.concat("Date: "+d+"  ");
+//		tmp.concat("URL: "+this.imageURL);
+
+		return tmp;
 	}
 	
 }
