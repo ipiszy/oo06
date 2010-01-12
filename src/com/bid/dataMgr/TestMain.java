@@ -1,8 +1,11 @@
 package com.bid.dataMgr;
 
 import java.util.Date;
+import java.util.List;
 
+import com.bid.data.Category;
 import com.bid.exchange.Item;
+import com.bid.exchange.ItemDigest;
 
 public class TestMain {
 	public static void main(String[]arg){
@@ -65,7 +68,7 @@ public class TestMain {
 		// bid test
 		
 		//test of methods
-		boolean retV;
+		List<ItemDigest> retV;
 		//retV = b.charge(1000, "sepsky");
 		//System.out.println(retV);
 		
@@ -79,7 +82,21 @@ public class TestMain {
 		//		1001, "witchj", new Date(), -1, "", 0, Item.ONBID, null, new Date()));
 		//System.out.println(retV);
 		
-		retV = b.confirmDelivery(90001, 0, "witchCmp");
-		System.out.println(retV);
+		//retV = b.confirmDelivery(90001, 0, "witchCmp");
+		//System.out.println(retV);
+		
+		//retV = b.getCategories();
+		//for(Category obj : retV)
+		//	System.out.println(obj.getId() +":" +obj.getName());
+		
+		//retV = b.confirmReceipt(90001);
+		//System.out.println(retV);
+		
+		retV = b.queryBiddingItems("sepsky");
+		for(ItemDigest obj : retV)
+			System.out.println(obj.getItemId() +":" +obj.getName());
+		
+		//retV = b.requestBid(90002);
+		//System.out.println(retV);
 	}
 }
