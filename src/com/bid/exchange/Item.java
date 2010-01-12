@@ -55,6 +55,7 @@ public class Item implements IsSerializable {
 		this.itemStatus = itemStatus;
 		this.imageURL = imageURL;
 		this.postTimestamp = postTimestamp;
+		this.postUserName = postUserName;
 	}
 
 

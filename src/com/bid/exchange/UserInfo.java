@@ -9,6 +9,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
  *
  */
 public class UserInfo implements IsSerializable{
+	public static String NONE = "none";
 
 	private String userName;
 	private double userBalance = 0;
