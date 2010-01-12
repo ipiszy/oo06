@@ -24,7 +24,7 @@ public class TestMain {
 		Item sampleItem;
 		
 		System.out.println("testing getDyingItems(long , long ):");
-		itemlist = b.getDyingItems(0, 250);
+		itemlist = b.getDyingItems(2, 4);
 		Iterator<ItemDigest> iter = itemlist.iterator();
 		while (iter.hasNext()){
 			ItemDigest it = iter.next();
@@ -32,7 +32,7 @@ public class TestMain {
 		}
 		
 		System.out.println("testing getDyingItems(long , long , long ):");
-		itemlist = b.getDyingItems(0, 250, 1001);
+		itemlist = b.getDyingItems(2, 4, 1001);
 		iter = itemlist.iterator();
 		while (iter.hasNext()){
 			ItemDigest it = iter.next();
@@ -40,7 +40,7 @@ public class TestMain {
 		}
 		
 		System.out.println("testing getLatestItems(long , long ):");
-		itemlist = b.getLatestItems(0, 250);
+		itemlist = b.getLatestItems(2, 4);
 		iter = itemlist.iterator();
 		while (iter.hasNext()){
 			ItemDigest it = iter.next();
@@ -48,7 +48,7 @@ public class TestMain {
 		}
 		
 		System.out.println("testing getLatestItems(long , long, long ):");
-		itemlist = b.getLatestItems(0, 250, 1001);
+		itemlist = b.getLatestItems(2, 4, 1001);
 		iter = itemlist.iterator();
 		while (iter.hasNext()){
 			ItemDigest it = iter.next();
