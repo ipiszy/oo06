@@ -144,9 +144,9 @@ public class ItemMgr {
 	 */
 	public List<ItemDigest> queryLatestItems(long from, long to) {
 		List<ItemDigest> queryResult = new ArrayList<ItemDigest>();
-		String SQLQuery = "select * from items where itemStatus = "
-				+ Item.ONBID + " order by itemPostTimestamp desc limit "
-				+ (from - 1) + ", " + (to - from);
+		String SQLQuery = "select * from items where itemStatus = '"
+				+ Item.ONBID + "' order by itemPostTimestamp desc limit "
+				+ from + ", " + (to - from);
 		List<Items> detailList = this.execSQLQuery(SQLQuery);
 		for (Items item : detailList) {
 			String imageURL = item.getImageUrl();
@@ -172,9 +172,9 @@ public class ItemMgr {
 	 */
 	public List<ItemDigest> queryLatestItems(long from, long to, long categoryId) {
 		List<ItemDigest> queryResult = new ArrayList<ItemDigest>();
-		String SQLQuery = "select * from items where itemStatus = "
-				+ Item.ONBID + " and sortID = " + categoryId
-				+ " order by itemPostTimestamp desc limit " + (from - 1) + ", "
+		String SQLQuery = "select * from items where itemStatus = '"
+				+ Item.ONBID + "' and sortID = " + categoryId
+				+ " order by itemPostTimestamp desc limit " + from + ", "
 				+ (to - from);
 
 		// "SELECT   TOP   "+ (to- from) +"   *   FROM   "+
@@ -207,9 +207,9 @@ public class ItemMgr {
 	 */
 	public List<ItemDigest> queryDyingItems(long from, long to) {
 		List<ItemDigest> queryResult = new ArrayList<ItemDigest>();
-		String SQLQuery = "select * from items where itemStatus = "
-				+ Item.ONBID + " order by itemBidDeadline asc limit "
-				+ (from - 1) + ", " + (to - from);
+		String SQLQuery = "select * from items where itemStatus = '"
+				+ Item.ONBID + "' order by itemBidDeadline asc limit "
+				+ from + ", " + (to - from);
 
 		// "SELECT   TOP   "+ (to- from)
 		// +"   *   FROM   items   WHERE   itemBidDeadline" +
@@ -241,9 +241,9 @@ public class ItemMgr {
 	 */
 	public List<ItemDigest> queryDyingItems(long from, long to, long categoryId) {
 		List<ItemDigest> queryResult = new ArrayList<ItemDigest>();
-		String SQLQuery = "select * from items where itemStatus = "
-				+ Item.ONBID + " and sortID = " + categoryId
-				+ " order by itemBidDeadline asc limit " + (from - 1) + ", "
+		String SQLQuery = "select * from items where itemStatus = '"
+				+ Item.ONBID + "' and sortID = " + categoryId
+				+ " order by itemBidDeadline asc limit " + from + ", "
 				+ (to - from);
 
 		List<Items> detailList = this.execSQLQuery(SQLQuery);
