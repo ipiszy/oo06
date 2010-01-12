@@ -75,7 +75,8 @@ public class TestMain {
 		//retV = b.offerPrice(300000, 90001, "sepsky");
 		//System.out.println(retV);
 		
-		retV = b.register(new UserInfo());
+		//retV = b.register(new UserInfo("witchj", 3000, "hello from witch", "CloudBankAccount", "witchj@cloud"));
+		//System.out.println(retV);
 		
 	}
 }
