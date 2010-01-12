@@ -536,7 +536,7 @@ public class ItemMgr {
 				Double itemHighestBidprice = (Double) (((Object[]) obj)[5]);
 				String itemHighestBidUserName = (((Object[]) obj)[6])
 						.toString();
-				Integer itmeStatus = (Integer) (((Object[]) obj)[7]);
+				String itmeStatus = (String) (((Object[]) obj)[7]);
 				String itemCargoName;
 				if(((Object[]) obj)[8] == null)
 					itemCargoName = null;
