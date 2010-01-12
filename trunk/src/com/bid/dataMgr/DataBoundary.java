@@ -16,6 +16,10 @@ public class DataBoundary {
 		categoryMgr = new CategoryMgr();
 	}
 	
+	public long addCategory(String categoryName){
+		return (categoryMgr.addCategory(categoryName));
+	}
+	
 	public List<ItemDigest> queryBiddingItems(String userName){
 		return (itemMgr.queryBiddingItems(userName));
 	}
@@ -59,7 +63,6 @@ public class DataBoundary {
 		
 		return false;
 	}
-
 
 	/**
 	 *	输入：货品的详细资料

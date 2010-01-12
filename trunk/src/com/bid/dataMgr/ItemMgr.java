@@ -27,23 +27,6 @@ import com.bid.exchange.UserInfo;
 public class ItemMgr {
 	// createItem()
 
-	public ItemMgr() {
-		itemCnt = 0;
-		Session s = HibernateUtility.currentSession();
-		try {
-			HibernateUtility.beginTransaction();
-			List<BigInteger> idList = s.createSQLQuery(
-					"SELECT COUNT(itemId) FROM items").list();
-			HibernateUtility.commitTransaction();
-			itemCnt = idList.get(0).longValue();
-		} catch (HibernateException e) {
-			HibernateUtility.commitTransaction();
-			e.printStackTrace();
-			log.fatal(e);
-		}
-		HibernateUtility.closeSession();
-	}
-	
 	/**
 	 * Query items that have been bidded by a certain person
 	 * 
@@ -271,34 +254,37 @@ public class ItemMgr {
 		Session s = HibernateUtility.currentSession();
 		try {
 			//先获得需要的users以及category
-			Users bidUser, postUser;
+			Users bidUser = null, postUser = null;
 			Sorts sort;
 			Set<Deposits> deposits = new HashSet<Deposits>();
-			HibernateUtility.beginTransaction();
-			bidUser = (Users) s.get(Users.class, thisItem.getItemHighestBidUserName());
-			HibernateUtility.commitTransaction();
-			HibernateUtility.beginTransaction();
-			postUser = (Users) s.get(Users.class, thisItem.getPostUserName());
-			HibernateUtility.commitTransaction();
+			if(thisItem.getItemHighestBidUserName() != null){
+				HibernateUtility.beginTransaction();
+				bidUser = (Users) s.get(Users.class, thisItem.getItemHighestBidUserName());
+				HibernateUtility.commitTransaction();
+			}
+			if(thisItem.getPostUserName() != null){
+				HibernateUtility.beginTransaction();
+				postUser = (Users) s.get(Users.class, thisItem.getPostUserName());
+				HibernateUtility.commitTransaction();
+			}
 			HibernateUtility.beginTransaction();
 			sort = (Sorts) s.get(Sorts.class, thisItem.getSortID());
 			HibernateUtility.commitTransaction();
 			HibernateUtility.beginTransaction();
-			// itemId由后台统一发放
-			long itemId = itemCnt + 1;
-			/** ---------------我是警示线，id是int型----------------------------- */
-			/**----------------目前的价格应该与thisItem.getItemHighestBidPrice()一致----------*/
-			Sorts sorts = new Sorts();
+			//Items(Users usersByItemHighestBidUserName, Users usersByPostUser,
+			//Sorts sorts, String itemName, String itemDes, String itemBidRule,
+			//Double itemFloorPrice, Double itemHighestBidPrice,
+			//String itemStatux, String itemCargoName, Long itemCargoId,
+			//String imageUrl, Date itemBidDeadLine, Date itemPostTimestamp,
+			//Set<Deposits> depositses)
 			Items saveItem = new Items(bidUser, postUser, sort, thisItem.getItemName(),
 					thisItem.getItemDes(), null, thisItem.getItemFloorPrice(),
 					thisItem.getItemHighestBidPrice(), Item.ONBID, thisItem
 							.getItemCargoName(), thisItem.getItemCargoID(),
 					thisItem.getImageURL(), thisItem.getItemBidDeadline(),
 					thisItem.getItemPostTimestamp(), deposits);
-			saveItem.setItemId(itemCnt + 1);
 			s.saveOrUpdate(saveItem);
 			HibernateUtility.commitTransaction();
-			itemCnt++;
 			flag = true;
 		} catch (HibernateException e) {
 			HibernateUtility.commitTransaction();
@@ -621,5 +607,4 @@ public class ItemMgr {
 	}
 
 	private static Log log = LogFactory.getLog(UserMgr.class);
-	private long itemCnt = 0;
 }

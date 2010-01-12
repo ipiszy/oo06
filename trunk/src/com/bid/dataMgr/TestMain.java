@@ -79,9 +79,19 @@ public class TestMain {
 //		userinfo.dump();
 //		
 //
-//		retV = b.submitItem(new Item(0, "Sweep?", "Sweep used by witchj", 1000,
-//				1001, "witchj", new Date(), -1, "", 0, Item.ONBID, null, new Date()));
-//		System.out.println(retV);
+		//public UserInfo(String name, double balance, String pswd, String bankAccount, String mailBox)
+		//retV = b.register(new UserInfo("sepsky", 10000, "pass", "BA", "sepsky@mail"));
+		//System.out.println(retV);
+		//retV = b.register(new UserInfo("litt", 10000, "pass", "BA", "litt@mail"));
+		//System.out.println(retV);
+		//retV = b.register(new UserInfo(UserInfo.NONE, 10000, "pass", "BA", "none@mail"));
+		//System.out.println(retV);
+		//UserInfo user = b.getUser("sepsky");
+		long categoryId = b.addCategory("comic");
+		Item newItem = new Item(0, "Sweep?", "Sweep used by witchj", 1000,
+				categoryId, "litt", new Date(), -1, UserInfo.NONE, 0, Item.ONBID, null, new Date());
+		retV = b.submitItem(newItem);
+		System.out.println(retV);
 //		
 //		retV = b.confirmDelivery(90001, 0, "witchCmp");
 //		System.out.println(retV);
@@ -94,14 +104,14 @@ public class TestMain {
 //		retV = b.confirmReceipt(90001);
 //		System.out.println(retV);
 		
-		List<ItemDigest> retItemDigList = b.queryBiddingItems("sepsky");
-		for(ItemDigest obj : retItemDigList)
-			System.out.println(obj.getItemId() +":" +obj.getName());
+//		List<ItemDigest> retItemDigList = b.queryBiddingItems("sepsky");
+//		for(ItemDigest obj : retItemDigList)
+//			System.out.println(obj.getItemId() +":" +obj.getName());
 		
-		retItemDigList = b.queryBiddedItems("sepsky");
-		for(ItemDigest obj : retItemDigList)
-			System.out.println(obj.getItemId() +":" +obj.getName());
-		
-		System.out.println(b.requestBid(90002));
+//		retItemDigList = b.queryBiddedItems("sepsky");
+//		for(ItemDigest obj : retItemDigList)
+//			System.out.println(obj.getItemId() +":" +obj.getName());
+//		
+//		System.out.println(b.requestBid(90002));
 	}
 }
