@@ -16,6 +16,10 @@ public class DataBoundary {
 		categoryMgr = new CategoryMgr();
 	}
 	
+	public List<ItemDigest> queryBiddingItems(String userName){
+		return (itemMgr.queryBiddingItems(userName));
+	}
+	
 	public List<ItemDigest> queryBiddedItems(String userName){
 		return (itemMgr.queryBiddedItems(userName));
 	}
@@ -83,8 +87,8 @@ public class DataBoundary {
 	 * 	输出：无
 	 * 	作用：浏览器端和服务器端都知道货品已收到
 	 */
-	public void confirmReceipt(long itemId){
-		itemMgr.updateReceipt(itemId);
+	public boolean confirmReceipt(long itemId){
+		return (itemMgr.updateReceipt(itemId));
 	}
 
 	//???receipt password
@@ -100,7 +104,7 @@ public class DataBoundary {
 		//2检查货品是否在拍卖时限内
 		//3获得当前价格
 		if(itemMgr.isAlive(itemId))
-			itemMgr.queryCurPrice(itemId);
+			curPrice = itemMgr.queryCurPrice(itemId);
 		
 		return curPrice;
 	}

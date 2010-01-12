@@ -37,6 +37,30 @@ public class ItemMgr {
 		}
 		HibernateUtility.closeSession();
 	}
+	
+	/**
+	 * Query items that have been bidded by a certain person
+	 * 
+	 * @param userName
+	 * @return
+	 */
+	public List<ItemDigest> queryBiddingItems(String userName) {
+		List<ItemDigest> queryResult = new ArrayList<ItemDigest>();
+		String SQLQuery = "select * from items where itemHighestBidUserName = '"
+				+ userName + "' and itemStatus = " + Item.ONBID;
+		List<Items> detailList = this.execSQLQuery(SQLQuery);
+		for (Items item : detailList) {
+			String imageURL = item.getImageUrl();
+			String name = item.getItemName();
+			double basePrice = item.getItemFlourPrice();
+			double latestPrice = item.getItemHighestBidprice();
+			Date d = item.getItemBidDeadline();
+			long itemId = item.getItemId();
+			queryResult.add(new ItemDigest(itemId, imageURL, name, basePrice,
+					latestPrice, d));
+		}
+		return queryResult;
+	}
 
 	/**
 	 * Query items that have been bidded by a certain person
@@ -46,8 +70,8 @@ public class ItemMgr {
 	 */
 	public List<ItemDigest> queryBiddedItems(String userName) {
 		List<ItemDigest> queryResult = new ArrayList<ItemDigest>();
-		String SQLQuery = "select * from items where itemHighestBidUserName = "
-				+ userName;
+		String SQLQuery = "select * from items where itemHighestBidUserName = '"
+				+ userName + "' and itemStatus != " + Item.ONBID;
 		List<Items> detailList = this.execSQLQuery(SQLQuery);
 		for (Items item : detailList) {
 			String imageURL = item.getImageUrl();
@@ -244,6 +268,7 @@ public class ItemMgr {
 			// itemId由后台统一发放
 			long itemId = itemCnt + 1;
 			/** ---------------我是警示线，id是int型----------------------------- */
+			/**----------------目前的价格应该与thisItem.getItemHighestBidPrice()一致----------*/
 			Items saveItem = new Items((int) itemId, thisItem.getItemName(),
 					thisItem.getItemDes(), null, thisItem.getItemFloorPrice(),
 					thisItem.getItemHighestBidPrice(), thisItem
@@ -442,15 +467,15 @@ public class ItemMgr {
 			HibernateUtility.beginTransaction();
 			Items items = (Items) s.get(Items.class, itemId);
 			HibernateUtility.commitTransaction();
-
+			
 			if (items == null)
 				returnValue = false;
-			else if (!(items.getItemBidDeadline().after(new Date())))
-				returnValue = false;
-			else
+			else if (!(items.getItemBidDeadline().before(new Date())))
 				returnValue = true;
+			else
+				returnValue = false;
 
-			returnValue = returnValue & (items.getItemStatus() == Item.ONBID);
+			returnValue = returnValue && (items.getItemStatus() == Item.ONBID);
 
 		} catch (HibernateException e) {
 			HibernateUtility.commitTransaction();
@@ -469,22 +494,38 @@ public class ItemMgr {
 			List itemsList = s.createSQLQuery(SQLQuery).list();
 			HibernateUtility.commitTransaction();
 			for (Object obj : itemsList) {
-				int itemId = (Integer) (((Object[]) obj)[0]);
+				long itemId = ((BigInteger) (((Object[]) obj)[0])).longValue();
 				String itemName = (((Object[]) obj)[1]).toString();
 				String itemDes = (((Object[]) obj)[2]).toString();
-				String itemBidRule = (((Object[]) obj)[3]).toString();
+				String itemBidRule;
+				if(((Object[]) obj)[3] == null)
+					itemBidRule = null;
+				else
+					itemBidRule = (((Object[]) obj)[3]).toString();
 				Double itemFlourPrice = (Double) (((Object[]) obj)[4]);
-				int sortId = (Integer) (((Object[]) obj)[5]);
-				String postUser = (((Object[]) obj)[6]).toString();
-				String imageUrl = (((Object[]) obj)[7]).toString();
-				Double itemHighestBidprice = (Double) (((Object[]) obj)[8]);
-				String itemHighestBidUserName = (((Object[]) obj)[9])
+				String imageUrl;
+				if(((Object[]) obj)[11] == null)
+					imageUrl = null;
+				else
+					imageUrl = (((Object[]) obj)[11]).toString();
+				Double itemHighestBidprice = (Double) (((Object[]) obj)[5]);
+				String itemHighestBidUserName = (((Object[]) obj)[6])
 						.toString();
-				Integer itmeStatus = (Integer) (((Object[]) obj)[10]);
-				String itemCargoName = (((Object[]) obj)[11]).toString();
-				Integer itmeCargoId = (Integer) (((Object[]) obj)[12]);
-				Date itemBidDeadline = (Date) (((Object[]) obj)[13]);
-				Date itemPostTimestamp = (Date) (((Object[]) obj)[14]);
+				Integer itmeStatus = (Integer) (((Object[]) obj)[7]);
+				String itemCargoName;
+				if(((Object[]) obj)[8] == null)
+					itemCargoName = null;
+				else
+					itemCargoName = (((Object[]) obj)[8]).toString();
+				Integer itmeCargoId = (Integer) (((Object[]) obj)[9]);
+				long sortId = ((BigInteger) (((Object[]) obj)[10])).longValue();
+				String postUser;
+				if(((Object[]) obj)[11] == null)
+					postUser = null;
+				else
+					postUser = (((Object[]) obj)[11]).toString();
+				Date itemBidDeadline = (Date) (((Object[]) obj)[12]);
+				Date itemPostTimestamp = (Date) (((Object[]) obj)[13]);
 				queryResult.add(new Items(itemId, itemName, itemDes,
 						itemBidRule, itemFlourPrice, itemHighestBidprice,
 						itemHighestBidUserName, itmeStatus, itemCargoName,
