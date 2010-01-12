@@ -120,12 +120,10 @@ public class DataBoundary {
 		//0º∆À„≤Ó∂Ó
 		double deltaMoney;
 		Map<String, Double> bidUsers = itemMgr.queryReturnMoney(itemId);
-		if(bidUsers.isEmpty())
-			return false;
-		if(!bidUsers.containsKey(userName))
-			deltaMoney = money - bidUsers.get(userName);
+		if(bidUsers.containsKey(userName))
+			deltaMoney = -money + bidUsers.get(userName);
 		else
-			deltaMoney = money;
+			deltaMoney = -money;
 		boolean offered = userMgr.transfer(userName, deltaMoney);
 		if(offered)
 			itemMgr.biddedBy(itemId, userName, money);

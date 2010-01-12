@@ -123,12 +123,13 @@ public class UserMgr {
 				double balance = user.getUserBalance();
 				if(balance + money < 0)
 					returnValue = false;
-				else
+				else{
 					user.setUserBalance(balance + money);
-
-				HibernateUtility.beginTransaction();
-				s.update(user);
-				HibernateUtility.commitTransaction();
+					HibernateUtility.beginTransaction();
+					s.update(user);
+					HibernateUtility.commitTransaction();
+					returnValue = true;
+					}
 
 			}
 
