@@ -6,10 +6,10 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class Item implements IsSerializable {
 	// constant values for the bidding status
-	public final static int ONBID = 0;
-	public final static int BIDDED = 1;
-	public final static int ONDELIVER = 2;
-	public final static int DELIVERED = 3;
+	public final static String ONBID = "ONBID";
+	public final static String OBSOLETE = "OBSOLETE";
+	public final static String ONDELIVER = "ONDELIVER";
+	public final static String DELIVERED = "DELIVERED";
 
 	// static information which must be provide when posting obsolete
 	private long itemID;
@@ -29,7 +29,7 @@ public class Item implements IsSerializable {
 	private double itemHighestBidPrice = 0;
 	private String itemHighestBidUserName = null;
 	private int itemBidRule = 0;	//default
-	private int itemStatus = ONBID;
+	private String itemStatus = ONBID;
 	private String itemCargoName = null;
 	private int itemCargoID = -1; // not available
 	
@@ -40,7 +40,7 @@ public class Item implements IsSerializable {
 	public Item(long itemid, String itemname, String des, 
 			double floorprice, long sortId, String postUserName, Date deadline,
 			double highestBidPrice, String highestBidUserName, 
-			int itemBidRule, int itemStatus, String imageURL,
+			int itemBidRule, String itemStatus, String imageURL,
 			Date postTimestamp
 			){
 		this.itemID = itemid;
@@ -114,11 +114,11 @@ public class Item implements IsSerializable {
 		return itemHighestBidPrice;
 	}
 
-	public void setItemStatus(int itemStatus) {
+	public void setItemStatus(String itemStatus) {
 		this.itemStatus = itemStatus;
 	}
 
-	public int getItemStatus() {
+	public String getItemStatus() {
 		return itemStatus;
 	}
 
