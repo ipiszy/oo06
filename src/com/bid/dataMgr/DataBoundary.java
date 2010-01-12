@@ -3,10 +3,10 @@ package com.bid.dataMgr;
 import java.util.List;
 import java.util.Map;
 
-import com.bid.data.Category;
+import com.bid.exchange.Category;
 import com.bid.exchange.Item;
-import com.bid.exchange.UserInfo;
 import com.bid.exchange.ItemDigest;
+import com.bid.exchange.UserInfo;
 
 public class DataBoundary {
 	
