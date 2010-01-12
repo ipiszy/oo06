@@ -4,8 +4,10 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -16,8 +18,11 @@ import com.bid.data.Deposits;
 import com.bid.data.DepositsId;
 import com.bid.data.Items;
 import com.bid.data.Sorts;
+import com.bid.data.Users;
+import com.bid.exchange.Category;
 import com.bid.exchange.Item;
 import com.bid.exchange.ItemDigest;
+import com.bid.exchange.UserInfo;
 
 public class ItemMgr {
 	// createItem()
@@ -265,20 +270,32 @@ public class ItemMgr {
 		boolean flag = false;
 		Session s = HibernateUtility.currentSession();
 		try {
+			//先获得需要的users以及category
+			Users bidUser, postUser;
+			Sorts sort;
+			Set<Deposits> deposits = new HashSet<Deposits>();
+			HibernateUtility.beginTransaction();
+			bidUser = (Users) s.get(Users.class, thisItem.getItemHighestBidUserName());
+			HibernateUtility.commitTransaction();
+			HibernateUtility.beginTransaction();
+			postUser = (Users) s.get(Users.class, thisItem.getPostUserName());
+			HibernateUtility.commitTransaction();
+			HibernateUtility.beginTransaction();
+			sort = (Sorts) s.get(Sorts.class, thisItem.getSortID());
+			HibernateUtility.commitTransaction();
 			HibernateUtility.beginTransaction();
 			// itemId由后台统一发放
 			long itemId = itemCnt + 1;
 			/** ---------------我是警示线，id是int型----------------------------- */
 			/**----------------目前的价格应该与thisItem.getItemHighestBidPrice()一致----------*/
 			Sorts sorts = new Sorts();
-			Items saveItem = new Items((int) itemId, thisItem.getItemName(),
+			Items saveItem = new Items(bidUser, postUser, sort, thisItem.getItemName(),
 					thisItem.getItemDes(), null, thisItem.getItemFloorPrice(),
-					thisItem.getItemHighestBidPrice(), thisItem
-							.getItemHighestBidUserName(), Item.ONBID, thisItem
+					thisItem.getItemHighestBidPrice(), Item.ONBID, thisItem
 							.getItemCargoName(), thisItem.getItemCargoID(),
-					thisItem.getSortID(), thisItem.getPostUserName(), thisItem
-							.getImageURL(), thisItem.getItemBidDeadline(),
-					thisItem.getItemPostTimestamp());
+					thisItem.getImageURL(), thisItem.getItemBidDeadline(),
+					thisItem.getItemPostTimestamp(), deposits);
+			saveItem.setItemId(itemCnt + 1);
 			s.saveOrUpdate(saveItem);
 			HibernateUtility.commitTransaction();
 			itemCnt++;
@@ -312,8 +329,8 @@ public class ItemMgr {
 				return false;
 
 			HibernateUtility.beginTransaction();
-			item.setItemStatus(Item.ONDELIVER);
-			item.setItmeCargoId((int) receiptId);
+			item.setItemStatux(Item.ONDELIVER);
+			item.setItemCargoId(receiptId);
 			/** -----id有错 */
 			item.setItemCargoName(cargoCmp);			
 			s.saveOrUpdate(item);
@@ -344,7 +361,7 @@ public class ItemMgr {
 				return false;
 
 			HibernateUtility.beginTransaction();
-			item.setItemStatus(Item.DELIVERED);
+			item.setItemStatux(Item.DELIVERED);
 			s.saveOrUpdate(item);
 			HibernateUtility.commitTransaction();
 		} catch (HibernateException e) {
@@ -369,14 +386,31 @@ public class ItemMgr {
 			HibernateUtility.beginTransaction();
 			Items item = (Items) s.get(Items.class, itemId);
 			HibernateUtility.commitTransaction();
+			Users bidUser, postUser;
+			Sorts sort;
+			Set<Deposits> deposits = new HashSet<Deposits>();
+			HibernateUtility.beginTransaction();
+			bidUser = (Users) s.get(Users.class, thisItem.getItemHighestBidUserName());
+			HibernateUtility.commitTransaction();
+			HibernateUtility.beginTransaction();
+			postUser = (Users) s.get(Users.class, thisItem.getPostUserName());
+			HibernateUtility.commitTransaction();
+			HibernateUtility.beginTransaction();
+			sort = (Sorts) s.get(Sorts.class, thisItem.getSortID());
+			HibernateUtility.commitTransaction();
+			HibernateUtility.beginTransaction();
 			/** itemId 类型错 */
-			thisItem = new Item((int) itemId, item.getItemName(), item
-					.getItemDes(), item.getItemFloorPrice(), item.getSorts().getSortId(),
-					item.getUsersByPostUser(), item.getItemBidDeadLine(), item
-							.getItemHighestBidPrice(), 
-							item
-							.getUsersByItemHighestBidUserName(), 0, Item.ONBID, item
-							.getImageUrl(), item.getItemPostTimestamp());
+			//Item(long itemid, String itemname, String des, 
+			//double floorprice, long sortId, String postUserName, Date deadline,
+			//double highestBidPrice, String highestBidUserName, 
+			//int itemBidRule, String itemStatus, String imageURL,
+			//Date postTimestamp
+			//)
+			thisItem = new Item(item.getItemId(), item.getItemName(), item.getItemDes(),
+					item.getItemFloorPrice(), item.getSorts().getSortId(), item.getUsersByPostUser().getUserName(),
+					item.getItemBidDeadLine(), item.getItemHighestBidPrice(), 
+					item.getUsersByItemHighestBidUserName().getUserName(),
+					0, item.getItemStatux(), item.getImageUrl(), item.getItemPostTimestamp());
 		} catch (HibernateException e) {
 			HibernateUtility.commitTransaction();
 			log.fatal(e);
@@ -504,7 +538,7 @@ public class ItemMgr {
 					itemBidRule = null;
 				else
 					itemBidRule = (((Object[]) obj)[3]).toString();
-				Double itemFlourPrice = (Double) (((Object[]) obj)[4]);
+				Double itemFloorPrice = (Double) (((Object[]) obj)[4]);
 
 				String imageUrl;
 				if(((Object[]) obj)[11] == null)
@@ -520,20 +554,32 @@ public class ItemMgr {
 					itemCargoName = null;
 				else
 					itemCargoName = (((Object[]) obj)[8]).toString();
-				Integer itmeCargoId = (Integer) (((Object[]) obj)[9]);
+				long itmeCargoId = ((BigInteger) (((Object[]) obj)[9])).longValue();
 				long sortId = ((BigInteger) (((Object[]) obj)[10])).longValue();
-				String postUser;
+				String postUserName;
 				if(((Object[]) obj)[11] == null)
-					postUser = null;
+					postUserName = null;
 				else
-					postUser = (((Object[]) obj)[11]).toString();
+					postUserName = (((Object[]) obj)[11]).toString();
 				Date itemBidDeadline = (Date) (((Object[]) obj)[12]);
 				Date itemPostTimestamp = (Date) (((Object[]) obj)[13]);
-				queryResult.add(new Items(itemId, itemName, itemDes,
-						itemBidRule, itemFlourPrice, itemHighestBidprice,
-						itemHighestBidUserName, itmeStatus, itemCargoName,
-						itmeCargoId, sortId, postUser, imageUrl,
-						itemBidDeadline, itemPostTimestamp));
+				Users bidUser, postUser;
+				Sorts sort;
+				Set<Deposits> deposits = new HashSet<Deposits>();
+				HibernateUtility.beginTransaction();
+				bidUser = (Users) s.get(Users.class, itemHighestBidUserName);
+				HibernateUtility.commitTransaction();
+				HibernateUtility.beginTransaction();
+				postUser = (Users) s.get(Users.class, postUserName);
+				HibernateUtility.commitTransaction();
+				HibernateUtility.beginTransaction();
+				sort = (Sorts) s.get(Sorts.class, sortId);
+				HibernateUtility.commitTransaction();
+				queryResult.add(new Items(bidUser, postUser, sort, itemName,
+						itemDes, null, itemFloorPrice,
+						itemHighestBidprice, Item.ONBID, itemCargoName,
+						itmeCargoId, imageUrl, itemBidDeadline,
+						itemPostTimestamp, deposits));
 			}
 		} catch (HibernateException e) {
 			HibernateUtility.commitTransaction();
@@ -549,8 +595,17 @@ public class ItemMgr {
 		boolean flag = false;
 		Session s = HibernateUtility.currentSession();
 		try {
+			Users user;
+			Items item;
 			HibernateUtility.beginTransaction();
-			Deposits saveDep = new Deposits(new DepositsId(itemId, userName),
+			user = (Users) s.get(Users.class, userName);
+			HibernateUtility.commitTransaction();
+			HibernateUtility.beginTransaction();
+			item = (Items) s.get(Items.class, itemId);
+			HibernateUtility.commitTransaction();
+			HibernateUtility.beginTransaction();
+			//Deposits(DepositsId id, Users users, Items items, Double moneyFrozen)
+			Deposits saveDep = new Deposits(new DepositsId(itemId, userName), user, item,
 					money);
 			s.saveOrUpdate(saveDep);
 			HibernateUtility.commitTransaction();
