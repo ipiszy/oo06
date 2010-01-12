@@ -503,6 +503,7 @@ public class ItemMgr {
 				else
 					itemBidRule = (((Object[]) obj)[3]).toString();
 				Double itemFlourPrice = (Double) (((Object[]) obj)[4]);
+
 				String imageUrl;
 				if(((Object[]) obj)[11] == null)
 					imageUrl = null;
