@@ -68,14 +68,14 @@ public class ItemDigest implements IsSerializable {
 	//@OVERRIDE
 	public String toString(){
 		String tmp = "";
-		tmp.concat("itemName: "+name+" ");
-		tmp.concat("itemID: "+ this.itemId+" ");
-		tmp.concat("\n");
-		tmp.concat("basePrice: "+this.basePrice+" ");
-		tmp.concat("latestPrice: "+ this.latestPrice+" ");
-		tmp.concat("\n");
-		tmp.concat("Date: "+d+"  ");
-		tmp.concat("URL: "+this.imageURL);
+		tmp = tmp.concat("itemName: "+name+" ");
+		tmp = tmp.concat("itemID: "+ this.itemId+" ");
+		tmp = tmp.concat("\n");
+		tmp = tmp.concat("basePrice: "+this.basePrice+" ");
+		tmp = tmp.concat("latestPrice: "+ this.latestPrice+" ");
+		tmp = tmp.concat("\n");
+		tmp = tmp.concat("Date: "+d+"  ");
+		tmp = tmp.concat("URL: "+this.imageURL);
 
 		return tmp;
 	}
