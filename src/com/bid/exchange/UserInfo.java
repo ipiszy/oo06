@@ -67,6 +67,18 @@ public class UserInfo implements IsSerializable{
 	public String getUserMailBox() {
 		return userMailBox;
 	}
+	public void dump() {
+		System.out.println(this.toString());
+	}
 
+	public String toString(){
+		String tmp = "";
+		tmp = tmp.concat("userName: "+this.userName+" ");
+		tmp = tmp.concat("passwd:"+ this.userPass+" ");
+		tmp = tmp.concat("userBalance: "+this.userBalance+" ");
+		tmp = tmp.concat("bankAccount: "+this.userBankAccount+" ");
+		tmp = tmp.concat("userEmail"+this.userMailBox);
+		return tmp;
+	}
 }
 

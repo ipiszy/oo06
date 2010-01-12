@@ -187,11 +187,11 @@ public class Item implements IsSerializable {
 	
 	public String  toString(){
 		String tmp = "";
-		tmp.concat("itemName: "+this.itemName+" ");
-		tmp.concat("itemID: "+ this.itemID+" ");
-		tmp.concat("\n");
-		tmp.concat("basePrice: "+this.itemFloorPrice+" ");
-		tmp.concat("latestPrice: "+ this.itemHighestBidPrice+" ");
+		tmp = tmp.concat("itemName: "+this.itemName+" ");
+		tmp = tmp.concat("itemID: "+ this.itemID+" ");
+		tmp = tmp.concat("\n");
+		tmp = tmp.concat("basePrice: "+this.itemFloorPrice+" ");
+		tmp = tmp.concat("latestPrice: "+ this.itemHighestBidPrice+" ");
 //		tmp.concat("\n");
 //		tmp.concat("Date: "+d+"  ");
 //		tmp.concat("URL: "+this.imageURL);
