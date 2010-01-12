@@ -376,13 +376,15 @@ public class ItemMgr {
 			Sorts sort;
 			Set<Deposits> deposits = new HashSet<Deposits>();
 			HibernateUtility.beginTransaction();
-			bidUser = (Users) s.get(Users.class, thisItem.getItemHighestBidUserName());
+			bidUser = (Users) s.get(
+					Users.class, 
+					item.getUsersByItemHighestBidUserName().getUserName());
 			HibernateUtility.commitTransaction();
 			HibernateUtility.beginTransaction();
-			postUser = (Users) s.get(Users.class, thisItem.getPostUserName());
+			postUser = (Users) s.get(Users.class, item.getUsersByPostUser().getUserName());
 			HibernateUtility.commitTransaction();
 			HibernateUtility.beginTransaction();
-			sort = (Sorts) s.get(Sorts.class, thisItem.getSortID());
+			sort = (Sorts) s.get(Sorts.class, item.getSorts().getSortId());
 			HibernateUtility.commitTransaction();
 			HibernateUtility.beginTransaction();
 			/** itemId ¿‡–Õ¥Ì */
