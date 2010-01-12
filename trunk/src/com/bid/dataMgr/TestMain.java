@@ -1,24 +1,25 @@
 package com.bid.dataMgr;
 
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import com.bid.data.Category;
 import com.bid.exchange.Item;
 import com.bid.exchange.ItemDigest;
+import com.bid.exchange.UserInfo;
 
 public class TestMain {
 	public static void main(String[]arg){
 		DataBoundary b = new DataBoundary();
 		
-		/*// login test
-		System.out.print("------------->");
+		// login test
+//		System.out.println(b.login("sepsky", "sepskypass"));
+//		System.out.println(b.login("sepsky", "sepskypas"));		
+//		System.out.println(b.login("sepsk", "sepskypass"));
+		
+		// login test
 		System.out.println(b.login("sepsky", "sepskypass"));
-		System.out.print("------------->");
 		System.out.println(b.login("sepsky", "sepskypas"));		
-		System.out.print("------------->");
-		System.out.println(b.login("sepsk", "sepskypass"));*/
+		System.out.println(b.login("sepsk", "sepskypass"));
 		
 		// browse test
 		
@@ -69,6 +70,7 @@ public class TestMain {
 		// bid test
 		
 		//test of methods
+//		boolean retV;
 		List<ItemDigest> retV;
 		//retV = b.charge(1000, "sepsky");
 		//System.out.println(retV);
@@ -78,6 +80,12 @@ public class TestMain {
 		
 		//retV = b.register(new UserInfo("witchj", 3000, "hello from witch", "CloudBankAccount", "witchj@cloud"));
 		//System.out.println(retV);
+		
+		System.out.println("testing DataBoundary.getUser()");
+		UserInfo userinfo = b.getUser("litt");
+		System.out.println("<"+userinfo+">");
+		userinfo.dump();
+		
 		
 		//retV = b.submitItem(new Item(0, "Sweep?", "Sweep used by witchj", 1000,
 		//		1001, "witchj", new Date(), -1, "", 0, Item.ONBID, null, new Date()));
