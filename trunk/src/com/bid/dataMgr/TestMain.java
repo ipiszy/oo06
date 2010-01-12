@@ -1,6 +1,7 @@
 package com.bid.dataMgr;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import com.bid.data.Category;
@@ -17,7 +18,7 @@ public class TestMain {
 		System.out.print("------------->");
 		System.out.println(b.login("sepsky", "sepskypas"));		
 		System.out.print("------------->");
-		System.out.println(b.login("sepsk", "sepskypass"));
+		System.out.println(b.login("sepsk", "sepskypass"));*/
 		
 		// browse test
 		
@@ -62,7 +63,7 @@ public class TestMain {
 		
 		System.out.println("testing getItem(long ):");
 		sampleItem  = b.getItem(90001);
-		sampleItem.dump();*/
+		sampleItem.dump();
 
 		
 		// bid test
@@ -92,9 +93,9 @@ public class TestMain {
 		//retV = b.confirmReceipt(90001);
 		//System.out.println(retV);
 		
-		retV = b.queryBiddingItems("sepsky");
-		for(ItemDigest obj : retV)
-			System.out.println(obj.getItemId() +":" +obj.getName());
+		//retV = b.queryBiddingItems("sepsky");
+		//for(ItemDigest obj : retV)
+		//	System.out.println(obj.getItemId() +":" +obj.getName());
 		
 		//retV = b.requestBid(90002);
 		//System.out.println(retV);
