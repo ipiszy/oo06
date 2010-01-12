@@ -10,7 +10,7 @@ public class TestMain {
 	public static void main(String[]arg){
 		DataBoundary b = new DataBoundary();
 		
-		// login test
+		/*// login test
 		System.out.print("------------->");
 		System.out.println(b.login("sepsky", "sepskypass"));
 		System.out.print("------------->");
@@ -61,12 +61,15 @@ public class TestMain {
 		
 		System.out.println("testing getItem(long ):");
 		sampleItem  = b.getItem(90001);
-		sampleItem.dump();
+		sampleItem.dump();*/
 
 		
 		// bid test
 		
-		
+		//test of methods
+		boolean retV;
+		retV = b.charge(1000, "sepsky");
+		System.out.println(retV);
 		
 	}
 }

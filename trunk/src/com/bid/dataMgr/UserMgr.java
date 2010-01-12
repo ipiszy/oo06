@@ -92,7 +92,7 @@ public class UserMgr {
 				HibernateUtility.beginTransaction();
 				s.update(user);
 				HibernateUtility.commitTransaction();
-
+				returnValue = true;
 			}
 
 		} catch (HibernateException e) {
