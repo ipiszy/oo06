@@ -111,7 +111,7 @@ public class ItemMgr {
 					.getItemName(), item.getItemDes(), item.getItemFloorPrice()
 					.doubleValue(), item.getSorts().getSortId(), item.getUsersByPostUser().getUserName(), item
 					.getItemBidDeadLine(), item.getItemHighestBidPrice(), item
-					.getUsersByItemHighestBidUserName().getUserName(), 0, item.getItemStatux(), item
+					.getUsersByItemHighestBidUserName().getUserName(), 0, item.getItemStatus(), item
 					.getImageUrl(), item.getItemPostTimestamp()));
 		}
 		return queryResult;
@@ -315,7 +315,7 @@ public class ItemMgr {
 				return false;
 
 			HibernateUtility.beginTransaction();
-			item.setItemStatux(Item.ONDELIVER);
+			item.setItemStatus(Item.ONDELIVER);
 			item.setItemCargoId(receiptId);
 			/** -----id”–¥Ì */
 			item.setItemCargoName(cargoCmp);			
@@ -347,7 +347,7 @@ public class ItemMgr {
 				return false;
 
 			HibernateUtility.beginTransaction();
-			item.setItemStatux(Item.DELIVERED);
+			item.setItemStatus(Item.DELIVERED);
 			s.saveOrUpdate(item);
 			HibernateUtility.commitTransaction();
 		} catch (HibernateException e) {
@@ -398,7 +398,7 @@ public class ItemMgr {
 					item.getItemFloorPrice(), item.getSorts().getSortId(), item.getUsersByPostUser().getUserName(),
 					item.getItemBidDeadLine(), item.getItemHighestBidPrice(), 
 					item.getUsersByItemHighestBidUserName().getUserName(),
-					0, item.getItemStatux(), item.getImageUrl(), item.getItemPostTimestamp());
+					0, item.getItemStatus(), item.getImageUrl(), item.getItemPostTimestamp());
 		} catch (HibernateException e) {
 			HibernateUtility.commitTransaction();
 			log.fatal(e);
@@ -499,7 +499,7 @@ public class ItemMgr {
 			else
 				returnValue = false;
 
-			returnValue = returnValue && (items.getItemStatux() == Item.ONBID);
+			returnValue = returnValue && (items.getItemStatus() == Item.ONBID);
 
 		} catch (HibernateException e) {
 			HibernateUtility.commitTransaction();
