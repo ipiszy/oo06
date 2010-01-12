@@ -56,6 +56,7 @@ public class UserMgr {
 				HibernateUtility.beginTransaction();
 				s.saveOrUpdate(user);
 				HibernateUtility.commitTransaction();
+				flag = true;
 			}
 		} catch (HibernateException e) {
 			HibernateUtility.commitTransaction();
@@ -152,7 +153,8 @@ public class UserMgr {
 
 			if (user == null)
 				returnValue = false;
-			returnValue = true;
+			else
+				returnValue = true;
 
 		} catch (HibernateException e) {
 			HibernateUtility.commitTransaction();

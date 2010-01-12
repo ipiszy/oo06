@@ -49,6 +49,7 @@ public class DataBoundary {
 	public boolean register(UserInfo userInfo){
 		if(!userMgr.hasUser(userInfo.getUserName())){
 			userMgr.addUser(userInfo);
+			return true;
 		}
 		
 		return false;
