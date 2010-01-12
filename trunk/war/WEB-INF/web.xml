@@ -26,6 +26,17 @@
     <servlet-class>com.bid.server.GetDyingItemsService</servlet-class>
   </servlet>
   
+  <servlet>
+    <servlet-name>getItemServlet</servlet-name>
+    <servlet-class>com.bid.server.GetItemService</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>itemBidServlet</servlet-name>
+    <servlet-class>com.bid.server.ItemBidService</servlet-class>
+  </servlet>
+
+  
   <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
     <url-pattern>/bid/greet</url-pattern>
@@ -44,6 +55,16 @@
   <servlet-mapping>
     <servlet-name>getDyingItemsServlet</servlet-name>
     <url-pattern>/browse_module/getDyingItems</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>getItemServlet</servlet-name>
+    <url-pattern>/itemBid_module/getItem</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>getCategoriesServlet</servlet-name>
+    <url-pattern>/itemBid_module/itemBid</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->
