@@ -31,7 +31,7 @@ public class Item implements IsSerializable {
 	private int itemBidRule = 0;	//default
 	private String itemStatus = ONBID;
 	private String itemCargoName = null;
-	private int itemCargoID = -1; // not available
+	private long itemCargoID = -1; // not available
 	
 
 	public Item(){
@@ -152,7 +152,7 @@ public class Item implements IsSerializable {
 		this.itemCargoID = itemCargoID;
 	}
 
-	public int getItemCargoID() {
+	public long getItemCargoID() {
 		return itemCargoID;
 	}
 
