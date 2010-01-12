@@ -1,15 +1,21 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2010-1-11 22:43:11 by Hibernate Tools 3.2.4.GA -->
+<!-- Generated 2010-1-12 21:13:36 by Hibernate Tools 3.2.4.GA -->
 <hibernate-mapping>
     <class name="com.bid.data.Sorts" table="sorts" catalog="ooad">
         <id name="sortId" type="long">
-            <column name="sortID" />
-            <generator class="assigned" />
+            <column name="sortId" />
+            <generator class="identity" />
         </id>
         <property name="sortName" type="string">
-            <column name="sortName" length="40" />
+            <column name="sortName" length="150" not-null="true" />
         </property>
+        <set name="itemses" inverse="true" lazy="true" table="items" fetch="select">
+            <key>
+                <column name="sortId" not-null="true" />
+            </key>
+            <one-to-many class="com.bid.data.Items" />
+        </set>
     </class>
 </hibernate-mapping>

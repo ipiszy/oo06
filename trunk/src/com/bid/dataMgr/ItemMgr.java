@@ -15,6 +15,7 @@ import org.hibernate.Session;
 import com.bid.data.Deposits;
 import com.bid.data.DepositsId;
 import com.bid.data.Items;
+import com.bid.data.Sorts;
 import com.bid.exchange.Item;
 import com.bid.exchange.ItemDigest;
 
@@ -52,9 +53,9 @@ public class ItemMgr {
 		for (Items item : detailList) {
 			String imageURL = item.getImageUrl();
 			String name = item.getItemName();
-			double basePrice = item.getItemFlourPrice();
-			double latestPrice = item.getItemHighestBidprice();
-			Date d = item.getItemBidDeadline();
+			double basePrice = item.getItemFloorPrice();
+			double latestPrice = item.getItemHighestBidPrice();
+			Date d = item.getItemBidDeadLine();
 			long itemId = item.getItemId();
 			queryResult.add(new ItemDigest(itemId, imageURL, name, basePrice,
 					latestPrice, d));
@@ -76,9 +77,9 @@ public class ItemMgr {
 		for (Items item : detailList) {
 			String imageURL = item.getImageUrl();
 			String name = item.getItemName();
-			double basePrice = item.getItemFlourPrice();
-			double latestPrice = item.getItemHighestBidprice();
-			Date d = item.getItemBidDeadline();
+			double basePrice = item.getItemFloorPrice();
+			double latestPrice = item.getItemHighestBidPrice();
+			Date d = item.getItemBidDeadLine();
 			long itemId = item.getItemId();
 			queryResult.add(new ItemDigest(itemId, imageURL, name, basePrice,
 					latestPrice, d));
@@ -98,9 +99,9 @@ public class ItemMgr {
 		for (Items item : detailList) {
 			String imageURL = item.getImageUrl();
 			String name = item.getItemName();
-			double basePrice = item.getItemFlourPrice();
-			double latestPrice = item.getItemHighestBidprice();
-			Date d = item.getItemBidDeadline();
+			double basePrice = item.getItemFloorPrice();
+			double latestPrice = item.getItemHighestBidPrice();
+			Date d = item.getItemBidDeadLine();
 			long itemId = item.getItemId();
 			queryResult.add(new ItemDigest(itemId, imageURL, name, basePrice,
 					latestPrice, d));
@@ -119,10 +120,10 @@ public class ItemMgr {
 		List<Items> detailList = this.execSQLQuery(SQLQuery);
 		for (Items item : detailList) {
 			queryResult.add(new Item((long) item.getItemId(), item
-					.getItemName(), item.getItemDes(), item.getItemFlourPrice()
-					.doubleValue(), item.getSortId(), item.getPostUser(), item
-					.getItemBidDeadline(), item.getItemHighestBidprice(), item
-					.getItemHighestBidUserName(), 0, item.getItemStatus(), item
+					.getItemName(), item.getItemDes(), item.getItemFloorPrice()
+					.doubleValue(), item.getSorts().getSortId(), item.getUsersByPostUser().getUserName(), item
+					.getItemBidDeadLine(), item.getItemHighestBidPrice(), item
+					.getUsersByItemHighestBidUserName().getUserName(), 0, item.getItemStatux(), item
 					.getImageUrl(), item.getItemPostTimestamp()));
 		}
 		return queryResult;
@@ -145,9 +146,9 @@ public class ItemMgr {
 		for (Items item : detailList) {
 			String imageURL = item.getImageUrl();
 			String name = item.getItemName();
-			double basePrice = item.getItemFlourPrice();
-			double latestPrice = item.getItemHighestBidprice();
-			Date d = item.getItemBidDeadline();
+			double basePrice = item.getItemFloorPrice();
+			double latestPrice = item.getItemHighestBidPrice();
+			Date d = item.getItemBidDeadLine();
 			long itemId = item.getItemId();
 			queryResult.add(new ItemDigest(itemId, imageURL, name, basePrice,
 					latestPrice, d));
@@ -181,9 +182,9 @@ public class ItemMgr {
 		for (Items item : detailList) {
 			String imageURL = item.getImageUrl();
 			String name = item.getItemName();
-			double basePrice = item.getItemFlourPrice();
-			double latestPrice = item.getItemHighestBidprice();
-			Date d = item.getItemBidDeadline();
+			double basePrice = item.getItemFloorPrice();
+			double latestPrice = item.getItemHighestBidPrice();
+			Date d = item.getItemBidDeadLine();
 			long itemId = item.getItemId();
 			queryResult.add(new ItemDigest(itemId, imageURL, name, basePrice,
 					latestPrice, d));
@@ -214,9 +215,9 @@ public class ItemMgr {
 		for (Items item : detailList) {
 			String imageURL = item.getImageUrl();
 			String name = item.getItemName();
-			double basePrice = item.getItemFlourPrice();
-			double latestPrice = item.getItemHighestBidprice();
-			Date d = item.getItemBidDeadline();
+			double basePrice = item.getItemFloorPrice();
+			double latestPrice = item.getItemHighestBidPrice();
+			Date d = item.getItemBidDeadLine();
 			long itemId = item.getItemId();
 			queryResult.add(new ItemDigest(itemId, imageURL, name, basePrice,
 					latestPrice, d));
@@ -244,9 +245,9 @@ public class ItemMgr {
 		for (Items item : detailList) {
 			String imageURL = item.getImageUrl();
 			String name = item.getItemName();
-			double basePrice = item.getItemFlourPrice();
-			double latestPrice = item.getItemHighestBidprice();
-			Date d = item.getItemBidDeadline();
+			double basePrice = item.getItemFloorPrice();
+			double latestPrice = item.getItemHighestBidPrice();
+			Date d = item.getItemBidDeadLine();
 			long itemId = item.getItemId();
 			queryResult.add(new ItemDigest(itemId, imageURL, name, basePrice,
 					latestPrice, d));
@@ -269,6 +270,7 @@ public class ItemMgr {
 			long itemId = itemCnt + 1;
 			/** ---------------我是警示线，id是int型----------------------------- */
 			/**----------------目前的价格应该与thisItem.getItemHighestBidPrice()一致----------*/
+			Sorts sorts = new Sorts();
 			Items saveItem = new Items((int) itemId, thisItem.getItemName(),
 					thisItem.getItemDes(), null, thisItem.getItemFloorPrice(),
 					thisItem.getItemHighestBidPrice(), thisItem
@@ -369,11 +371,11 @@ public class ItemMgr {
 			HibernateUtility.commitTransaction();
 			/** itemId 类型错 */
 			thisItem = new Item((int) itemId, item.getItemName(), item
-					.getItemDes(), item.getItemFlourPrice(), item.getSortId(),
-					item.getPostUser(), item.getItemBidDeadline(), item
-							.getItemHighestBidprice(), 
+					.getItemDes(), item.getItemFloorPrice(), item.getSorts().getSortId(),
+					item.getUsersByPostUser(), item.getItemBidDeadLine(), item
+							.getItemHighestBidPrice(), 
 							item
-							.getItemHighestBidUserName(), 0, Item.ONBID, item
+							.getUsersByItemHighestBidUserName(), 0, Item.ONBID, item
 							.getImageUrl(), item.getItemPostTimestamp());
 		} catch (HibernateException e) {
 			HibernateUtility.commitTransaction();
@@ -396,7 +398,7 @@ public class ItemMgr {
 			HibernateUtility.beginTransaction();
 			Items items = (Items) s.get(Items.class, itemId);
 			HibernateUtility.commitTransaction();
-			curPrice = items.getItemHighestBidprice();
+			curPrice = items.getItemHighestBidPrice();
 		} catch (HibernateException e) {
 			HibernateUtility.commitTransaction();
 			log.fatal(e);
@@ -470,12 +472,12 @@ public class ItemMgr {
 			
 			if (items == null)
 				returnValue = false;
-			else if (!(items.getItemBidDeadline().before(new Date())))
+			else if (!(items.getItemBidDeadLine().before(new Date())))
 				returnValue = true;
 			else
 				returnValue = false;
 
-			returnValue = returnValue && (items.getItemStatus() == Item.ONBID);
+			returnValue = returnValue && (items.getItemStatux() == Item.ONBID);
 
 		} catch (HibernateException e) {
 			HibernateUtility.commitTransaction();
@@ -548,7 +550,7 @@ public class ItemMgr {
 		Session s = HibernateUtility.currentSession();
 		try {
 			HibernateUtility.beginTransaction();
-			Deposits saveDep = new Deposits(new DepositsId(userName, itemId),
+			Deposits saveDep = new Deposits(new DepositsId(itemId, userName),
 					money);
 			s.saveOrUpdate(saveDep);
 			HibernateUtility.commitTransaction();

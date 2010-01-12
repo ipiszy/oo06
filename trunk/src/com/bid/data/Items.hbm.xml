@@ -1,15 +1,24 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2010-1-11 22:43:11 by Hibernate Tools 3.2.4.GA -->
+<!-- Generated 2010-1-12 21:13:36 by Hibernate Tools 3.2.4.GA -->
 <hibernate-mapping>
     <class name="com.bid.data.Items" table="items" catalog="ooad">
         <id name="itemId" type="long">
-            <column name="itemID" />
-            <generator class="assigned" />
+            <column name="itemId" />
+            <generator class="identity" />
         </id>
+        <many-to-one name="usersByItemHighestBidUserName" class="com.bid.data.Users" fetch="select">
+            <column name="itemHighestBidUserName" length="150" />
+        </many-to-one>
+        <many-to-one name="usersByPostUser" class="com.bid.data.Users" fetch="select">
+            <column name="postUser" length="150" />
+        </many-to-one>
+        <many-to-one name="sorts" class="com.bid.data.Sorts" fetch="select">
+            <column name="sortId" not-null="true" />
+        </many-to-one>
         <property name="itemName" type="string">
-            <column name="itemName" length="40" />
+            <column name="itemName" length="150" not-null="true" />
         </property>
         <property name="itemDes" type="string">
             <column name="itemDes" length="150" />
@@ -17,38 +26,35 @@
         <property name="itemBidRule" type="string">
             <column name="itemBidRule" length="150" />
         </property>
-        <property name="itemFlourPrice" type="java.lang.Double">
-            <column name="itemFlourPrice" precision="22" scale="0" />
+        <property name="itemFloorPrice" type="java.lang.Double">
+            <column name="itemFloorPrice" precision="22" scale="0" />
         </property>
-        <property name="itemHighestBidprice" type="java.lang.Double">
-            <column name="ItemHighestBidprice" precision="22" scale="0" />
+        <property name="itemHighestBidPrice" type="java.lang.Double">
+            <column name="itemHighestBidPrice" precision="22" scale="0" />
         </property>
-        <property name="itemHighestBidUserName" type="string">
-            <column name="itemHighestBidUserName" length="20" />
-        </property>
-        <property name="itemStatus" type="java.lang.Integer">
-            <column name="itemStatus" />
+        <property name="itemStatux" type="string">
+            <column name="itemStatux" length="150" />
         </property>
         <property name="itemCargoName" type="string">
-            <column name="itemCargoName" length="20" />
+            <column name="itemCargoName" length="150" />
         </property>
-        <property name="itmeCargoId" type="java.lang.Integer">
-            <column name="itmeCargoID" />
-        </property>
-        <property name="sortId" type="long">
-            <column name="sortID" not-null="true" />
-        </property>
-        <property name="postUser" type="string">
-            <column name="postUser" length="45" />
+        <property name="itemCargoId" type="java.lang.Long">
+            <column name="itemCargoId" />
         </property>
         <property name="imageUrl" type="string">
-            <column name="imageURL" length="100" />
+            <column name="imageUrl" length="150" />
         </property>
-        <property name="itemBidDeadline" type="timestamp">
-            <column name="itemBidDeadline" length="19" not-null="true" />
+        <property name="itemBidDeadLine" type="timestamp">
+            <column name="itemBidDeadLine" length="19" not-null="true" />
         </property>
         <property name="itemPostTimestamp" type="timestamp">
             <column name="itemPostTimestamp" length="19" not-null="true" />
         </property>
+        <set name="depositses" inverse="true" lazy="true" table="deposits" fetch="select">
+            <key>
+                <column name="itemId" not-null="true" />
+            </key>
+            <one-to-many class="com.bid.data.Deposits" />
+        </set>
     </class>
 </hibernate-mapping>

@@ -1,17 +1,23 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2010-1-11 22:43:11 by Hibernate Tools 3.2.4.GA -->
+<!-- Generated 2010-1-12 21:13:36 by Hibernate Tools 3.2.4.GA -->
 <hibernate-mapping>
     <class name="com.bid.data.Deposits" table="deposits" catalog="ooad">
         <composite-id name="id" class="com.bid.data.DepositsId">
-            <key-property name="userName" type="string">
-                <column name="userName" length="20" />
-            </key-property>
             <key-property name="itemId" type="long">
-                <column name="itemID" />
+                <column name="itemId" />
+            </key-property>
+            <key-property name="userName" type="string">
+                <column name="userName" length="150" />
             </key-property>
         </composite-id>
+        <many-to-one name="users" class="com.bid.data.Users" update="false" insert="false" fetch="select">
+            <column name="userName" length="150" not-null="true" />
+        </many-to-one>
+        <many-to-one name="items" class="com.bid.data.Items" update="false" insert="false" fetch="select">
+            <column name="itemId" not-null="true" />
+        </many-to-one>
         <property name="moneyFrozen" type="java.lang.Double">
             <column name="moneyFrozen" precision="22" scale="0" />
         </property>
