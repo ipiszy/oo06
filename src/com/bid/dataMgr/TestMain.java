@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.bid.exchange.Item;
 import com.bid.exchange.ItemDigest;
+import com.bid.exchange.UserInfo;
 
 public class TestMain {
 	public static void main(String[]arg){
@@ -68,8 +69,13 @@ public class TestMain {
 		
 		//test of methods
 		boolean retV;
-		retV = b.charge(1000, "sepsky");
-		System.out.println(retV);
+		//retV = b.charge(1000, "sepsky");
+		//System.out.println(retV);
+		
+		//retV = b.offerPrice(300000, 90001, "sepsky");
+		//System.out.println(retV);
+		
+		retV = b.register(new UserInfo());
 		
 	}
 }
