@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import com.bid.data.Category;
 import com.bid.exchange.Item;
 import com.bid.exchange.ItemDigest;
 import com.bid.exchange.UserInfo;
