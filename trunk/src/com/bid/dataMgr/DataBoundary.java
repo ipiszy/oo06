@@ -20,6 +20,7 @@ public class DataBoundary {
 		return (itemMgr.queryBiddingItems(userName));
 	}
 	
+	
 	public List<ItemDigest> queryBiddedItems(String userName){
 		return (itemMgr.queryBiddedItems(userName));
 	}
@@ -59,11 +60,6 @@ public class DataBoundary {
 		return false;
 	}
 
-	/**
-	 *	输入： 
-	 */
-	public void requestPostItem(){/**--------------------我是华丽丽的警示线----------------------------------------*/
-	}
 
 	/**
 	 *	输入：货品的详细资料
