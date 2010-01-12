@@ -1,6 +1,6 @@
 package com.bid.data;
 
-// Generated 2010-1-12 21:13:35 by Hibernate Tools 3.2.4.GA
+// Generated 2010-1-13 1:54:57 by Hibernate Tools 3.2.4.GA
 
 import java.util.Date;
 import java.util.HashSet;
@@ -20,7 +20,7 @@ public class Items implements java.io.Serializable {
 	private String itemBidRule;
 	private Double itemFloorPrice;
 	private Double itemHighestBidPrice;
-	private String itemStatux;
+	private String itemStatus;
 	private String itemCargoName;
 	private Long itemCargoId;
 	private String imageUrl;
@@ -42,7 +42,7 @@ public class Items implements java.io.Serializable {
 	public Items(Users usersByItemHighestBidUserName, Users usersByPostUser,
 			Sorts sorts, String itemName, String itemDes, String itemBidRule,
 			Double itemFloorPrice, Double itemHighestBidPrice,
-			String itemStatux, String itemCargoName, Long itemCargoId,
+			String itemStatus, String itemCargoName, Long itemCargoId,
 			String imageUrl, Date itemBidDeadLine, Date itemPostTimestamp,
 			Set<Deposits> depositses) {
 		this.usersByItemHighestBidUserName = usersByItemHighestBidUserName;
@@ -53,7 +53,7 @@ public class Items implements java.io.Serializable {
 		this.itemBidRule = itemBidRule;
 		this.itemFloorPrice = itemFloorPrice;
 		this.itemHighestBidPrice = itemHighestBidPrice;
-		this.itemStatux = itemStatux;
+		this.itemStatus = itemStatus;
 		this.itemCargoName = itemCargoName;
 		this.itemCargoId = itemCargoId;
 		this.imageUrl = imageUrl;
@@ -135,12 +135,12 @@ public class Items implements java.io.Serializable {
 		this.itemHighestBidPrice = itemHighestBidPrice;
 	}
 
-	public String getItemStatux() {
-		return this.itemStatux;
+	public String getItemStatus() {
+		return this.itemStatus;
 	}
 
-	public void setItemStatux(String itemStatux) {
-		this.itemStatux = itemStatux;
+	public void setItemStatus(String itemStatus) {
+		this.itemStatus = itemStatus;
 	}
 
 	public String getItemCargoName() {
