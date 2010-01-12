@@ -280,10 +280,17 @@ public class ItemMgr {
 			HibernateUtility.beginTransaction();
 			Items item = (Items) s.get(Items.class, itemId);
 			HibernateUtility.commitTransaction();
+
+			if(item == null)
+				return false;
+
+			HibernateUtility.beginTransaction();
 			item.setItemStatus(Item.ONDELIVER);
 			item.setItmeCargoId((int) receiptId);
 			/** -----id”–¥Ì */
-			item.setItemCargoName(cargoCmp);
+			item.setItemCargoName(cargoCmp);			
+			s.saveOrUpdate(item);
+			HibernateUtility.commitTransaction();
 		} catch (HibernateException e) {
 			HibernateUtility.commitTransaction();
 			log.fatal(e);
@@ -305,7 +312,14 @@ public class ItemMgr {
 			HibernateUtility.beginTransaction();
 			Items item = (Items) s.get(Items.class, itemId);
 			HibernateUtility.commitTransaction();
+			
+			if(item == null)
+				return false;
+
+			HibernateUtility.beginTransaction();
 			item.setItemStatus(Item.DELIVERED);
+			s.saveOrUpdate(item);
+			HibernateUtility.commitTransaction();
 		} catch (HibernateException e) {
 			HibernateUtility.commitTransaction();
 			log.fatal(e);

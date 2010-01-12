@@ -1,11 +1,8 @@
 package com.bid.dataMgr;
 
-import java.util.Iterator;
-import java.util.List;
+import java.util.Date;
 
 import com.bid.exchange.Item;
-import com.bid.exchange.ItemDigest;
-import com.bid.exchange.UserInfo;
 
 public class TestMain {
 	public static void main(String[]arg){
@@ -78,5 +75,11 @@ public class TestMain {
 		//retV = b.register(new UserInfo("witchj", 3000, "hello from witch", "CloudBankAccount", "witchj@cloud"));
 		//System.out.println(retV);
 		
+		//retV = b.submitItem(new Item(0, "Sweep?", "Sweep used by witchj", 1000,
+		//		1001, "witchj", new Date(), -1, "", 0, Item.ONBID, null, new Date()));
+		//System.out.println(retV);
+		
+		retV = b.confirmDelivery(90001, 0, "witchCmp");
+		System.out.println(retV);
 	}
 }
