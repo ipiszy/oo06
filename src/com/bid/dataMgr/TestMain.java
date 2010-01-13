@@ -130,16 +130,18 @@ public class TestMain {
 		for(int i = 6; i <= 11; i++){
 			Date postDate = new Date();
 			Date deadDate = new Date();
-			int min = postDate.getMinutes();
-			deadDate.setMinutes(min + 30);
+			int hour = postDate.getHours();
+			deadDate.setHours(hour + 3);
 			b.submitItem(new Item(0, "Sweep" + i, "Sweep used by witchj", 1000,
 				11, "litt", deadDate, 1000, UserInfo.NONE, 0, Item.ONBID, null, postDate, "flying", 0));
 			double price = b.requestBid(i);
 			b.offerPrice(price + 1000, i, "sepsky");
+			price = b.requestBid(i);
+			b.offerPrice(price + 1000, i, "litt");
 		}
 		//list all ok?
-		List<ItemDigest> retlist = b.queryItemsBidded("sepsky");
-		for(ItemDigest iitem : retlist)
-			iitem.dump();
+	//	List<ItemDigest> retlist = b.queryItemsBidded("sepsky");
+	//	for(ItemDigest iitem : retlist)
+	//		iitem.dump();
 	}
 }
