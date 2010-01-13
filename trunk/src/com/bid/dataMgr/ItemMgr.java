@@ -607,7 +607,7 @@ public class ItemMgr {
 			else
 				returnValue = false;
 
-			returnValue = returnValue && (items.getItemStatus() == Item.ONBID);
+			returnValue = returnValue && (items.getItemStatus() .equals( Item.ONBID));
 
 		} catch (HibernateException e) {
 			HibernateUtility.commitTransaction();
