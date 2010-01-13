@@ -14,6 +14,11 @@ public class DataBoundary {
 		itemMgr = new ItemMgr();
 		userMgr = new UserMgr();
 		categoryMgr = new CategoryMgr();
+		timerMgr = new TimerMgr();
+	}
+	
+	public void startUp(){
+		
 	}
 	
 	public long addCategory(String categoryName){
@@ -171,5 +176,6 @@ public class DataBoundary {
 	private ItemMgr itemMgr;
 	private UserMgr userMgr;
 	private CategoryMgr categoryMgr;
+	private TimerMgr timerMgr;
 
 }
