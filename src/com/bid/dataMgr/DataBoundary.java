@@ -25,8 +25,8 @@ public class DataBoundary {
 	}
 	
 	
-	public List<ItemDigest> queryBiddedItems(String userName){
-		return (itemMgr.queryBiddedItems(userName));
+	public List<ItemDigest> queryItemsBought(String userName){
+		return (itemMgr.queryItemsBought(userName));
 	}
 	
 	public Item getItem(long itemId){

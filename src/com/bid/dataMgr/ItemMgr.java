@@ -52,12 +52,12 @@ public class ItemMgr {
 	}
 
 	/**
-	 * Query items that have been bidded by a certain person
+	 * Query items that have been bought by a certain person
 	 * 
 	 * @param userName
 	 * @return
 	 */
-	public List<ItemDigest> queryBiddedItems(String userName) {
+	public List<ItemDigest> queryItemsBought(String userName) {
 		List<ItemDigest> queryResult = new ArrayList<ItemDigest>();
 		String SQLQuery = "select * from items where itemHighestBidUserName = '"
 				+ userName + "' and itemStatus != '" + Item.ONBID+"'";
@@ -72,6 +72,44 @@ public class ItemMgr {
 			queryResult.add(new ItemDigest(itemId, imageURL, name, basePrice,
 					latestPrice, d));
 		}
+		return queryResult;
+	}
+	
+	/**
+	 * Query items that have been bidded by a certain person
+	 * 
+	 * @param userName
+	 * @return
+	 */
+	public List<ItemDigest> queryItemsBidded(String userName) {
+		List<ItemDigest> queryResult = new ArrayList<ItemDigest>();
+		String SQLQuery = "select itemId from deposits where userName = '" + userName +"'";
+			//"select * from items where itemHighestBidUserName = '"
+			//+ userName + "' and itemStatus != '" + Item.ONBID+"'";
+		Session s = HibernateUtility.currentSession();
+		try{
+			HibernateUtility.beginTransaction();			
+			List deposits = s.createSQLQuery(SQLQuery).list();
+			HibernateUtility.commitTransaction();
+			
+			for (Object obj : deposits) {
+				long itemId = ((BigInteger)(((Object[]) obj)[0])).longValue();
+
+				HibernateUtility.beginTransaction();
+				Items item = (Items) s.get(Items.class, itemId);
+				HibernateUtility.commitTransaction();
+				//queryResult.add(new ItemDigest(itemId, imageURL, name, basePrice,
+				//latestPrice, d));
+				queryResult.add(new ItemDigest(itemId, item.getImageUrl(), item.getItemName(),
+						item.getItemFloorPrice(), item.getItemHighestBidPrice(), item.getItemBidDeadLine()));
+				}
+		}
+		catch(HibernateException e) {
+			HibernateUtility.commitTransaction();
+			e.printStackTrace();
+			log.fatal(e);
+		}
+		HibernateUtility.closeSession();
 		return queryResult;
 	}
 
