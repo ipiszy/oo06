@@ -12,7 +12,7 @@ public class Item implements IsSerializable {
 	public final static String DELIVERED = "DELIVERED";
 
 	// static information which must be provide when posting obsolete
-	private long itemID;
+	private long itemID = 0;
 	private String itemName;
 	private String itemDes;
 	//Sting itemBidRule;
@@ -44,6 +44,29 @@ public class Item implements IsSerializable {
 			Date postTimestamp, String itemCargoName, long itemCargoId
 			){
 		this.itemID = itemid;
+		this.itemName = itemname;
+		this.itemDes = des;
+		this.itemFloorPrice = floorprice;
+		this.sortID = sortId;
+		this.deadline = deadline;
+		this.itemHighestBidPrice = highestBidPrice;
+		this.itemHighestBidUserName = highestBidUserName;
+		this.itemBidRule = itemBidRule;
+		this.itemStatus = itemStatus;
+		this.imageURL = imageURL;
+		this.postTimestamp = postTimestamp;
+		this.postUserName = postUserName;
+		this.itemCargoName = itemCargoName;
+		this.itemCargoID = itemCargoId;
+	}
+
+	
+	public Item(String itemname, String des, 
+			double floorprice, long sortId, String postUserName, Date deadline,
+			double highestBidPrice, String highestBidUserName, 
+			int itemBidRule, String itemStatus, String imageURL,
+			Date postTimestamp, String itemCargoName, long itemCargoId
+			){
 		this.itemName = itemname;
 		this.itemDes = des;
 		this.itemFloorPrice = floorprice;
