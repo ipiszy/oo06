@@ -145,7 +145,7 @@ public class UserMgr {
 					
 					if(deposit == null && money < 0)
 					{
-						Deposits d = new Deposits(new DepositsId(itemId, userName), user, item, money);
+						Deposits d = new Deposits(new DepositsId(itemId, userName), user, item, -money);
 						HibernateUtility.beginTransaction();
 						s.saveOrUpdate(d);
 						HibernateUtility.commitTransaction();
