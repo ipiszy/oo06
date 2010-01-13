@@ -130,15 +130,15 @@ public class TestMain {
 		//b.charge(10000, "litt");
 		//b.charge(10000, "sepsky");
 
-		/*Date postDate = new Date();
+		Date postDate = new Date();
 		Date deadDate = new Date();
 		int hour = postDate.getHours();
 		deadDate.setHours(hour + 3);
-		b.submitItem(new Item(0, "test", "Magical test by witchj", 1000,
-			11, "witchj", deadDate, 1000, UserInfo.NONE, 0, Item.ONBID, null, postDate, null, 0));*/
+		b.submitItem(new Item(0, "test2", "Magical test2 by witchj", 1000,
+			11, "witchj", deadDate, 1000, UserInfo.NONE, 0, Item.ONBID, null, postDate, null, 0));
 		//b.charge(10000, "sepsky");
 		//b.charge(10000, "litt");
-		double price = b.requestBid(10);
+		/*double price = b.requestBid(10);
 		b.offerPrice(price + 1000, 10, "sepsky");//3000
 		price = b.requestBid(10);
 		b.offerPrice(price + 1000, 10, "litt");//4000
