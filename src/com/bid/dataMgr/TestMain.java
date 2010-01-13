@@ -92,13 +92,13 @@ public class TestMain {
 		
 		// TODO
 		//long categoryId = b.addCategory("comic");
-		Item newItem = new Item(0, "Sweep?", "Sweep used by witchj", 1000,
-				11, "litt", new Date(), 1000, UserInfo.NONE, 0, Item.ONBID, null, new Date(), "flying", 0);
-		retV = b.submitItem(newItem);
-		System.out.println(retV);
+		//Item newItem = new Item(0, "Sweep?", "Sweep used by witchj", 1000,
+		//		11, "litt", new Date(), 1000, UserInfo.NONE, 0, Item.ONBID, null, new Date(), "flying", 0);
+		//retV = b.submitItem(newItem);
+		//System.out.println(retV);
 		
-		retV = b.confirmDelivery(90001, 0, "witchCmp");
-		System.out.println(retV);
+		//retV = b.confirmDelivery(90001, 0, "witchCmp");
+		//System.out.println(retV);
 		
 		
 		
@@ -124,5 +124,22 @@ public class TestMain {
 //		System.out.println("-------RequestBid()---------");
 
 //		System.out.println(b.requestBid(2));
+		
+		//new Several articles and bidds them
+		//fenggang.wu bids several articles
+		for(int i = 6; i <= 11; i++){
+			Date postDate = new Date();
+			Date deadDate = new Date();
+			int min = postDate.getMinutes();
+			deadDate.setMinutes(min + 30);
+			b.submitItem(new Item(0, "Sweep" + i, "Sweep used by witchj", 1000,
+				11, "litt", deadDate, 1000, UserInfo.NONE, 0, Item.ONBID, null, postDate, "flying", 0));
+			double price = b.requestBid(i);
+			b.offerPrice(price + 1000, i, "sepsky");
+		}
+		//list all ok?
+		List<ItemDigest> retlist = b.queryItemsBidded("sepsky");
+		for(ItemDigest iitem : retlist)
+			iitem.dump();
 	}
 }
