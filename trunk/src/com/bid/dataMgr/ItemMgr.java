@@ -180,7 +180,7 @@ public class ItemMgr {
 					.doubleValue(), item.getSorts().getSortId(), item.getUsersByPostUser().getUserName(), item
 					.getItemBidDeadLine(), item.getItemHighestBidPrice(), item
 					.getUsersByItemHighestBidUserName().getUserName(), 0, item.getItemStatus(), item
-					.getImageUrl(), item.getItemPostTimestamp()));
+					.getImageUrl(), item.getItemPostTimestamp(), item.getItemCargoName(), item.getItemCargoId()));
 		}
 		return queryResult;
 	}
@@ -342,15 +342,16 @@ public class ItemMgr {
 			//Items(Users usersByItemHighestBidUserName, Users usersByPostUser,
 			//Sorts sorts, String itemName, String itemDes, String itemBidRule,
 			//Double itemFloorPrice, Double itemHighestBidPrice,
-			//String itemStatux, String itemCargoName, Long itemCargoId,
+			//String itemStatus, String itemCargoName, Long itemCargoId,
 			//String imageUrl, Date itemBidDeadLine, Date itemPostTimestamp,
 			//Set<Deposits> depositses)
 			Items saveItem = new Items(bidUser, postUser, sort, thisItem.getItemName(),
-					thisItem.getItemDes(), null, thisItem.getItemFloorPrice(),
-					thisItem.getItemHighestBidPrice(), Item.ONBID, thisItem
-							.getItemCargoName(), thisItem.getItemCargoID(),
+					thisItem.getItemDes(), null, 
+					thisItem.getItemFloorPrice(), thisItem.getItemHighestBidPrice(), 
+					Item.ONBID, thisItem.getItemCargoName(), thisItem.getItemCargoID(),
 					thisItem.getImageURL(), thisItem.getItemBidDeadline(),
-					thisItem.getItemPostTimestamp(), deposits);
+					thisItem.getItemPostTimestamp(), 
+					deposits);
 			s.saveOrUpdate(saveItem);
 			HibernateUtility.commitTransaction();
 			flag = true;
@@ -466,7 +467,8 @@ public class ItemMgr {
 					item.getItemFloorPrice(), item.getSorts().getSortId(), item.getUsersByPostUser().getUserName(),
 					item.getItemBidDeadLine(), item.getItemHighestBidPrice(), 
 					item.getUsersByItemHighestBidUserName().getUserName(),
-					0, item.getItemStatus(), item.getImageUrl(), item.getItemPostTimestamp());
+					0, item.getItemStatus(), item.getImageUrl(), item.getItemPostTimestamp(),
+					item.getItemCargoName(), item.getItemCargoId());
 		} catch (HibernateException e) {
 			HibernateUtility.commitTransaction();
 			log.fatal(e);

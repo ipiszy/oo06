@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import com.bid.exchange.Category;
 import com.bid.exchange.Item;
 import com.bid.exchange.ItemDigest;
 import com.bid.exchange.UserInfo;
@@ -90,38 +91,38 @@ public class TestMain {
 //		user.dump();
 		
 		// TODO
-//		long categoryId = b.addCategory("comic");
-//		Item newItem = new Item(0, "Sweep?", "Sweep used by witchj", 1000,
-//				categoryId, "litt", new Date(), -1, UserInfo.NONE, 0, Item.ONBID, null, new Date());
-//		retV = b.submitItem(newItem);
-//		System.out.println(retV);
-//		
-//		retV = b.confirmDelivery(90001, 0, "witchCmp");
-//		System.out.println(retV);
+		//long categoryId = b.addCategory("comic");
+		Item newItem = new Item(0, "Sweep?", "Sweep used by witchj", 1000,
+				11, "litt", new Date(), 1000, UserInfo.NONE, 0, Item.ONBID, null, new Date(), "flying", 0);
+		retV = b.submitItem(newItem);
+		System.out.println(retV);
+		
+		retV = b.confirmDelivery(90001, 0, "witchCmp");
+		System.out.println(retV);
 		
 		
 		
-//		List<Category> retCatList = b.getCategories();
-//		for(Category obj : retCatList)
-//			System.out.println(obj.getId() +":" +obj.getName());
-//		
-//		retV = b.confirmReceipt(1);
-//		System.out.println(retV);
+		/*List<Category> retCatList = b.getCategories();
+		for(Category obj : retCatList)
+			System.out.println(obj.getId() +":" +obj.getName());
+		
+		retV = b.confirmReceipt(1);
+		System.out.println(retV);*/
 		
 		
 		//TODO
-		System.out.println("-------queryBiddingItems()---------");
-		List<ItemDigest> retItemDigList = b.queryBiddingItems("sepsky");
-		for(ItemDigest obj : retItemDigList)
-			System.out.println(obj.getItemId() +":" +obj.getName());
+//		System.out.println("-------queryBiddingItems()---------");
+//		List<ItemDigest> retItemDigList = b.queryBiddingItems("sepsky");
+//		for(ItemDigest obj : retItemDigList)
+//			System.out.println(obj.getItemId() +":" +obj.getName());
 		
-		System.out.println("-------queryBiddedItems()---------");
-		retItemDigList = b.queryBiddedItems("sepsky");
-		for(ItemDigest obj : retItemDigList)
-			System.out.println(obj.getItemId() +":" +obj.getName());
+//		System.out.println("-------queryBiddedItems()---------");
+//		retItemDigList = b.queryBiddedItems("sepsky");
+//		for(ItemDigest obj : retItemDigList)
+//			System.out.println(obj.getItemId() +":" +obj.getName());
 
-		System.out.println("-------RequestBid()---------");
+//		System.out.println("-------RequestBid()---------");
 
-		System.out.println(b.requestBid(2));
+//		System.out.println(b.requestBid(2));
 	}
 }
