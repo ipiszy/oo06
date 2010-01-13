@@ -5,6 +5,9 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
+import com.bid.data.Deposits;
+import com.bid.data.DepositsId;
+import com.bid.data.Items;
 import com.bid.data.Users;
 import com.bid.exchange.UserInfo;
 
@@ -110,7 +113,7 @@ public class UserMgr {
 	 * @param money the money transfered. The balance increases if <b>money<b> is positive
 	 * @return
 	 */
-	public boolean transfer(String userName,double money/* (+,-) */) {
+	public boolean transfer(String userName,double money/* (+,-) */, long itemId) {
 		Session s = HibernateUtility.currentSession();
 		boolean returnValue = false;
 		try {
@@ -130,7 +133,35 @@ public class UserMgr {
 					s.update(user);
 					HibernateUtility.commitTransaction();
 					returnValue = true;
+					
+					//处理deposits
+					HibernateUtility.beginTransaction();
+					Items item = (Items) s.get(Items.class, itemId);
+					HibernateUtility.commitTransaction();
+					//先抓原来的
+					HibernateUtility.beginTransaction();
+					Deposits deposit = (Deposits) s.get(Deposits.class, new DepositsId(itemId, userName));
+					HibernateUtility.commitTransaction();
+					
+					if(deposit == null && money < 0)
+					{
+						Deposits d = new Deposits(new DepositsId(itemId, userName), user, item, money);
+						HibernateUtility.beginTransaction();
+						s.saveOrUpdate(d);
+						HibernateUtility.commitTransaction();
 					}
+					if(deposit != null)
+					{
+						double moneyFrozenNow = deposit.getMoneyFrozen();
+						if(money < 0)
+							deposit.setMoneyFrozen(moneyFrozenNow - money);
+						else
+							deposit.setMoneyFrozen(moneyFrozenNow + money);
+						HibernateUtility.beginTransaction();
+						s.saveOrUpdate(deposit);
+						HibernateUtility.commitTransaction();
+					}
+				}
 
 			}
 

@@ -60,7 +60,7 @@ public class ItemMgr {
 	public List<ItemDigest> queryItemsBought(String userName) {
 		List<ItemDigest> queryResult = new ArrayList<ItemDigest>();
 		String SQLQuery = "select * from items where itemHighestBidUserName = '"
-				+ userName + "' and itemStatus != '" + Item.ONBID+"'";
+				+ userName + "' and itemBidDeadline < "+ new Date();
 		List<Items> detailList = this.execSQLQuery(SQLQuery);
 		for (Items item : detailList) {
 			String imageURL = item.getImageUrl();
@@ -80,7 +80,7 @@ public class ItemMgr {
 	 * 
 	 * @param userName
 	 * @return
-	 */
+	 *///不仅仅是成功的，而是所有参与了竞价的
 	public List<ItemDigest> queryItemsBidded(String userName) {
 		List<ItemDigest> queryResult = new ArrayList<ItemDigest>();
 		String SQLQuery = "select itemId from deposits where userName = '" + userName +"'";
@@ -638,7 +638,7 @@ public class ItemMgr {
 				Double itemHighestBidprice = (Double) (((Object[]) obj)[5]);
 				String itemHighestBidUserName = (((Object[]) obj)[6])
 						.toString();
-				String itmeStatus = (String) (((Object[]) obj)[7]);
+				String itemStatus = (String) (((Object[]) obj)[7]);
 				String itemCargoName;
 				if(((Object[]) obj)[8] == null)
 					itemCargoName = null;
@@ -670,11 +670,20 @@ public class ItemMgr {
 				HibernateUtility.beginTransaction();
 				sort = (Sorts) s.get(Sorts.class, sortId);
 				HibernateUtility.commitTransaction();
-				queryResult.add(new Items(bidUser, postUser, sort, itemName,
+				//如果发现它过时了&&它的标志还是没有过时的标志
+				Items newItem = new Items(bidUser, postUser, sort, itemName,
 						itemDes, null, itemFloorPrice,
-						itemHighestBidprice, Item.ONBID, itemCargoName,
+						itemHighestBidprice, itemStatus, itemCargoName,
 						itmeCargoId, imageUrl, itemBidDeadline,
-						itemPostTimestamp, deposits));
+						itemPostTimestamp, deposits);
+				newItem.setItemId(itemId);
+				if(itemBidDeadline.after(new Date()) && itemStatus == Item.ONBID){
+					newItem.setItemStatus(Item.OBSOLETE);
+					HibernateUtility.beginTransaction();
+					s.update(newItem);
+					HibernateUtility.commitTransaction();
+				}
+				queryResult.add(newItem);
 			}
 		} catch (HibernateException e) {
 			HibernateUtility.commitTransaction();

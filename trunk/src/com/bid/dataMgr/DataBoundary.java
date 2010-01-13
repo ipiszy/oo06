@@ -29,6 +29,10 @@ public class DataBoundary {
 		return (itemMgr.queryItemsBought(userName));
 	}
 	
+	public List<ItemDigest> queryItemsBidded(String userName){
+		return (itemMgr.queryItemsBidded(userName));
+	}
+	
 	public Item getItem(long itemId){
 		Item thisItem = itemMgr.queryItem(itemId);
 		return thisItem;
@@ -128,7 +132,7 @@ public class DataBoundary {
 			deltaMoney = -money + bidUsers.get(userName);
 		else
 			deltaMoney = -money;
-		boolean offered = userMgr.transfer(userName, deltaMoney);
+		boolean offered = userMgr.transfer(userName, deltaMoney, itemId);
 		if(offered)
 			itemMgr.biddedBy(itemId, userName, money);
 		return offered;
