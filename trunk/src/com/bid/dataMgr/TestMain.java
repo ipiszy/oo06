@@ -127,25 +127,33 @@ public class TestMain {
 		
 		//new Several articles and bidds them
 		//fenggang.wu bids several articles
-	/*	for(int i = 6; i <= 11; i++){
-			Date postDate = new Date();
-			Date deadDate = new Date();
-			int hour = postDate.getHours();
-			deadDate.setHours(hour + 3);
-			b.submitItem(new Item(0, "Sweep" + i, "Sweep used by witchj", 1000,
-				11, "litt", deadDate, 1000, UserInfo.NONE, 0, Item.ONBID, null, postDate, "flying", 0));
-			double price = b.requestBid(i);
-			b.offerPrice(price + 1000, i, "sepsky");
-			price = b.requestBid(i);
-			b.offerPrice(price + 1000, i, "litt");
-		}*/
+		//b.charge(10000, "litt");
+		//b.charge(10000, "sepsky");
+
+		/*Date postDate = new Date();
+		Date deadDate = new Date();
+		int hour = postDate.getHours();
+		deadDate.setHours(hour + 3);
+		b.submitItem(new Item(0, "test", "Magical test by witchj", 1000,
+			11, "witchj", deadDate, 1000, UserInfo.NONE, 0, Item.ONBID, null, postDate, null, 0));*/
+		//b.charge(10000, "sepsky");
+		//b.charge(10000, "litt");
+		double price = b.requestBid(10);
+		b.offerPrice(price + 1000, 10, "sepsky");//3000
+		price = b.requestBid(10);
+		b.offerPrice(price + 1000, 10, "litt");//4000
+		/*price = b.requestBid(10);
+		b.offerPrice(price + 1000, 10, "sepsky");//5000
+		price = b.requestBid(10);
+		b.offerPrice(price + 1000, 10, "litt");//6000
+		price = b.requestBid(10);
+		b.offerPrice(price + 1000, 10, "sepsky");//7000
+		price = b.requestBid(10);
+		b.offerPrice(price + 1000, 10, "litt");//8000
+		*/
 		//list all ok?
 	//	List<ItemDigest> retlist = b.queryItemsBidded("sepsky");
 	//	for(ItemDigest iitem : retlist)
 	//		iitem.dump();
-		System.out.println("-------queryBiddedItems()---------");
-		List<ItemDigest> retItemDigList = b.queryItemsBidded("sepsky");
-		for(ItemDigest obj : retItemDigList)
-			System.out.println(obj.getItemId() +":" +obj.getName());
 	}
 }

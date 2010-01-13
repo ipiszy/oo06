@@ -26,6 +26,17 @@ import com.bid.exchange.UserInfo;
 
 public class ItemMgr {
 	// createItem()
+	
+	public double beenBiddedBy(long itemId, String userName){
+		double money = 0;
+		DepositsId id = new DepositsId(itemId, userName);
+		Session s = HibernateUtility.currentSession();
+		HibernateUtility.beginTransaction();
+		Deposits depo = (Deposits) s.get(Deposits.class, id);
+		HibernateUtility.commitTransaction();
+		if(depo != null) money = depo.getMoneyFrozen();
+		return money;
+	}
 
 	/**
 	 * Query items that have been bidded by a certain person
@@ -713,8 +724,10 @@ public class ItemMgr {
 			item = (Items) s.get(Items.class, itemId);
 			HibernateUtility.commitTransaction();
 			
-			item.setUsersByItemHighestBidUserName(user);
-			item.setItemHighestBidPrice(price);
+			if(item.getItemHighestBidPrice() < price){
+				item.setUsersByItemHighestBidUserName(user);
+				item.setItemHighestBidPrice(price);
+			}
 			
 			HibernateUtility.beginTransaction();
 			s.saveOrUpdate(item);

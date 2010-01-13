@@ -122,19 +122,15 @@ public class DataBoundary {
 	/**
 	 *	作用：服务器和客户器端都知道某一位用户为某一个商品出了一个价格 
 	 */	
-	public boolean  offerPrice(double money, long itemId, String userName){
+	public boolean  offerPrice(double price, long itemId, String userName){
 		//1把出价的用户与其货品之间的关系绑定
 		//2从用户的账面上扣去某个(差额)金额
 		//0计算差额
 		double deltaMoney;
-		Map<String, Double> bidUsers = itemMgr.queryReturnMoney(itemId);
-		if(bidUsers.containsKey(userName))
-			deltaMoney = -money + bidUsers.get(userName);
-		else
-			deltaMoney = -money;
+		deltaMoney = -price + itemMgr.beenBiddedBy(itemId, userName);
 		boolean offered = userMgr.transfer(userName, deltaMoney, itemId);
 		if(offered)
-			itemMgr.biddedBy(itemId, userName, money);
+			itemMgr.biddedBy(itemId, userName, price);
 		return offered;
 	} 
 	
