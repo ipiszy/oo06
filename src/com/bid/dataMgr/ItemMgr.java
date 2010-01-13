@@ -36,7 +36,7 @@ public class ItemMgr {
 	public List<ItemDigest> queryBiddingItems(String userName) {
 		List<ItemDigest> queryResult = new ArrayList<ItemDigest>();
 		String SQLQuery = "select * from items where itemHighestBidUserName = '"
-				+ userName + "' and itemStatus = " + Item.ONBID;
+				+ userName + "' and itemStatus = '" + Item.ONBID+"'";
 		List<Items> detailList = this.execSQLQuery(SQLQuery);
 		for (Items item : detailList) {
 			String imageURL = item.getImageUrl();
@@ -60,7 +60,7 @@ public class ItemMgr {
 	public List<ItemDigest> queryBiddedItems(String userName) {
 		List<ItemDigest> queryResult = new ArrayList<ItemDigest>();
 		String SQLQuery = "select * from items where itemHighestBidUserName = '"
-				+ userName + "' and itemStatus != " + Item.ONBID;
+				+ userName + "' and itemStatus != '" + Item.ONBID+"'";
 		List<Items> detailList = this.execSQLQuery(SQLQuery);
 		for (Items item : detailList) {
 			String imageURL = item.getImageUrl();
