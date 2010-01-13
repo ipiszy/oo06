@@ -76,74 +76,6 @@ public class ItemMgr {
 	}
 
 	/**
-	 * For seller, query all the items on sale
-	 */
-	public List<ItemDigest> sellerQueryOnSaleItems(String userName) {
-		List<ItemDigest> queryResult = new ArrayList<ItemDigest>();
-		String SQLQuery = "select * from items where postUser = '"
-				+ userName + "' and itemStatus = '" + Item.ONBID+"'";
-		List<Items> detailList = this.execSQLQuery(SQLQuery);
-		for (Items item : detailList) {
-			String imageURL = item.getImageUrl();
-			String name = item.getItemName();
-			double basePrice = item.getItemFloorPrice();
-			double latestPrice = item.getItemHighestBidPrice();
-			Date d = item.getItemBidDeadLine();
-			long itemId = item.getItemId();
-			queryResult.add(new ItemDigest(itemId, imageURL, name, basePrice,
-					latestPrice, d));
-		}
-		return queryResult;
-	}
-	
-	
-	/**
-	 * for the seller, query all item sold
-	 * 
-	 */
-	public List<ItemDigest> sellerQuerySoldItems(String userName) {
-		List<ItemDigest> queryResult = new ArrayList<ItemDigest>();
-		String SQLQuery = "select * from items where postUser = '"
-				+ userName + "' and itemStatus != '" + Item.ONBID+"' and itemHighestBidUserName != 'none'";
-		List<Items> detailList = this.execSQLQuery(SQLQuery);
-		for (Items item : detailList) {
-			String imageURL = item.getImageUrl();
-			String name = item.getItemName();
-			double basePrice = item.getItemFloorPrice();
-			double latestPrice = item.getItemHighestBidPrice();
-			Date d = item.getItemBidDeadLine();
-			long itemId = item.getItemId();
-			queryResult.add(new ItemDigest(itemId, imageURL, name, basePrice,
-					latestPrice, d));
-		}
-		return queryResult;
-	}
-	
-	/**
-	 * for the seller, query all the items he/she is unable to sell it out 
-	 */
-	
-	public List<ItemDigest> sellerQueryFailItems(String userName) {
-		List<ItemDigest> queryResult = new ArrayList<ItemDigest>();
-		String SQLQuery = "select * from items where postUser = '"
-				+ userName + "' and itemStatus != '" + Item.ONBID+"' and itemHighestBidUserName = 'none'";
-		List<Items> detailList = this.execSQLQuery(SQLQuery);
-		for (Items item : detailList) {
-			String imageURL = item.getImageUrl();
-			String name = item.getItemName();
-			double basePrice = item.getItemFloorPrice();
-			double latestPrice = item.getItemHighestBidPrice();
-			Date d = item.getItemBidDeadLine();
-			long itemId = item.getItemId();
-			queryResult.add(new ItemDigest(itemId, imageURL, name, basePrice,
-					latestPrice, d));
-		}
-		return queryResult;
-	}
-	
-	
-	
-	/**
 	 * Query all item digests
 	 * 
 	 * @return
@@ -595,12 +527,6 @@ public class ItemMgr {
 				else
 					itemBidRule = (((Object[]) obj)[3]).toString();
 				Double itemFloorPrice = (Double) (((Object[]) obj)[4]);
-
-				String imageUrl;
-				if(((Object[]) obj)[11] == null)
-					imageUrl = null;
-				else
-					imageUrl = (((Object[]) obj)[11]).toString();
 				Double itemHighestBidprice = (Double) (((Object[]) obj)[5]);
 				String itemHighestBidUserName = (((Object[]) obj)[6])
 						.toString();
@@ -617,8 +543,13 @@ public class ItemMgr {
 					postUserName = null;
 				else
 					postUserName = (((Object[]) obj)[11]).toString();
-				Date itemBidDeadline = (Date) (((Object[]) obj)[12]);
-				Date itemPostTimestamp = (Date) (((Object[]) obj)[13]);
+				String imageUrl;
+				if(((Object[]) obj)[12] == null)
+					imageUrl = null;
+				else
+					imageUrl = (((Object[]) obj)[12]).toString();
+				Date itemBidDeadline = (Date) (((Object[]) obj)[13]);
+				Date itemPostTimestamp = (Date) (((Object[]) obj)[14]);
 				Users bidUser, postUser;
 				Sorts sort;
 				Set<Deposits> deposits = new HashSet<Deposits>();
