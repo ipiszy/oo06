@@ -36,7 +36,7 @@ public class ItemMgr {
 	public List<ItemDigest> queryBiddingItems(String userName) {
 		List<ItemDigest> queryResult = new ArrayList<ItemDigest>();
 		String SQLQuery = "select * from items where itemHighestBidUserName = '"
-				+ userName + "' and itemStatus = '" + Item.ONBID+"'";
+				+ userName + "' and itemStatus = '" + Item.ONBID + "'";
 		List<Items> detailList = this.execSQLQuery(SQLQuery);
 		for (Items item : detailList) {
 			String imageURL = item.getImageUrl();
@@ -60,7 +60,7 @@ public class ItemMgr {
 	public List<ItemDigest> queryItemsBought(String userName) {
 		List<ItemDigest> queryResult = new ArrayList<ItemDigest>();
 		String SQLQuery = "select * from items where itemHighestBidUserName = '"
-				+ userName + "' and itemBidDeadline < "+ new Date();
+				+ userName + "' and itemStatus = '" + Item.OBSOLETE + "'";
 		List<Items> detailList = this.execSQLQuery(SQLQuery);
 		for (Items item : detailList) {
 			String imageURL = item.getImageUrl();
@@ -83,7 +83,7 @@ public class ItemMgr {
 	 *///不仅仅是成功的，而是所有参与了竞价的
 	public List<ItemDigest> queryItemsBidded(String userName) {
 		List<ItemDigest> queryResult = new ArrayList<ItemDigest>();
-		String SQLQuery = "select itemId from deposits where userName = '" + userName +"'";
+		String SQLQuery = "select itemId, userName from deposits where userName = '" + userName +"'";
 			//"select * from items where itemHighestBidUserName = '"
 			//+ userName + "' and itemStatus != '" + Item.ONBID+"'";
 		Session s = HibernateUtility.currentSession();
@@ -93,7 +93,7 @@ public class ItemMgr {
 			HibernateUtility.commitTransaction();
 			
 			for (Object obj : deposits) {
-				long itemId = ((BigInteger)(((Object[]) obj)[0])).longValue();
+				long itemId = ((BigInteger) (((Object[]) obj)[0])).longValue();
 
 				HibernateUtility.beginTransaction();
 				Items item = (Items) s.get(Items.class, itemId);
@@ -670,19 +670,20 @@ public class ItemMgr {
 				HibernateUtility.beginTransaction();
 				sort = (Sorts) s.get(Sorts.class, sortId);
 				HibernateUtility.commitTransaction();
-				//如果发现它过时了&&它的标志还是没有过时的标志
 				Items newItem = new Items(bidUser, postUser, sort, itemName,
 						itemDes, null, itemFloorPrice,
 						itemHighestBidprice, itemStatus, itemCargoName,
 						itmeCargoId, imageUrl, itemBidDeadline,
 						itemPostTimestamp, deposits);
 				newItem.setItemId(itemId);
-				if(itemBidDeadline.after(new Date()) && itemStatus == Item.ONBID){
+				/*
+				//如果发现它过时了&&它的标志还是没有过时的标志
+				 * if(itemBidDeadline.after(new Date()) && itemStatus == Item.ONBID){
 					newItem.setItemStatus(Item.OBSOLETE);
 					HibernateUtility.beginTransaction();
 					s.update(newItem);
 					HibernateUtility.commitTransaction();
-				}
+				}*/
 				queryResult.add(newItem);
 			}
 		} catch (HibernateException e) {
