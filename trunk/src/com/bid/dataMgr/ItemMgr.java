@@ -694,7 +694,10 @@ public class ItemMgr {
 		return queryResult;
 	}
 
-	public boolean biddedBy(long itemId, String userName, double money) {
+	/**
+	 * 作用：更新最新出价者及价格
+	 * */
+	public boolean biddedBy(long itemId, String userName, double price) {
 
 		boolean flag = false;
 		Session s = HibernateUtility.currentSession();
@@ -704,14 +707,16 @@ public class ItemMgr {
 			HibernateUtility.beginTransaction();
 			user = (Users) s.get(Users.class, userName);
 			HibernateUtility.commitTransaction();
+			
 			HibernateUtility.beginTransaction();
 			item = (Items) s.get(Items.class, itemId);
 			HibernateUtility.commitTransaction();
+			
+			item.setUsersByItemHighestBidUserName(user);
+			item.setItemHighestBidPrice(price);
+			
 			HibernateUtility.beginTransaction();
-			//Deposits(DepositsId id, Users users, Items items, Double moneyFrozen)
-			Deposits saveDep = new Deposits(new DepositsId(itemId, userName), user, item,
-					money);
-			s.saveOrUpdate(saveDep);
+			s.saveOrUpdate(item);
 			HibernateUtility.commitTransaction();
 			flag = true;
 		} catch (HibernateException e) {
