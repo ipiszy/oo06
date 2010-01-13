@@ -23,12 +23,12 @@ public class CategoryMgr {
 		categoryCnt  = this.getAllCategories().size();
 	}
 	
-	public long addCategory(String sortName){
+	public long addCategory(String categoryName){
 		Session s = HibernateUtility.currentSession();
 		long returnValue = -1;
 		try {
 			//public Sorts(String sortName, Set<Items> itemses)
-			Sorts sort = new Sorts(sortName, new HashSet<Items>());
+			Sorts sort = new Sorts(categoryName, new HashSet<Items>());
 			HibernateUtility.beginTransaction();
 			s.saveOrUpdate(sort);
 			HibernateUtility.commitTransaction();

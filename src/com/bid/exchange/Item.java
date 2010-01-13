@@ -41,7 +41,7 @@ public class Item implements IsSerializable {
 			double floorprice, long sortId, String postUserName, Date deadline,
 			double highestBidPrice, String highestBidUserName, 
 			int itemBidRule, String itemStatus, String imageURL,
-			Date postTimestamp
+			Date postTimestamp, String itemCargoName, long itemCargoId
 			){
 		this.itemID = itemid;
 		this.itemName = itemname;
@@ -56,6 +56,8 @@ public class Item implements IsSerializable {
 		this.imageURL = imageURL;
 		this.postTimestamp = postTimestamp;
 		this.postUserName = postUserName;
+		this.itemCargoName = itemCargoName;
+		this.itemCargoID = itemCargoId;
 	}
 
 
