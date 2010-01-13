@@ -130,7 +130,7 @@ public class TestMain {
 		//b.charge(10000, "litt");
 		//b.charge(10000, "sepsky");
 
-		Date postDate = new Date();
+		/*Date postDate = new Date();
 		Date deadDate = new Date();
 		int hour = postDate.getHours();
 		deadDate.setHours(hour + 3);
@@ -155,5 +155,6 @@ public class TestMain {
 	//	List<ItemDigest> retlist = b.queryItemsBidded("sepsky");
 	//	for(ItemDigest iitem : retlist)
 	//		iitem.dump();
+		b.startUp();
 	}
 }

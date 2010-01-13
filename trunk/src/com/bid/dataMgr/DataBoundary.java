@@ -18,7 +18,7 @@ public class DataBoundary {
 	}
 	
 	public void startUp(){
-		
+		timerMgr.startUp();
 	}
 	
 	public long addCategory(String categoryName){
