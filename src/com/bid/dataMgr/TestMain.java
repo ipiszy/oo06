@@ -127,7 +127,7 @@ public class TestMain {
 		
 		//new Several articles and bidds them
 		//fenggang.wu bids several articles
-		for(int i = 6; i <= 11; i++){
+	/*	for(int i = 6; i <= 11; i++){
 			Date postDate = new Date();
 			Date deadDate = new Date();
 			int hour = postDate.getHours();
@@ -138,10 +138,14 @@ public class TestMain {
 			b.offerPrice(price + 1000, i, "sepsky");
 			price = b.requestBid(i);
 			b.offerPrice(price + 1000, i, "litt");
-		}
+		}*/
 		//list all ok?
 	//	List<ItemDigest> retlist = b.queryItemsBidded("sepsky");
 	//	for(ItemDigest iitem : retlist)
 	//		iitem.dump();
+		System.out.println("-------queryBiddedItems()---------");
+		List<ItemDigest> retItemDigList = b.queryItemsBidded("sepsky");
+		for(ItemDigest obj : retItemDigList)
+			System.out.println(obj.getItemId() +":" +obj.getName());
 	}
 }
