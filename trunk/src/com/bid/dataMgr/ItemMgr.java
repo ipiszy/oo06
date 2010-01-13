@@ -366,8 +366,8 @@ public class ItemMgr {
 	 * @param thisItem
 	 * @return
 	 */
-	public boolean addItem(Item thisItem) {
-		boolean flag = false;
+	public long addItem(Item thisItem) {
+		long retV = 0;
 		Session s = HibernateUtility.currentSession();
 		try {
 			//先获得需要的users以及category
@@ -403,15 +403,14 @@ public class ItemMgr {
 					deposits);
 			s.saveOrUpdate(saveItem);
 			HibernateUtility.commitTransaction();
-			flag = true;
+			retV = saveItem.getItemId();
 		} catch (HibernateException e) {
 			HibernateUtility.commitTransaction();
 			e.printStackTrace();
 			log.fatal(e);
-			flag = false;
 		}
 		HibernateUtility.closeSession();
-		return flag;
+		return retV;
 	}
 
 	/**
