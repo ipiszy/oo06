@@ -655,7 +655,11 @@ public class ItemMgr {
 					itemCargoName = null;
 				else
 					itemCargoName = (((Object[]) obj)[8]).toString();
-				long itmeCargoId = ((BigInteger) (((Object[]) obj)[9])).longValue();
+				
+				long itmeCargoId = 0;
+				if(((Object[]) obj)[8] != null)
+					itmeCargoId = ((BigInteger) (((Object[]) obj)[9])).longValue();
+				
 				long sortId = ((BigInteger) (((Object[]) obj)[10])).longValue();
 				String postUserName;
 				if(((Object[]) obj)[11] == null)
