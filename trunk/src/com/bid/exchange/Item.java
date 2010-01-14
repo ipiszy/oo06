@@ -6,9 +6,19 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class Item implements IsSerializable {
 	// constant values for the bidding status
+	
+	// newly posted item
 	public final static String ONBID = "ONBID";
+	
+	// time has passed deadline, the bidding process has ended
 	public final static String OBSOLETE = "OBSOLETE";
+	
+	// after the bidding time is passed, the seller comfirms the delivery,
+	// the item change into this state
 	public final static String ONDELIVER = "ONDELIVER";
+	
+	// the item has reach the buyer, he/she comfirm the receipt, 
+	// the item goes into this state
 	public final static String DELIVERED = "DELIVERED";
 
 	// static information which must be provide when posting obsolete
@@ -81,6 +91,25 @@ public class Item implements IsSerializable {
 		this.postUserName = postUserName;
 		this.itemCargoName = itemCargoName;
 		this.itemCargoID = itemCargoId;
+	}
+
+	
+	public Item(String itemname, String des, 
+			double floorprice, long sortId, String postUserName, Date deadline, String imageURL	){
+		this.itemName = itemname;
+		this.itemDes = des;
+		this.itemFloorPrice = floorprice;
+		this.sortID = sortId;
+		this.deadline = deadline;
+		this.itemHighestBidPrice = floorprice;
+		this.itemHighestBidUserName = "none";
+		this.itemBidRule = 0;
+		this.itemStatus = Item.ONBID;
+		this.imageURL = imageURL;
+		this.postTimestamp = new Date();
+		this.postUserName = postUserName;
+		this.itemCargoName = null;
+		this.itemCargoID = 0;
 	}
 
 
