@@ -746,8 +746,12 @@ public class ItemMgr {
 				item.setUsersByItemHighestBidUserName(user);
 				item.setItemHighestBidPrice(price);
 				
+				String SQLQuery = "update items SET itemHighestBidUserName = '"
+					+ "'" + user + "'" + "," + "itemHighestBidPrice = " + 
+					price  + " where itemId = " + itemId;
+				
 				HibernateUtility.beginTransaction();
-				s.saveOrUpdate(item);
+				s.createSQLQuery(SQLQuery);
 				HibernateUtility.commitTransaction();
 				flag = true;
 			}
