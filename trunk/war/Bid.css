@@ -1,16 +1,17 @@
-@CHARSET "UTF-8";
-/* Reference from Google Shopping */
 /** Add css rules here for your application. */
 
+@CHARSET "UTF-8";
+/* Reference from Google Shopping */
 body,div,ul,ol,li,h1,h2,h3,form,p,th,td{padding:0;margin:0}
 body{margin:3px 8px 0 8px}
 table{border-collapse:collapse;border-spacing:0}
 img{border:0}
 td,th{vertical-align:top}
 li{list-style:none}
-h1,h2,h3{font-size:85%;font-weight:normal}
+h1,h2,h3{font-size:100%;font-weight:normal}
 cite,em,th{font-style:normal;font-weight:normal}
 body{font:82% Arial,Helvetica,sans-serif}
+a{color:#00c}
 .hiddenframe{overflow:hidden;visibility:hidden}
 .bold{font-weight:bold}
 #hp-logo{margin:1.54em 0}
@@ -36,9 +37,6 @@ padding:10px 0 20px;
 .cw-FlexTable-buttonPanel td {
   border: 0px;
 }
-
-
-
 .gwt-DecoratedStackPanel {
   border-bottom: 1px solid #bbbbbb;
 }
@@ -52,7 +50,6 @@ padding:10px 0 20px;
   cursor: pointer;
   cursor: hand;
 }
-
 .gwt-DecoratedStackPanel .stackItemTopLeft,
 .gwt-DecoratedStackPanel .stackItemTopRight {
   height: 6px;
@@ -74,19 +71,12 @@ padding:10px 0 20px;
   font-weight: bold;
   font-size: 1.4em;
 }
-
-
-
-
 * html .gwt-DecoratedStackPanel .stackItemTopLeftInner,
 * html .gwt-DecoratedStackPanel .stackItemTopRightInner {
   width: 6px;
   height: 6px;
   overflow: hidden;
 }
-
-
-
 
 /** Example rules used by the template application (remove for your app) */
 h1 {
@@ -98,37 +88,7 @@ h1 {
 }
 
 img{border:0}
-a{color:#00c,font-size:85%}
-#srp-header{clear:both}#srp-header #search-input{margin-top:19px}
-#srp-logo{display:block;height:40px;margin:14px 8px 11px 0;overflow:hidden;position:relative}
-#ps-navbar table{margin:0 auto;text-align:center}
-table{border-collapse:collapse;border-spacing:0}
-td,th{vertical-align:top}
-#view-sort .tr{text-align:right}
-.ps-sprite{display:inline}.ps-sprite{display:inline-table}.ps-sprite p{position:relative;overflow:hidden}.ps-sprite-s{height:9px;width:50px}.ps-sprite-s p{height:9px;width:10px}.ps-sprite-s img{position:absolute;top:-40px}.ps-sprite-son{left:-167px}.ps-sprite-shalf{left:-197px}.ps-sprite-sgon{left:-177px}.ps-sprite-sghalf{left:-187px}.ps-sprite-soff{left:-207px}.ps-sprite-cb{vertical-align:text-bottom;position:relative;top:-1px}.ps-sprite-cb,.ps-sprite-cb p{height:15px;width:104px}.ps-sprite-cb img{position:absolute;left:-63px;top:-40px}.ps-sprite-pslogo,.ps-sprite-pslogo p{height:23px;width:167px}.ps-sprite-pslogo img{position:absolute;top:0;left:0}
-.ps-sprite-cart{vertical-align:text-bottom;position:relative;top:-1px}
-.v-ref div{width:90px;border:1px solid #00c;margin:0 auto 0.3em auto}
-.result-seller-rating a{font-size:85%}
-.tool-header{font-size:85%}
-.list .result-title{font-size:123%}
-.ps-guide a{font-size:124%}
-#refinement-header{font-size:124%;padding:0 0 10px 6px}
-.popup-title{font-size:124%;font-weight:bold;padding-bottom:3px}
-.cw-StackPanelHeader {
-  padding-left: 7px;
-  font-weight: bold;
-  font-size: 1.4em;
-}
-h1,h2,h3{font-size:100%;font-weight:normal}
-.search_advanced{font-size:77%;padding-left:0.6em;width:25%;text-align:left;white-space:nowrap}
-.list #results{margin:0 0 20px 0}.grid .result{padding:0 14px 20px 6px;display:-moz-inline-box;display:inline-block;width:150px;font-size:93%;vertical-align:top}
-
-
-
-
-
-
-
+a{color:#00c}
 
 .sendButton {
   display: block;
@@ -160,7 +120,7 @@ body {
 	background-color: white;
 	color: black;
 	font-family: Arial, sans-serif;
-		font-size: smaller;
+	font-size: small;
 	margin: 5px;
 }
 
@@ -453,14 +413,11 @@ a:visited {
 }
 .gwt-VerticalPanel {
 	padding: 3px;
-	background-color: #E8EEFA;
+	background-color: transparent;
 }
 .gwt-Label-small {
 	font-size: smaller;
 }
-.gwt-RichTextArea {
-}
-
 .hasRichTextToolbar {
   border: 0px;
 }
@@ -534,8 +491,7 @@ a:visited {
   border-spacing: 0px;
 }
 .cw-FlexTable td {
-  border: 1px solid #BBBBBB;
-  padding: 3px;
+	padding: 1px;
 }
 
 .cw-FlexTable-buttonPanel td {
@@ -543,21 +499,31 @@ a:visited {
 }
 .gwt-Label-large {
 	color: #6699cc;
-	font-size: smaller;
+	font-size:30pt;
 	font-style: normal;
 	font-variant: normal;
 	font-weight: bold;
 }
-
-
-
-
-
-
-
-
-
-
-
-
+.gwt-Label {
+font-size: 32px;
+}
+.gwt-Label1 {
+font-size:40pt;
+}
+.gwt-PasswordTextBox {
+font-size:15pt;
+}
+.gwt-TextBox {
+font-size:15pt;
+}
+.gwt-DateBox {
+font-size: 15pt;
+}
+.gwt-Label-post {
+	font-size: 25px;
+}
+.gwt-RichTextArea1 {
+	
+	background-color: powderblue;
+}
 
