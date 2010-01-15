@@ -33,6 +33,7 @@ public class TimerMgr {
 				if(true) thisTimer.cancel();				
 			}};
 		long cmpValue = deadline.getTime() - (new Date()).getTime();
+		if(cmpValue <= 0) return false;
 		thisTimer.schedule(tt, cmpValue);
 		return true;
 	}
