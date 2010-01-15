@@ -86,6 +86,8 @@ public class TimerMgr {
 				HibernateUtility.beginTransaction();
 				bidUser = (Users) s.get(Users.class, itemHighestBidUserName);
 				HibernateUtility.commitTransaction();
+				
+				
 				HibernateUtility.beginTransaction();
 				postUser = (Users) s.get(Users.class, postUserName);
 				HibernateUtility.commitTransaction();
