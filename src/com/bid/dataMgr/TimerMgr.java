@@ -27,7 +27,6 @@ public class TimerMgr {
 	public boolean registerDeadline(Date deadline, final long itemId){
 		final Timer thisTimer = new Timer();
 		TimerTask tt = new TimerTask(){
-			Boolean notRepeats = true;
 			public void run() {
 				doCleaning(itemId);
 				if(true) thisTimer.cancel();				
