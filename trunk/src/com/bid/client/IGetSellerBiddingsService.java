@@ -9,6 +9,6 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("getSellerBiddings")
 public interface IGetSellerBiddingsService extends RemoteService{
 
-	List<ItemDigest> getSellerBiddings(String id);
+	List<ItemDigest> getSellerBiddings();
 	
 }

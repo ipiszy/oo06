@@ -3,5 +3,6 @@
 <module rename-to="sellerBiddings_module">
 	<inherits name="com.google.gwt.user.User" />
 	<source path="client" />
+	<source path="exchange" />
 	<entry-point class="com.bid.client.SellerBiddings" />
 </module>

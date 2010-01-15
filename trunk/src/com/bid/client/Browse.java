@@ -89,7 +89,7 @@ public class Browse implements EntryPoint {
 				Image image = new Image();
 				image.setUrl(itemDigest.getImageURL());
 				vp.add(image);
-				vp.add(new HTML("<a href=\"/Bid.html?itemId="
+				vp.add(new HTML("<a href=\"/bid/itemBid.html?itemId="
 							+ itemDigest.getItemId() + "\">" 
 							+ itemDigest.getName() + "</a>"));
 				vp.add(new Label("base price : " + itemDigest.getBasePrice()));
