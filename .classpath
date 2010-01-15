@@ -15,5 +15,10 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/mysql-connector-java-5.1.6-bin.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/slf4j-api-1.5.8.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/slf4j-log4j12-1.5.8.jar"/>
+	<classpathentry kind="lib" path="E:/Documents and Settings/WuFG/workspace/Hello1/gwt-2.0.0/gwt-api-checker.jar"/>
+	<classpathentry kind="lib" path="E:/Documents and Settings/WuFG/workspace/Hello1/gwt-2.0.0/gwt-dev.jar"/>
+	<classpathentry kind="lib" path="E:/Documents and Settings/WuFG/workspace/Hello1/gwt-2.0.0/gwt-servlet.jar"/>
+	<classpathentry kind="lib" path="E:/Documents and Settings/WuFG/workspace/Hello1/gwt-2.0.0/gwt-soyc-vis.jar"/>
+	<classpathentry kind="lib" path="E:/Documents and Settings/WuFG/workspace/Hello1/gwt-2.0.0/gwt-user.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

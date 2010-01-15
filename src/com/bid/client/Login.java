@@ -94,7 +94,7 @@ public class Login implements EntryPoint {
 
 							public void onSuccess(Boolean result) {
 								if (result.equals(result.TRUE)) {
-									Window.Location.assign("/browse.html");
+									Window.Location.assign("/bid/browse.html");
 
 								} else {
 									error.setText("id or password false");

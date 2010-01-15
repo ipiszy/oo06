@@ -102,10 +102,10 @@ public class TestMain {
 		
 		
 		
-		/*List<Category> retCatList = b.getCategories();
+		List<Category> retCatList = b.getCategories();
 		for(Category obj : retCatList)
 			System.out.println(obj.getId() +":" +obj.getName());
-		
+		/*
 		retV = b.confirmReceipt(1);
 		System.out.println(retV);*/
 		
@@ -138,11 +138,15 @@ public class TestMain {
 			11, "witchj", deadDate, 1000, UserInfo.NONE, 0, Item.ONBID, null, postDate, null, 0));
 		//b.charge(10000, "sepsky");
 		//b.charge(10000, "litt");
-		/*double price = b.requestBid(10);
+		 * 
+		 */
+		
+		b.getCategories();
+		double price = b.requestBid(10);
 		b.offerPrice(price + 1000, 10, "sepsky");//3000
 		price = b.requestBid(10);
 		b.offerPrice(price + 1000, 10, "litt");//4000
-		/*price = b.requestBid(10);
+		price = b.requestBid(10);
 		b.offerPrice(price + 1000, 10, "sepsky");//5000
 		price = b.requestBid(10);
 		b.offerPrice(price + 1000, 10, "litt");//6000
@@ -150,7 +154,7 @@ public class TestMain {
 		b.offerPrice(price + 1000, 10, "sepsky");//7000
 		price = b.requestBid(10);
 		b.offerPrice(price + 1000, 10, "litt");//8000
-		*/
+		
 		//list all ok?
 	//	List<ItemDigest> retlist = b.queryItemsBidded("sepsky");
 	//	for(ItemDigest iitem : retlist)

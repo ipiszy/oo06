@@ -35,6 +35,11 @@
     <servlet-name>itemBidServlet</servlet-name>
     <servlet-class>com.bid.server.ItemBidService</servlet-class>
   </servlet>
+  
+  <servlet>
+    <servlet-name>postItemServlet</servlet-name>
+    <servlet-class>com.bid.server.PostItemService</servlet-class>
+  </servlet>
 
   
   <servlet-mapping>
@@ -63,8 +68,13 @@
   </servlet-mapping>
   
   <servlet-mapping>
-    <servlet-name>getCategoriesServlet</servlet-name>
+    <servlet-name>itemBidServlet</servlet-name>
     <url-pattern>/itemBid_module/itemBid</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>postItemServlet</servlet-name>
+    <url-pattern>/post_module/post</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->
