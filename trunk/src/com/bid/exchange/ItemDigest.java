@@ -4,12 +4,37 @@ import java.util.Date;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class ItemDigest implements IsSerializable {
+	static public String ONBID = Item.ONBID;
+	static public String ONDELIEVER = Item.ONDELIVER;
+	static public String OBSOLETE = Item.OBSOLETE;
+	static public String DELIVERED = Item.DELIVERED;
 	String imageURL;
 	String name;
 	double basePrice;
 	double latestPrice;
+	long cargoId;
+	String cargoName;
 	Date d;
 	long itemId;
+	int itemStatus;
+	
+	public int getStatus(){
+		return itemStatus;
+	}
+	
+	public String getCargoName() {
+		return cargoName;
+	}
+	public void setCargoName(String cargoName) {
+		this.cargoName = cargoName;
+	}
+	
+	public long getCargoId() {
+		return cargoId;
+	}
+	public void setCargoId(long cargoId) {
+		this.cargoId = cargoId;
+	}
 	
 	public long getItemId() {
 		return itemId;
@@ -48,7 +73,7 @@ public class ItemDigest implements IsSerializable {
 		this.d = d;
 	}
 	public ItemDigest(long itemId, String imageURL, String name, double basePrice,
-			double latestPrice, Date d) {
+			double latestPrice, Date d, String cargoName, long cargoId, int itemStatus) {
 		super();
 		this.itemId = itemId;
 		this.imageURL = imageURL;
