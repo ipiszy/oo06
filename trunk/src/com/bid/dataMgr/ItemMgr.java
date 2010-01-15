@@ -57,7 +57,7 @@ public class ItemMgr {
 			Date d = item.getItemBidDeadLine();
 			long itemId = item.getItemId();
 			queryResult.add(new ItemDigest(itemId, imageURL, name, basePrice,
-					latestPrice, d));
+					latestPrice, d, item.getItemCargoName(), item.getItemCargoId(), item.getItemStatus()));
 		}
 		return queryResult;
 	}
@@ -81,7 +81,7 @@ public class ItemMgr {
 			Date d = item.getItemBidDeadLine();
 			long itemId = item.getItemId();
 			queryResult.add(new ItemDigest(itemId, imageURL, name, basePrice,
-					latestPrice, d));
+					latestPrice, d, item.getItemCargoName(), item.getItemCargoId(), item.getItemStatus()));
 		}
 		return queryResult;
 	}
@@ -112,7 +112,8 @@ public class ItemMgr {
 				//queryResult.add(new ItemDigest(itemId, imageURL, name, basePrice,
 				//latestPrice, d));
 				queryResult.add(new ItemDigest(itemId, item.getImageUrl(), item.getItemName(),
-						item.getItemFloorPrice(), item.getItemHighestBidPrice(), item.getItemBidDeadLine()));
+						item.getItemFloorPrice(), item.getItemHighestBidPrice(), item.getItemBidDeadLine(), 
+						item.getItemCargoName(), item.getItemCargoId(), item.getItemStatus()));
 				}
 		}
 		catch(HibernateException e) {
@@ -140,7 +141,7 @@ public class ItemMgr {
 			Date d = item.getItemBidDeadLine();
 			long itemId = item.getItemId();
 			queryResult.add(new ItemDigest(itemId, imageURL, name, basePrice,
-					latestPrice, d));
+					latestPrice, d, item.getItemCargoName(), item.getItemCargoId(), item.getItemStatus()));
 		}
 		return queryResult;
 	}
@@ -163,7 +164,7 @@ public class ItemMgr {
 			Date d = item.getItemBidDeadLine();
 			long itemId = item.getItemId();
 			queryResult.add(new ItemDigest(itemId, imageURL, name, basePrice,
-					latestPrice, d));
+					latestPrice, d, item.getItemCargoName(), item.getItemCargoId(), item.getItemStatus()));
 		}
 		return queryResult;
 	}
@@ -185,7 +186,7 @@ public class ItemMgr {
 			Date d = item.getItemBidDeadLine();
 			long itemId = item.getItemId();
 			queryResult.add(new ItemDigest(itemId, imageURL, name, basePrice,
-					latestPrice, d));
+					latestPrice, d, item.getItemCargoName(), item.getItemCargoId(), item.getItemStatus()));
 		}
 		return queryResult;
 	}
@@ -209,7 +210,7 @@ public class ItemMgr {
 			Date d = item.getItemBidDeadLine();
 			long itemId = item.getItemId();
 			queryResult.add(new ItemDigest(itemId, imageURL, name, basePrice,
-					latestPrice, d));
+					latestPrice, d, item.getItemCargoName(), item.getItemCargoId(), item.getItemStatus()));
 		}
 		return queryResult;
 	}
@@ -256,7 +257,7 @@ public class ItemMgr {
 			Date d = item.getItemBidDeadLine();
 			long itemId = item.getItemId();
 			queryResult.add(new ItemDigest(itemId, imageURL, name, basePrice,
-					latestPrice, d));
+					latestPrice, d, item.getItemCargoName(), item.getItemCargoId(), item.getItemStatus()));
 		}
 		return queryResult;
 	}
@@ -292,7 +293,7 @@ public class ItemMgr {
 			Date d = item.getItemBidDeadLine();
 			long itemId = item.getItemId();
 			queryResult.add(new ItemDigest(itemId, imageURL, name, basePrice,
-					latestPrice, d));
+					latestPrice, d, item.getItemCargoName(), item.getItemCargoId(), item.getItemStatus()));
 		}
 		return queryResult;
 	}
@@ -325,7 +326,7 @@ public class ItemMgr {
 			Date d = item.getItemBidDeadLine();
 			long itemId = item.getItemId();
 			queryResult.add(new ItemDigest(itemId, imageURL, name, basePrice,
-					latestPrice, d));
+					latestPrice, d, item.getItemCargoName(), item.getItemCargoId(), item.getItemStatus()));
 		}
 		return queryResult;
 	}
@@ -355,7 +356,7 @@ public class ItemMgr {
 			Date d = item.getItemBidDeadLine();
 			long itemId = item.getItemId();
 			queryResult.add(new ItemDigest(itemId, imageURL, name, basePrice,
-					latestPrice, d));
+					latestPrice, d, item.getItemCargoName(), item.getItemCargoId(), item.getItemStatus()));
 		}
 		return queryResult;
 	}
