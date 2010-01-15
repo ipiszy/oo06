@@ -7,6 +7,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface IGetSellerBiddedsServiceAsync {
 
-	void getSellerBiddeds(String id, AsyncCallback<List<ItemDigest>> callback);
+	void getSellerBiddeds(AsyncCallback<List<ItemDigest>> callback);
 
 }

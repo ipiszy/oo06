@@ -1,5 +1,8 @@
 package com.bid.client;
 
+import java.util.List;
+
+import com.bid.exchange.Category;
 import com.bid.exchange.Item;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -9,6 +12,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -24,7 +28,11 @@ public class ItemBid implements EntryPoint {
 	private final FlexTable bidInfo = new FlexTable();
 	private final Button wantBid = new Button("\u51FA\u4EF7\uFF01");
 	private final DialogBox beginBid = new DialogBox();
+	private final HTML cateList = new HTML();
 
+	private final IGetBidCategoriesServiceAsync getBidCategoriesService = GWT
+	.create(IGetBidCategoriesService.class);
+	
 	private final IGetItemServiceAsync getItemService = GWT
 			.create(IGetItemService.class);
 
@@ -40,10 +48,13 @@ public class ItemBid implements EntryPoint {
 		itemId = Long.parseLong(com.google.gwt.user.client.Window.Location
 				.getParameter("itemId"));
 		initWidget();
+		
+		RootPanel.get("categories").add(cateList);
 		RootPanel.get("gwt_item").add(itemDetail);
 		RootPanel.get("bidding").add(wantBid);
 		RootPanel.get("bidInfo").add(bidInfo);
 		//RootPanel.get("beginBid").add(beginBid);
+		getCategories(cateList);
 		getItem(itemDetail);
 	}
 
@@ -80,7 +91,7 @@ public class ItemBid implements EntryPoint {
 		beginBidTable.setWidget(0, 0, new Label("\u8BF7\u8F93\u5165\u6240\u51FA\u4EF7\u683C\uFF1A"));
 		final TextBox moneyBox = new TextBox();
 		beginBidTable.setWidget(0, 1, moneyBox);
-		final Button submitBid = new Button("³ö¼Û!");
+		final Button submitBid = new Button("\u51FA\u4EF7\uFF01");
 		beginBidTable.setWidget(0, 2, submitBid);
 		final Button close = new Button("\u5173\u95ED");
 
@@ -157,8 +168,9 @@ public class ItemBid implements EntryPoint {
 
 					FlexTable texts = new FlexTable();
 					Label header = new Label(result.getItemName());
-					TextArea des = new TextArea();
+					Label des = new Label();
 					des.setText(result.getItemDes());
+					des.setWordWrap(true);
 					Label status = new Label("\u5F53\u524D\u72B6\u6001\uFF1A"
 							+ result.getItemStatus());
 					
@@ -194,4 +206,21 @@ public class ItemBid implements EntryPoint {
 			}
 		});
 	}
+	
+	private void getCategories(final HTML cateList) {
+		getBidCategoriesService.getCategories(new AsyncCallback<List<Category>>(){
+			public void onFailure(Throwable caught) {
+			}
+			public void onSuccess(List<Category> result) {
+				String html="";
+				for (int i = 0; i < result.size(); i++) {
+					html += "<li><a href=\"/bid/browse.html?catagoryId="
+							+ result.get(i).getId() + "\">" 
+							+ result.get(i).getName() + "</a></li>\n";
+				}
+				cateList.setHTML(html);
+			}
+		});
+	}
+	
 }
