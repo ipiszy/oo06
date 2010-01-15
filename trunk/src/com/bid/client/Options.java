@@ -11,17 +11,17 @@ public class Options extends Composite {
 		
 		VerticalPanel verticalPanel = new VerticalPanel();
 		verticalPanel.setStyleName("gwt-VerticalPanel");
-		verticalPanel.setSize("92px", "232px");
+		verticalPanel.setSize("147px", "159px");
 		initWidget(verticalPanel);
 		
-		Hyperlink hyperlink = new Hyperlink("\u6211\u8981\u5356", false, "\\post.html");
+		Hyperlink hyperlink = new Hyperlink("\u6211\u8981\u5356~", false, "\\post.html");
 		verticalPanel.add(hyperlink);
 		
 		
-		Hyperlink hyperlink_1 = new Hyperlink("\u67E5\u770B\u6B63\u5728\u62CD\u5356\u7269\u54C1", false, "\\sellerBiddings.html");
+		Hyperlink hyperlink_1 = new Hyperlink("\u67E5\u770B\u6B63\u5728\u51FA\u552E\u7684\u5546\u54C1", false, "\\sellerBiddings.html");
 		verticalPanel.add(hyperlink_1);
 		
-		Hyperlink hyperlink_2 = new Hyperlink("\u67E5\u770B\u5DF2\u62CD\u5356\u5B8C\u6210\u7269\u54C1", false, "\\sellerBidded.html");
+		Hyperlink hyperlink_2 = new Hyperlink("\u6210\u529F\u62CD\u5230\u7684\u5546\u54C1", false, "\\sellerBidded.html");
 		verticalPanel.add(hyperlink_2);
 	}
 
