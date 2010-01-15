@@ -11,7 +11,7 @@ public class GetDyingItemsService extends RemoteServiceServlet
 implements IGetDyingItemsService {
 
 	@Override
-	public List<ItemDigest> getDyingItems(long from, long to) {
+	public List<ItemDigest> getDyingItems(long from, long to, long categoryId) {
 		// TODO Auto-generated method stub
 	/*	List<ItemDigest> result = new ArrayList<ItemDigest>();
 		ItemDigest itemDigest;
@@ -29,7 +29,7 @@ implements IGetDyingItemsService {
 		}
 		return result;
 */
-		return new DataBoundary().getDyingItems(from, to);
+		return new DataBoundary().getDyingItems(from, to, categoryId);
 	}
 
 }
