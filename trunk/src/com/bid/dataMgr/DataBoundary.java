@@ -136,6 +136,7 @@ public class DataBoundary {
 		//2从用户的账面上扣去某个(差额)金额
 		//0计算差额
 		double deltaMoney;
+		if(price < 0) return false;
 		deltaMoney = -price + itemMgr.beenBiddedBy(itemId, userName);
 		boolean offered = userMgr.transfer(userName, deltaMoney, itemId);
 		if(offered)
