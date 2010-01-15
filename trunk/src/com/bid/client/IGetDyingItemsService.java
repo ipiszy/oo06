@@ -8,6 +8,6 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("getDyingItems")
 public interface IGetDyingItemsService extends RemoteService{
 
-	List<ItemDigest> getDyingItems(long from, long to, long categoryId);
+	List<ItemDigest> getDyingItems(long from, long to);
 
 }
