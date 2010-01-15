@@ -32,7 +32,7 @@ public class TimerMgr {
 				doCleaning(itemId);
 				if(true) thisTimer.cancel();				
 			}};
-		int cmpValue = deadline.compareTo(new Date());
+		long cmpValue = deadline.getTime() - (new Date()).getTime();
 		thisTimer.schedule(tt, cmpValue);
 		return true;
 	}
