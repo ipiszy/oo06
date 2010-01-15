@@ -16,9 +16,9 @@ public class ItemDigest implements IsSerializable {
 	String cargoName;
 	Date d;
 	long itemId;
-	int itemStatus;
+	String itemStatus;
 	
-	public int getStatus(){
+	public String getStatus(){
 		return itemStatus;
 	}
 	
@@ -73,7 +73,7 @@ public class ItemDigest implements IsSerializable {
 		this.d = d;
 	}
 	public ItemDigest(long itemId, String imageURL, String name, double basePrice,
-			double latestPrice, Date d, String cargoName, long cargoId, int itemStatus) {
+			double latestPrice, Date d, String cargoName, long cargoId, String itemStatus) {
 		super();
 		this.itemId = itemId;
 		this.imageURL = imageURL;
@@ -81,6 +81,9 @@ public class ItemDigest implements IsSerializable {
 		this.basePrice = basePrice;
 		this.latestPrice = latestPrice;
 		this.d = d;
+		this.cargoId = cargoId;
+		this.cargoName = cargoName;
+		this.itemStatus = itemStatus;
 	}
 	public ItemDigest() {
 	}
