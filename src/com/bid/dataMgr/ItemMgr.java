@@ -31,10 +31,18 @@ public class ItemMgr {
 		double money = 0;
 		DepositsId id = new DepositsId(itemId, userName);
 		Session s = HibernateUtility.currentSession();
-		HibernateUtility.beginTransaction();
-		Deposits depo = (Deposits) s.get(Deposits.class, id);
-		HibernateUtility.commitTransaction();
-		if(depo != null) money = depo.getMoneyFrozen();
+		try{
+			HibernateUtility.beginTransaction();
+			Deposits depo = (Deposits) s.get(Deposits.class, id);
+			HibernateUtility.commitTransaction();
+			if(depo != null) money = depo.getMoneyFrozen();
+		}
+		catch (HibernateException e) {
+			HibernateUtility.commitTransaction();
+			e.printStackTrace();
+			log.fatal(e);
+		}
+		HibernateUtility.closeSession();
 		return money;
 	}
 
@@ -737,12 +745,12 @@ public class ItemMgr {
 			if(item.getItemHighestBidPrice() < price){
 				item.setUsersByItemHighestBidUserName(user);
 				item.setItemHighestBidPrice(price);
+				
+				HibernateUtility.beginTransaction();
+				s.saveOrUpdate(item);
+				HibernateUtility.commitTransaction();
+				flag = true;
 			}
-			
-			HibernateUtility.beginTransaction();
-			s.saveOrUpdate(item);
-			HibernateUtility.commitTransaction();
-			flag = true;
 		} catch (HibernateException e) {
 			HibernateUtility.commitTransaction();
 			e.printStackTrace();
