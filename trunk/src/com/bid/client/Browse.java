@@ -40,7 +40,7 @@ public class Browse implements EntryPoint {
 	    // Add some text
 	    cellFormatter.setHorizontalAlignment(0, 0,
 	        HasHorizontalAlignment.ALIGN_LEFT);
-	    flexTable.setHTML(0, 0, "<img src=\"/resource/bidding_header.jpg\" alt=\".o0O Bidding\" border=\"0\" >");
+	//    flexTable.setHTML(0, 0, "<img src=\"/resource/bidding_header.jpg\" alt=\".o0O Bidding\" border=\"0\" >");
 
 	    // Return the panel
 		RootPanel.get("categories").add(cateList);
