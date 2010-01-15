@@ -40,7 +40,21 @@
     <servlet-name>postItemServlet</servlet-name>
     <servlet-class>com.bid.server.PostItemService</servlet-class>
   </servlet>
-
+  
+  <servlet>
+    <servlet-name>postGetCategoriesServlet</servlet-name>
+    <servlet-class>com.bid.server.PostGetCategoriesService</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>getSellerBiddingsServlet</servlet-name>
+    <servlet-class>com.bid.server.GetSellerBiddingsService</servlet-class>
+  </servlet>  
+  
+  <servlet>
+    <servlet-name>confirmDeliveryServlet</servlet-name>
+    <servlet-class>com.bid.server.SellerDeliveryService</servlet-class>
+  </servlet>  
   
   <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
@@ -77,6 +91,21 @@
     <url-pattern>/post_module/post</url-pattern>
   </servlet-mapping>
   
+  <servlet-mapping>
+    <servlet-name>postGetCategoriesServlet</servlet-name>
+    <url-pattern>/post_module/postGetCategories</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>getSellerBiddingsServlet</servlet-name>
+    <url-pattern>/sellerBiddings_module/getSellerBiddings</url-pattern>
+  </servlet-mapping>  
+  
+  <servlet-mapping>
+    <servlet-name>confirmDeliveryServlet</servlet-name>
+    <url-pattern>/sellerBiddings_module/sellerDelivery</url-pattern>
+  </servlet-mapping>  
+    
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>Bid.html</welcome-file>
