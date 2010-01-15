@@ -388,6 +388,20 @@ public class ItemMgr {
 			HibernateUtility.beginTransaction();
 			sort = (Sorts) s.get(Sorts.class, thisItem.getSortID());
 			HibernateUtility.commitTransaction();
+			Date deadline = thisItem.getItemBidDeadline();
+			Date timestamp = thisItem.getItemPostTimestamp();
+			String itemStatus = Item.ONBID;
+			if(deadline.before(timestamp)){
+				itemStatus = Item.OBSOLETE;
+				return 0;
+				}
+			Items saveItem = new Items(bidUser, postUser, sort, thisItem.getItemName(),
+					thisItem.getItemDes(), null, 
+					thisItem.getItemFloorPrice(), thisItem.getItemHighestBidPrice(), 
+					itemStatus, thisItem.getItemCargoName(), thisItem.getItemCargoID(),
+					thisItem.getImageURL(), thisItem.getItemBidDeadline(),
+					thisItem.getItemPostTimestamp(), 
+					deposits);
 			HibernateUtility.beginTransaction();
 			//Items(Users usersByItemHighestBidUserName, Users usersByPostUser,
 			//Sorts sorts, String itemName, String itemDes, String itemBidRule,
@@ -395,13 +409,6 @@ public class ItemMgr {
 			//String itemStatus, String itemCargoName, Long itemCargoId,
 			//String imageUrl, Date itemBidDeadLine, Date itemPostTimestamp,
 			//Set<Deposits> depositses)
-			Items saveItem = new Items(bidUser, postUser, sort, thisItem.getItemName(),
-					thisItem.getItemDes(), null, 
-					thisItem.getItemFloorPrice(), thisItem.getItemHighestBidPrice(), 
-					Item.ONBID, thisItem.getItemCargoName(), thisItem.getItemCargoID(),
-					thisItem.getImageURL(), thisItem.getItemBidDeadline(),
-					thisItem.getItemPostTimestamp(), 
-					deposits);
 			s.saveOrUpdate(saveItem);
 			HibernateUtility.commitTransaction();
 			retV = saveItem.getItemId();
@@ -504,7 +511,6 @@ public class ItemMgr {
 			HibernateUtility.beginTransaction();
 			sort = (Sorts) s.get(Sorts.class, item.getSorts().getSortId());
 			HibernateUtility.commitTransaction();
-			HibernateUtility.beginTransaction();
 			/** itemId ¿‡–Õ¥Ì */
 			//Item(long itemid, String itemname, String des, 
 			//double floorprice, long sortId, String postUserName, Date deadline,
