@@ -8,6 +8,8 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.datepicker.client.DateBox;
+import com.google.gwt.user.datepicker.client.DatePicker;
 
 public class registerform extends Composite {
 
@@ -15,7 +17,7 @@ public class registerform extends Composite {
 		
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		initWidget(absolutePanel);
-		absolutePanel.setSize("452px", "423px");
+		absolutePanel.setSize("452px", "492px");
 		
 		Label lblUsername = new Label("\u7528\u6237\u540D");
 		absolutePanel.add(lblUsername, 20, 76);
@@ -75,5 +77,8 @@ public class registerform extends Composite {
 		button_1.setText("\u6211\u8981\u91CD\u586B~~");
 		absolutePanel.add(button_1, 236, 360);
 		button_1.setSize("100", "35");
+		
+		Label lblL = new Label("");
+		absolutePanel.add(lblL, 88, 421);
 	}
 }
