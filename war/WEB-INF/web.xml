@@ -56,6 +56,11 @@
     <servlet-class>com.bid.server.SellerDeliveryService</servlet-class>
   </servlet>  
   
+  <servlet>
+    <servlet-name>registerServlet</servlet-name>
+    <servlet-class>com.bid.server.RegisterService</servlet-class>
+  </servlet>  
+  
   <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
     <url-pattern>/bid/greet</url-pattern>
@@ -105,10 +110,15 @@
     <servlet-name>confirmDeliveryServlet</servlet-name>
     <url-pattern>/sellerBiddings_module/sellerDelivery</url-pattern>
   </servlet-mapping>  
+  
+  <servlet-mapping>
+    <servlet-name>registerServlet</servlet-name>
+    <url-pattern>/register_module/register</url-pattern>
+  </servlet-mapping>  
     
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>Bid.html</welcome-file>
+    <welcome-file>browse.html</welcome-file>
   </welcome-file-list>
 
 </web-app>
